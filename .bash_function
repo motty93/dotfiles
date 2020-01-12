@@ -1,0 +1,126 @@
+# cd alias function
+function cdls () {
+  \cd "$@" && ls
+  my_prompt
+
+  return $?
+}
+
+# my branch
+function my_git_branch () {
+  git rev-parse --abbrev-ref HEAD
+
+  return $?
+}
+
+# git checkout develop or dev
+function switch_dev () {
+  git checkout develop
+
+  if [ $? = 1 ]; then
+    echo "develop branch did not exist."
+    git checkout development
+    if [ $? = 1 ]; then
+      echo "development branch did not exist."
+      git checkout dev
+    fi
+  fi
+  my_prompt
+
+  return $?
+}
+
+# git pull current branch
+function g () {
+  branch=`git rev-parse --abbrev-ref HEAD`
+  if [ "$(uname)" == 'Darwin' ]; then
+    rsa_path=`mdfind -name github_rsa | grep -v pub | grep ssh`
+  else
+    rsa_path=`locate -b -r "^github_rsa$"`
+  fi
+
+  expect -c "
+  set timeout 10
+  spawn git $1 origin $branch
+  expect {
+    \"Username for 'https://github.com': \" {
+      send \"$GITHUB_NAME\n\"
+      expect \"Password for 'https://$GITHUB_NAME@github.com': \"
+      send \"$GITHUB_PASSWORD\n\"
+    }
+    \"Enter passphrase for key '$rsa_path':\" {
+      send \"$SSH_PASSWORD\n\"
+    }
+  }
+
+  interact
+  "
+
+  return $?
+}
+
+# disable keyboard
+function disable_keyboard () {
+  input-kbd -f ~/keyboard_setting/disable-all.map 3
+
+  return $?
+}
+
+# enable keyboard
+function enable_keyboard () {
+  input-kbd -f ~/keyboard_setting/default.map 3
+
+  return $?
+}
+
+# deploy amazon project function
+function amazon () {
+  switch_dev
+  g pull
+  gcheckout_master
+  git merge dev
+  g push
+
+  return $?
+}
+
+# web container attach
+function web_container_attach() {
+  process=`docker-compose ps -q web`
+
+  if [ -n "$process" ]; then
+    docker attach $process
+  fi
+
+  return $?
+}
+
+# prompt
+function my_prompt() {
+  branch=`git branch 2>&1 > /dev/null`
+
+  if [ $? = 0 ]; then
+    branch_name=`git rev-parse --abbrev-ref HEAD`
+
+    export PS1="\[\e[1;36m\]\w\[\e[m\] \[\e[0;35m\]${branch_name}\[\e[m\]* \n% "
+  else
+    export PS1='\[\e[1;36m\]\w\[\e[m\] \n% '
+  fi
+
+  return $?
+}
+
+# git checkout branch name
+function gcheckout() {
+  git checkout $@
+  my_prompt
+
+  return $?
+}
+
+function gcheckout_master() {
+  git checkout master
+  my_prompt
+
+  return $?
+}

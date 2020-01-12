@@ -1,0 +1,14 @@
+[user]
+  name = motty93
+  email = rdwbocungelt5@gmail.com
+[core]
+  editor = vim
+	autocrlf = input
+[remote "origin"]
+  fetch = +refs/heads/*:refs/remotes/origin/*
+[color]
+  diff = auto
+  status = auto
+  branch = auto
+[help]
+	autocorrect = 1
