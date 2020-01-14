@@ -5,6 +5,7 @@ packages = (
   curl
   openssh
   git
+  xsel
   ufw
   #background papers
   mint-backgrounds-*
