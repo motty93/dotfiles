@@ -1,7 +1,7 @@
 shopt -s expand_aliases
 
-if [ -f "$HOME/.bash_functions" ]; then
-  . $HOME/.bash_functions
+if [ -f "$HOME/.bash_function" ]; then
+  . $HOME/.bash_function
 fi
 
 # some more ls aliases
