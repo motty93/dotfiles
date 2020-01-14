@@ -1,0 +1,7 @@
+[Desktop Entry]
+Encoding=UTF-8
+Type=Application
+Name=gnome-terminal
+Icon=/usr/share/icons/gnome/gnome-terminal.png
+Exec=gnome-terminal
+StartupNotify=true
