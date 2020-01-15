@@ -61,14 +61,14 @@ function g () {
 
 # disable keyboard
 function disable_keyboard () {
-  input-kbd -f ~/keyboard_setting/disable-all.map 3
+  sudo input-kbd -f ~/keyboard_setting/disable-all.map 3
 
   return $?
 }
 
 # enable keyboard
 function enable_keyboard () {
-  input-kbd -f ~/keyboard_setting/default.map 3
+  sudo input-kbd -f ~/keyboard_setting/default.map 3
 
   return $?
 }
