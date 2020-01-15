@@ -9,6 +9,7 @@ for f in .??*
 do
     #ignore files and directories
     [ "$f" = ".git" ] && continue
+    [ "$f" = ".gitgnore" ] && continue
     ln -snfv ${DOT_DIRECTORY}/${f} ${HOME}/${f}
 done
 
