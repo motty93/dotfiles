@@ -9,201 +9,196 @@ if &compatible
   set nocompatible
 endif
 
-let s:dein_path = expand('~/.vim/dein')
-let s:dein_repo_path = s:dein_path . '/repos/github.com/Shougo/dein.vim'
+set runtimepath+=$HOME/.cache/dein/repos/github.com/Shougo/dein.vim
 
-" dein.vimがなければgithubからinstall
-if &runtimepath !~# '/dein.vim'
-  if !isdirectory(s:dein_repo_path)
-    execute '!git clone https://github.com/Shougo/dein.vim' s:dein_repo_path
+if dein#load_state("$HOME/.cache/dein")
+  call dein#begin("$HOME/.cache/dein")
+
+  call dein#add("$HOME/.cache/dein/repos/github.com/Shougo/dein.vim")
+  call dein#add('Shougo/deoplete.nvim')
+  if !has('nvim')
+    call dein#add('roxma/nvim-yarp')
+    call dein#add('roxma/vim-hug-neovim-rpc')
   endif
-  execute 'set runtimepath^=' . fnamemodify(s:dein_repo_path, ':p')
+
+  " call dein#add('Shougo/vimproc.vim', {'build': 'make'})
+
+  " plantumlを開く
+  call dein#add('aklt/plantuml-syntax')
+  let g:plantuml_executable_script = "~/file/plantuml.sh"
+
+  " html補完 emmet
+  call dein#add('mattn/emmet-vim')
+
+  " URLを開いたりググったりできる
+  call dein#add('open-browser.vim')
+  let g:netrw_nogx = 1 " disable netrw's gx mapping.
+  nmap gx <Plug>(openbrowser-smart-search)
+  vmap gx <Plug>(openbrowser-smart-search)
+  command! OpenBrowserCurrent execute "!xdg-open" expand("%:p")
+
+  " html5のコードをシンタックス表示する
+  call dein#add('hail2u/vim-css3-syntax')
+
+  " color picker
+  call dein#add('KabbAmine/vCoolor.vim')
+  let g:vcoolor_map = '<leader>c'
+
+  " ファイルオープンを便利に
+  call dein#add('Shougo/unite.vim')
+
+  " ファイル検索Ag
+  call dein#add('rking/ag.vim')
+
+  " Unite.vimで最近使ったファイルを表示できるようにする
+  call dein#add('Shougo/neomru.vim')
+
+  " vin-devicons
+  call dein#add('ryanoasis/vim-devicons')
+  let g:WebDeviconsUnicodeDecorateFolderNodes = 1
+  let g:webdevicons_conceal_nerdtree_brackets = 1
+  let g:WebDevIconsNerdTreeAfterGlyphPadding = ' '
+
+  " ファイルをtree表示してくれる
+  call dein#add('scrooloose/nerdtree')
+  nnoremap <silent><C-e> :NERDTree<CR>
+
+  " vim-elixir シンタックスハイライト
+  call dein#add('elixir-editors/vim-elixir')
+  " vim-mix :Mix でコマンド実行可能
+  call dein#add('mattreduce/vim-mix')
+  " vim-extest テスト実行プラグイン
+  call dein#add('BjRo/vim-extest')
+  " elixir alchemist.vim
+  call dein#add('slashmili/alchemist.vim')
+
+  " NerdTreeのカラーリング
+  call dein#add('tiagofumo/vim-nerdtree-syntax-highlight')
+  let s:rspec_red = 'FE405F'
+  let s:git_orange = 'F54D27'
+  let g:NERDTreeExactMatchHighlightColor = {} " this line is needed to avoid error
+  let g:NERDTreeExactMatchHighlightColor['.gitignore'] = s:git_orange " sets the color for .gitignore files
+  let g:NERDTreePatternMatchHighlightColor = {} " this line is needed to avoid error
+  let g:NERDTreePatternMatchHighlightColor['.*_spec\.rb$'] = s:rspec_red " sets the color for files ending with _spec.rb
+  let g:NERDTreeLimitedSyntax = 1
+
+  " Rails向けのコマンドを提供する
+  " call dein#add('tpope/vim-rails')
+  " Ruby向けにendを自動挿入してくれる
+  call dein#add('tpope/vim-endwise')
+
+  " コメントON/OFFを手軽に実行
+  call dein#add('tomtom/tcomment_vim')
+
+  " シングルクオートとダブルクオートの入れ替え等
+  call dein#add('tpope/vim-surround')
+
+  " vim-go
+  call dein#add('fatih/vim-go')
+  let g:go_version_warning = 0
+
+  " インデントに色を付けて見やすくする
+  call dein#add('nathanaelkane/vim-indent-guides')
+  " ログファイルを色づけしてくれる
+  call dein#add('vim-scripts/AnsiEsc.vim')
+  " 行末の半角スペースを可視化
+  call dein#add('bronson/vim-trailing-whitespace')
+  " less用のsyntaxハイライト
+  " call dein#add('KohPoll/vim-less')
+
+  " markdown設定
+  call dein#add('tpope/vim-markdown')
+  call dein#add('kannokanno/previm')
+  call dein#add('skanehira/preview-markdown.vim')
+  let g:preview_markdown_vertical = 1
+
+
+  """ markdown {{{{
+    let g:previm_open_cmd = 'google-chrome'
+    augroup PrevimSetting
+      autocmd!
+      autocmd BufNewFile,BufRead *.{md,mdwn,mkd,mkdn,mark*} set filetype=markdown
+    augroup END
+    " Need: kannokanno/previm
+    nnoremap <silent> <C-p> :PrevimOpen<CR>
+    " 自動で折りたたまないようにする
+    let g:vim_markdown_folding_disabled=1
+    let g:previm_enable_realtime=1
+  " }}}}
+
+  " RubyMineのように自動保存する
+  call dein#add('907th/vim-auto-save')
+  let g:auto_save = 1
+
+  " Rubyメソッド自動補完
+  call dein#add('Shougo/neocomplcache.vim')
+  call dein#add('Shougo/neocomplcache-rsense.vim')
+
+  let g:neocomplcache_enable_at_startup = 1
+  let g:acp_enableAtStartup = 0
+  let g:neocomplcache_enable_smart_case = 1
+
+  " Set minimum syntax keyword length.
+  let g:neocomplcache_min_syntax_length = 3
+  let g:neocomplcache_lock_buffer_name_pattern = '\*ku\*'
+  let g:neocomplcache_enable_camel_case_completion = 1
+  let g:neocomplcache_enable_underbar_completion = 1
+
+  " rubocop
+  " call dein#add('ngmy/vim-rubocop')
+  " call dein#add('scrooloose/syntastic')
+
+  " let g:syntastic_mode_map = { 'mode': 'passive', 'active_filetypes': ['ruby'] }
+  " let g:syntastic_ruby_checkers=['rubocop', 'mri']
+
+  " 切り替え
+  call dein#add('AndrewRadev/switch.vim')
+  " -で切り替え
+  let g:switch_mapping = "-"
+
+  " react native用のプラグイン追加
+  call dein#add('pangloss/vim-javascript', { 'for': ['javascript', 'javascript.jsx'] })
+  call dein#add('othree/yajs.vim', { 'for': ['javascript', 'javascript.jsx'] })
+  call dein#add('othree/es.next.syntax.vim', { 'for': ['javascript', 'javascript.jsx'] })
+  call dein#add('othree/javascript-libraries-syntax.vim', { 'for': ['javascript', 'javascript.jsx'] })
+  " react native用コード補完
+  call dein#add('ternjs/tern_for_vim', { 'for': ['javascript', 'javascript.jsx'], 'do': 'npm install' })
+
+  " HTML5のプラグイン
+  call dein#add('othree/html5.vim')
+
+  " vimでtwitter
+  let twitvim_enable_python = 1
+  let twitvim_browser_cmd = 'google-chrome'
+  let twitvim_force_ssl = 1
+  let twitvim_count = 100
+
+  " CtrlP ファイルをさくっと開けるやつ
+  call dein#add('ctrlpvim/ctrlp.vim')
+  let g:ctrlp_map = '<c-p>'
+  let g:ctrlp_cmd = 'CtrlP'
+
+  " vim-prettier
+  call dein#add('prettier/vim-prettier', { 'do': 'yarn install', 'for': ['javascript', 'typescript', 'css', 'less', 'scss', 'json', 'graphql', 'markdown', 'vue', 'yaml', 'html'] })
+  let g:prettier#autoformat = 0
+  let g:prettier#quickfix_enabled = 0
+  let g:prettier#config#semi = 'true'
+  " autocmd BufWritePre *.js,*.jsx,*.ts,*.tsx,*.vue,*.css,*.scss,*.json,*.md PrettierAsync
+
+  " JS indent
+  call dein#add('jason0x43/vim-js-indent')
+
+  " TypeSctipt
+  call dein#add('leafgarland/typescript-vim')
+  call dein#add('Quramy/tsuquyomi')
+  let g:syntastic_typescript_tsc_args = "--experimentalDecorators --target ES5"
+
+  " mattn/sl
+  " call dein#add('mattn/vim-sl')
+
+  call dein#end()
+  call dein#save_state()
 endif
-
-""""""""""""""""""""""""""""""
-" プラグインのセットアップ
-""""""""""""""""""""""""""""""
-set runtimepath+=~/.vim/dein/repos/github.com/Shougo/dein.vim
-
-call dein#begin(expand('~/.vim/dein'))
-
-call dein#add('Shougo/dein.vim')
-call dein#add('Shougo/vimproc.vim', {'build': 'make'})
-
-" plantumlを開く
-call dein#add('aklt/plantuml-syntax')
-let g:plantuml_executable_script = "~/file/plantuml.sh"
-
-" html補完 emmet
-call dein#add('mattn/emmet-vim')
-
-" URLを開いたりググったりできる
-call dein#add('open-browser.vim')
-let g:netrw_nogx = 1 " disable netrw's gx mapping.
-nmap gx <Plug>(openbrowser-smart-search)
-vmap gx <Plug>(openbrowser-smart-search)
-command! OpenBrowserCurrent execute "!xdg-open" expand("%:p")
-
-" html5のコードをシンタックス表示する
-call dein#add('hail2u/vim-css3-syntax')
-
-" color picker
-call dein#add('KabbAmine/vCoolor.vim')
-let g:vcoolor_map = '<leader>c'
-
-" ファイルオープンを便利に
-call dein#add('Shougo/unite.vim')
-
-" ファイル検索Ag
-call dein#add('rking/ag.vim')
-
-" Unite.vimで最近使ったファイルを表示できるようにする
-call dein#add('Shougo/neomru.vim')
-
-" vin-devicons
-call dein#add('ryanoasis/vim-devicons')
-let g:WebDeviconsUnicodeDecorateFolderNodes = 1
-let g:webdevicons_conceal_nerdtree_brackets = 1
-let g:WebDevIconsNerdTreeAfterGlyphPadding = ' '
-
-" ファイルをtree表示してくれる
-call dein#add('scrooloose/nerdtree')
-nnoremap <silent><C-e> :NERDTree<CR>
-
-" vim-elixir シンタックスハイライト
-call dein#add('elixir-editors/vim-elixir')
-" vim-mix :Mix でコマンド実行可能
-call dein#add('mattreduce/vim-mix')
-" vim-extest テスト実行プラグイン
-call dein#add('BjRo/vim-extest')
-" elixir alchemist.vim
-call dein#add('slashmili/alchemist.vim')
-
-" NerdTreeのカラーリング
-call dein#add('tiagofumo/vim-nerdtree-syntax-highlight')
-let s:rspec_red = 'FE405F'
-let s:git_orange = 'F54D27'
-let g:NERDTreeExactMatchHighlightColor = {} " this line is needed to avoid error
-let g:NERDTreeExactMatchHighlightColor['.gitignore'] = s:git_orange " sets the color for .gitignore files
-let g:NERDTreePatternMatchHighlightColor = {} " this line is needed to avoid error
-let g:NERDTreePatternMatchHighlightColor['.*_spec\.rb$'] = s:rspec_red " sets the color for files ending with _spec.rb
-let g:NERDTreeLimitedSyntax = 1
-
-" Rails向けのコマンドを提供する
-" call dein#add('tpope/vim-rails')
-" Ruby向けにendを自動挿入してくれる
-call dein#add('tpope/vim-endwise')
-
-" コメントON/OFFを手軽に実行
-call dein#add('tomtom/tcomment_vim')
-
-" シングルクオートとダブルクオートの入れ替え等
-call dein#add('tpope/vim-surround')
-
-" vim-go
-call dein#add('fatih/vim-go')
-let g:go_version_warning = 0
-
-" インデントに色を付けて見やすくする
-call dein#add('nathanaelkane/vim-indent-guides')
-" ログファイルを色づけしてくれる
-call dein#add('vim-scripts/AnsiEsc.vim')
-" 行末の半角スペースを可視化
-call dein#add('bronson/vim-trailing-whitespace')
-" less用のsyntaxハイライト
-" call dein#add('KohPoll/vim-less')
-
-" markdown設定
-call dein#add('tpope/vim-markdown')
-call dein#add('kannokanno/previm')
-call dein#add('skanehira/preview-markdown.vim')
-let g:preview_markdown_vertical = 1
-
-
-""" markdown {{{{
-  let g:previm_open_cmd = 'google-chrome'
-  augroup PrevimSetting
-    autocmd!
-    autocmd BufNewFile,BufRead *.{md,mdwn,mkd,mkdn,mark*} set filetype=markdown
-  augroup END
-  " Need: kannokanno/previm
-  nnoremap <silent> <C-p> :PrevimOpen<CR>
-  " 自動で折りたたまないようにする
-  let g:vim_markdown_folding_disabled=1
-  let g:previm_enable_realtime=1
-" }}}}
-
-" RubyMineのように自動保存する
-call dein#add('907th/vim-auto-save')
-let g:auto_save = 1
-
-" Rubyメソッド自動補完
-call dein#add('Shougo/neocomplcache.vim')
-call dein#add('Shougo/neocomplcache-rsense.vim')
-
-let g:neocomplcache_enable_at_startup = 1
-let g:acp_enableAtStartup = 0
-let g:neocomplcache_enable_smart_case = 1
-
-" Set minimum syntax keyword length.
-let g:neocomplcache_min_syntax_length = 3
-let g:neocomplcache_lock_buffer_name_pattern = '\*ku\*'
-let g:neocomplcache_enable_camel_case_completion = 1
-let g:neocomplcache_enable_underbar_completion = 1
-
-" rubocop
-" call dein#add('ngmy/vim-rubocop')
-" call dein#add('scrooloose/syntastic')
-
-" let g:syntastic_mode_map = { 'mode': 'passive', 'active_filetypes': ['ruby'] }
-" let g:syntastic_ruby_checkers=['rubocop', 'mri']
-
-" 切り替え
-call dein#add('AndrewRadev/switch.vim')
-" -で切り替え
-let g:switch_mapping = "-"
-
-" react native用のプラグイン追加
-call dein#add('pangloss/vim-javascript', { 'for': ['javascript', 'javascript.jsx'] })
-call dein#add('othree/yajs.vim', { 'for': ['javascript', 'javascript.jsx'] })
-call dein#add('othree/es.next.syntax.vim', { 'for': ['javascript', 'javascript.jsx'] })
-call dein#add('othree/javascript-libraries-syntax.vim', { 'for': ['javascript', 'javascript.jsx'] })
-" react native用コード補完
-call dein#add('ternjs/tern_for_vim', { 'for': ['javascript', 'javascript.jsx'], 'do': 'npm install' })
-
-" HTML5のプラグイン
-call dein#add('othree/html5.vim')
-
-" vimでtwitter
-let twitvim_enable_python = 1
-let twitvim_browser_cmd = 'google-chrome'
-let twitvim_force_ssl = 1
-let twitvim_count = 100
-
-" CtrlP ファイルをさくっと開けるやつ
-call dein#add('ctrlpvim/ctrlp.vim')
-let g:ctrlp_map = '<c-p>'
-let g:ctrlp_cmd = 'CtrlP'
-
-" vim-prettier
-call dein#add('prettier/vim-prettier', { 'do': 'yarn install', 'for': ['javascript', 'typescript', 'css', 'less', 'scss', 'json', 'graphql', 'markdown', 'vue', 'yaml', 'html'] })
-let g:prettier#autoformat = 0
-let g:prettier#quickfix_enabled = 0
-let g:prettier#config#semi = 'true'
-" autocmd BufWritePre *.js,*.jsx,*.ts,*.tsx,*.vue,*.css,*.scss,*.json,*.md PrettierAsync
-
-" JS indent
-call dein#add('jason0x43/vim-js-indent')
-
-" TypeSctipt
-call dein#add('leafgarland/typescript-vim')
-call dein#add('Quramy/tsuquyomi')
-let g:syntastic_typescript_tsc_args = "--experimentalDecorators --target ES5"
-
-" mattn/sl
-" call dein#add('mattn/vim-sl')
-
-call dein#end()
 
 " Required:
 filetype plugin indent on
@@ -231,7 +226,6 @@ endif
 " set printfont=Cica:h8
 " set renderingoptions=type:directx,renmode:5
 " set ambiwidth=double
-" タグファイルの指定(でもタグジャンプは使ったことがない)
 set tags=~/.tags
 " スワップファイルは使わない(ときどき面倒な警告が出るだけで役に立ったことがない)
 set noswapfile
