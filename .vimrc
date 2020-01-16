@@ -183,7 +183,7 @@ if dein#load_state("$HOME/.cache/dein")
   let g:prettier#autoformat = 0
   let g:prettier#quickfix_enabled = 0
   let g:prettier#config#semi = 'true'
-  " autocmd BufWritePre *.js,*.jsx,*.ts,*.tsx,*.vue,*.css,*.scss,*.json,*.md PrettierAsync
+  " autocmd BufWritePre *.js,*.jsx,*.ts,*.tsx,*.vue,*.css,*.scss,*.json PrettierAsync
 
   " JS indent
   call dein#add('jason0x43/vim-js-indent')
