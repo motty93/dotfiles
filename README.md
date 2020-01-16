@@ -17,3 +17,8 @@ $ git clone https://github.com/motty93/dotfiles.git
 
 $ sh ./dotfiles/etc/install.sh
 ```
+
+### customizing
+
+Please change your .gitconfig user info.
+
