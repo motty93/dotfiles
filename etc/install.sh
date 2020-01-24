@@ -96,6 +96,16 @@ packagelist = (
   wmctrl
   libinput-tools
   dconf-cli
+  xserver-xorg-input-synaptics-hwe-18.04
+
+  #wine
+  winehq-stable
+  winetricks
+
+  #flash player
+  adobe-flashplugin
+  flashplugin-installer
+  browser-plugin-freshplayer-pepperflash
 )
 
 sudo apt update; sudo apt upgrade
@@ -152,6 +162,12 @@ echo "########## dotfiles link ##########\n"
 cd ${SCRIPT_DIRECTORY}
 sudo chmod +x link.sh
 ./link.sh
+
+
+echo "########## wine setting ##########\n"
+cd ${HOME}
+winetricks allfonts
+# winecfg
 
 
 sudo apt update; sudo apt upgrade
