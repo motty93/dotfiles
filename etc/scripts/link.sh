@@ -3,6 +3,11 @@
 set -u
 DOT_DIRECTORY="${HOME}/dotfiles"
 BIN_DIRECTORY="${HOME}/dotfiles/bin"
+XKB_DIRECTORY="${HOME}/dotfiles/xkb"
+
+echo "xkb files"
+setxkbmap -print >> ${HOME}/keymap/mypc_default
+ln -snfv ${XKB_DIRECTORY} ${HOME}/.xkb
 
 echo "link home directory dotfiles"
 cd ${DOT_DIRECTORY}
