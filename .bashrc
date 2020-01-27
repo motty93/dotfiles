@@ -166,7 +166,10 @@ xterm*|rxvt*)
     ;;
 esac
 
-#THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
+#keymapping
+xkbcomp -I$HOME/.xkb ~/.xkb/keymap/anne_pro2_keymap $DISPLAY 2> /dev/null
+
+#export
 PATH="$HOME/bin:$HOME/.local/bin:$PATH"
 export PATH="$HOME/.rbenv/bin:$PATH"
 eval "$(rbenv init -)"
