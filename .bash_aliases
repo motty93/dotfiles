@@ -8,8 +8,9 @@ fi
 alias ll='ls -alF'
 alias la='ls -A'
 alias l='ls -CF'
-
 alias cd="cdls"
+
+# keyboard command
 alias disablekey="disable_keyboard"
 alias enablekey="enable_keyboard"
 
@@ -29,10 +30,13 @@ alias mybranch="my_git_branch"
 
 # some tools
 alias pbcopy='xsel --clipboard --input'
-alias be='RAILS_ENV=development bundle exec'
 alias mozc='/usr/lib/mozc/mozc_tool --mode=config_dialog'
 alias slack='/usr/bin/slack'
 alias my-chown="sudo chown -R $USER:$USER *"
+
+# rails bundle exec
+alias bedev='RAILS_ENV=development bundle exec'
+alias betest='RAILS_ENV=test bundle exec'
 
 # some docker command
 alias fig='docker-compose'
