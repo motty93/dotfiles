@@ -16,6 +16,7 @@ packagelist = (
   unzip
   fontforge
   wget
+  gdebi
 
   #google drive async
   google-drive-ocamlfuse
@@ -170,6 +171,7 @@ winetricks allfonts
 # winecfg
 
 
-sudo apt update; sudo apt upgrade
+sudo apt update; sudo apt upgrade; sudo apt autoremove
+
 
 echo "congrats!!!!!!!!!!!"
