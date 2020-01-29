@@ -167,7 +167,7 @@ xterm*|rxvt*)
 esac
 
 #keymapping
-xkbcomp -I$HOME/.xkb ~/.xkb/keymap/anne_pro2_keymap $DISPLAY 2> /dev/null
+echo `xkbcomp -I$HOME/.xkb ~/.xkb/keymap/anne_pro2_keymap $DISPLAY 2> /dev/null`
 
 #export
 PATH="$HOME/bin:$HOME/.local/bin:$PATH"

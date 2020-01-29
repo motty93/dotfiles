@@ -183,6 +183,8 @@ if dein#load_state("$HOME/.cache/dein")
   let g:prettier#autoformat = 0
   let g:prettier#quickfix_enabled = 0
   let g:prettier#config#semi = 'true'
+  let g:prettier#config#single_quote = 'true'
+  let g:prettier#config#bracket_spacing = 'true'
   " autocmd BufWritePre *.js,*.jsx,*.ts,*.tsx,*.vue,*.css,*.scss,*.json PrettierAsync
 
   " JS indent
