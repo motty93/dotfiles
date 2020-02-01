@@ -179,12 +179,13 @@ if dein#load_state("$HOME/.cache/dein")
   let g:ctrlp_cmd = 'CtrlP'
 
   " vim-prettier
-  call dein#add('prettier/vim-prettier', { 'do': 'yarn install', 'for': ['javascript', 'typescript', 'css', 'less', 'scss', 'json', 'graphql', 'markdown', 'vue', 'yaml', 'html'] })
+  call dein#add('prettier/vim-prettier', { 'do': 'yarn install', 'branch': 'release/1.x' , 'for': ['javascript', 'typescript', 'css', 'less', 'scss', 'json', 'graphql', 'markdown', 'vue', 'yaml', 'html'] })
   let g:prettier#autoformat = 0
   let g:prettier#quickfix_enabled = 0
-  let g:prettier#config#semi = 'true'
+  let g:prettier#config#semi = 'false'
   let g:prettier#config#single_quote = 'true'
   let g:prettier#config#bracket_spacing = 'true'
+  let g:prettier#config#parser = 'babylon'
   " autocmd BufWritePre *.js,*.jsx,*.ts,*.tsx,*.vue,*.css,*.scss,*.json PrettierAsync
 
   " JS indent
