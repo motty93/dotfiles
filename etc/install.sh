@@ -88,6 +88,8 @@ packagelist = (
   libxslt-dev
   libffi-dev
   libtool
+  libbz2-dev
+  libsqlite3-dev
   unixodbc-dev
   gpg
   dirmngr
@@ -146,11 +148,23 @@ google-drive-ocamlfuse
 google-drive-ocamlfuse ${HOME}/GoogleDrive/
 
 
-echo "########## asdf & nodejs setting ##########\n"
+echo "########## asdf ##########\n"
 cd ${HOME}
 git clone https://github.com/asdf-vm/asdf.git ~/.asdf
+echo "########## install node ##########\n"
 asdf plugin-add nodejs https://github.com/asdf-vm/asdf-nodejs.git
 bash $HOME/.asdf/plugins/nodejs/bin/import-release-team-keyring
+echo "########## install golang ##########\n"
+asdf plugin-add golang https://github.com/kennyp/asdf-golang.git
+# asdf list-all golang
+# asdf install golang <latest stable version>
+# asdf global golang <latest stable version>
+echo "########## install python ##########\n"
+asdf plugin-add python
+# asdf list-all python
+# asdf install python <latest stable version>
+# asdf global python <latest stable version>
+
 
 
 echo "########## gesture tools setting ##########\n"
