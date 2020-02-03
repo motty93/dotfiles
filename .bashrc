@@ -181,7 +181,7 @@ export PS1='\[\e[1;36m\]\w\[\e[m\] \n% '
 # replace colon and semicolon
 xkbcomp -I$HOME/.xkb $HOME/.xkb/keymap/anne_pro2_keymap $DISPLAY 2> /dev/null
 # mount google drive
-google-drive-ocamlfuse $HOME/GoogleDrive
+google-drive-ocamlfuse $HOME/GoogleDrive 2> /dev/null
 
 
 [[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"
