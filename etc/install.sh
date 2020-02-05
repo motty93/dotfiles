@@ -185,7 +185,10 @@ winetricks allfonts
 # winecfg
 
 
+echo "########## discord install ##########\n"
+wget -O discord.deb "https://discordapp.com/api/download?platform=linux&format=deb" -P $HOME
+sudo gdebi $HOME/discord.deb
+
+
 sudo apt update; sudo apt upgrade; sudo apt autoremove
-
-
 echo "congrats!!!!!!!!!!!"
