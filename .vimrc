@@ -284,6 +284,8 @@ set clipboard&
 set clipboard^=unnamedplus
 " カーソルを行頭、行末で止まらないようにする
 set whichwrap=b,s,h,l,<,>,[,]
+" バックスペースを使えるようにする
+set backspace=indent,eol,start
 " 構文毎に文字色を変化させる
 syntax on
 " カラースキーマの指定
