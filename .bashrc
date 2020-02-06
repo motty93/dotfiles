@@ -168,14 +168,15 @@ esac
 
 #export
 PATH="$HOME/bin:$HOME/.local/bin:$PATH"
-export PATH="$HOME/.rbenv/bin:$PATH"
-eval "$(rbenv init -)"
+# asdfに依存するためrbenvのパスはコメントアウト
+# export PATH="$HOME/.rbenv/bin:$PATH"
+# eval "$(rbenv init -)"
+# export PATH="$HOME/.rbenv/bin:$PATH"
+# export PATH="$PATH:`yarn global bin`"
 export PULSE_LATENCY_MSEC=30
 export SDKMAN_DIR="$HOME/.sdkman"
-#export PATH="$PATH:`yarn global bin`"
 export PATH="$PATH:/usr/bin/go"
 export PATH="$HOME/tools:$HOME/tools/bin:$PATH"
-export PATH="$HOME/.rbenv/bin:$PATH"
 export PS1='\[\e[1;36m\]\w\[\e[m\] \n% '
 
 # replace colon and semicolon
@@ -193,5 +194,4 @@ if [ -f "$HOME/google-cloud-sdk/path.bash.inc" ]; then source "$HOME/google-clou
 if [ -f "$HOME/google-cloud-sdk/completion.bash.inc" ]; then source "$HOME/google-cloud-sdk/completion.bash.inc"; fi
 
 if [ -f "$HOME/.asdf/asdf.sh" ]; then source "$HOME/.asdf/asdf.sh"; fi
-
 if [ -f "$HOME/.asdf/completions/asdf.bash" ]; then source "$HOME/.asdf/completions/asdf.bash"; fi
