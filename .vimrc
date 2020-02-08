@@ -21,7 +21,14 @@ if dein#load_state("$HOME/.cache/dein")
     call dein#add('roxma/vim-hug-neovim-rpc')
   endif
 
-  " call dein#add('Shougo/vimproc.vim', {'build': 'make'})
+  call dein#add('Shougo/vimproc.vim', {
+        \ 'build': {
+        \     'cygwim'  : 'make -f make_cygwin.mak',
+        \     'mac'     : 'make -f make_mac.mak',
+        \     'linux'   : 'make',
+        \     'unix'    : 'gmake',
+        \   },
+        \ })
 
   " plantumlを開く
   call dein#add('aklt/plantuml-syntax')
@@ -44,14 +51,56 @@ if dein#load_state("$HOME/.cache/dein")
   call dein#add('KabbAmine/vCoolor.vim')
   let g:vcoolor_map = '<leader>c'
 
-  " ファイルオープンを便利に
-  call dein#add('Shougo/unite.vim')
-
   " ファイル検索Ag
   call dein#add('rking/ag.vim')
 
   " Unite.vimで最近使ったファイルを表示できるようにする
   call dein#add('Shougo/neomru.vim')
+
+  " unite.vim
+  call dein#add('Shougo/unite.vim')
+  let g:unite_enable_start_insert = 1
+  let g:unite_enable_ignore_case = 1
+  let g:unite_enable_smart_case = 1
+  " バッファ一覧
+  nnoremap <C-b> :Unite buffer<CR>
+  " ファイル一覧
+  noremap <C-N> :Unite -buffer-name=file file<CR>
+  " 再帰的にファイル検索
+  nnoremap <leader>rec :Unite file_rec<CR>
+  " 最近使ったファイルの一覧
+  noremap <C-Z> :Unite file_mru<CR>
+  " sourcesを「今開いているファイルのディレクトリ」とする
+  noremap :uff :<C-u>UniteWithBufferDir file -buffer-name=file<CR>
+  " ウィンドウを分割して開く
+  au FileType unite nnoremap <silent> <buffer> <expr> <C-J> unite#do_action('split')
+  au FileType unite inoremap <silent> <buffer> <expr> <C-J> unite#do_action('split')
+  " ウィンドウを縦に分割して開く
+  au FileType unite nnoremap <silent> <buffer> <expr> <C-K> unite#do_action('vsplit')
+  au FileType unite inoremap <silent> <buffer> <expr> <C-K> unite#do_action('vsplit')
+  " ESCキーを2回押すと終了する
+  au FileType unite nnoremap <silent> <buffer> <ESC><ESC> :q<CR>
+  au FileType unite inoremap <silent> <buffer> <ESC><ESC> <ESC>:q<CR>
+  " grep検索
+  nnoremap <silent> <leader>g :<C-u>Unite grep:. -buffer-name=search-buffer<CR>
+  " カーソル位置の単語をgrep検索
+  nnoremap <silent> <leader>cg :<C-u>Unite grep:. -buffer-name=search-buffer<CR><C-R><C-W>
+  " grep検索結果の再呼び出し
+  nnoremap <silent> <leader>r :<C-u>UniteResume search-buffer<CR>
+  " unite grepにagを使う
+  if executable('ag')
+    let g:unite_source_grep_command = 'ag'
+    let g:unite_source_grep_default_opts = '--nogroup --nocolor --column'
+    let g:unite_source_grep_recursive_opt = ''
+  endif
+
+  " denite.nvim
+  " call dein#add('Shougo/denite.nvim')
+  " if !has('nvim')
+  "   call dein#add('roxma/nvim-yarp')
+  "   call dein#add('roxma/vim-hug-neovim-rpc')
+  " endif
+  " nnoremap <leader>rec :Denite file_rec<CR>
 
   " vin-devicons
   call dein#add('ryanoasis/vim-devicons')
@@ -329,32 +378,6 @@ let g:indent_guides_enable_on_vim_startup = 1
 " grep検索の実行後にQuickFix Listを表示する
 autocmd QuickFixCmdPost *grep* cwindow
 
-" http://blog.remora.cx/2010/12/vim-ref-with-unite.html
-""""""""""""""""""""""""""""""
-" Unite.vimの設定
-""""""""""""""""""""""""""""""
-" 入力モードで開始する
-let g:unite_enable_start_insert=1
-" バッファ一覧
-nnoremap <C-b> :Unite buffer<CR>
-" ファイル一覧
-noremap <C-N> :Unite -buffer-name=file file<CR>
-" 再帰的にファイル検索
-nnoremap ,rec :Unite file_rec<CR>
-" 最近使ったファイルの一覧
-noremap <C-Z> :Unite file_mru<CR>
-" sourcesを「今開いているファイルのディレクトリ」とする
-noremap :uff :<C-u>UniteWithBufferDir file -buffer-name=file<CR>
-" ウィンドウを分割して開く
-au FileType unite nnoremap <silent> <buffer> <expr> <C-J> unite#do_action('split')
-au FileType unite inoremap <silent> <buffer> <expr> <C-J> unite#do_action('split')
-" ウィンドウを縦に分割して開く
-au FileType unite nnoremap <silent> <buffer> <expr> <C-K> unite#do_action('vsplit')
-au FileType unite inoremap <silent> <buffer> <expr> <C-K> unite#do_action('vsplit')
-" ESCキーを2回押すと終了する
-au FileType unite nnoremap <silent> <buffer> <ESC><ESC> :q<CR>
-au FileType unite inoremap <silent> <buffer> <ESC><ESC> <ESC>:q<CR>
-""""""""""""""""""""""""""""""
 
 """"""""""""""""""""""""""""""
 " javascriptの設定
@@ -462,8 +485,7 @@ inoremap <C-h> <Left>
 inoremap <C-l> <Right>
 """"""""""""""""""""""""""""""
 " 現在のファイルをブラウザで開く
-nnoremap <leader>g :exe ':silent !google-chrome % &'<CR>
-""
+nnoremap <leader>chrome :exe ':silent !google-chrome % &'<CR>
 
 " filetypeの自動検出(最後の方に書いた方がいいらしい)
 filetype on
