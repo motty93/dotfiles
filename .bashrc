@@ -178,6 +178,12 @@ export SDKMAN_DIR="$HOME/.sdkman"
 export PATH="$PATH:/usr/bin/go"
 export PATH="$HOME/tools:$HOME/tools/bin:$PATH"
 export PS1='\[\e[1;36m\]\w\[\e[m\] \n% '
+export ANDROID_HOME="/opt/android-sdk"
+export PATH="$PATH:$ANDROID_HOME/emulator"
+export PATH="$PATH:$ANDROID_HOME/tools"
+export PATH="$PATH:$ANDROID_HOME/tools/bin"
+export PATH="$PATH:$ANDROID_HOME/platform-tools"
+alias emu="$ANDROID_HOME/tools/emulator"
 
 # replace colon and semicolon
 xkbcomp -I$HOME/.xkb $HOME/.xkb/keymap/anne_pro2_keymap $DISPLAY 2> /dev/null
