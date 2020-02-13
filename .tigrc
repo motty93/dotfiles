@@ -1,0 +1,19 @@
+# main viewの左端にコミットIDを表示する
+set main-view   = id date author:abbreviated commit-title:graph=yes,refs=yes
+
+# blame view の行数表示をON,intervalを１に
+set blame-view  = date:default author:email-user id:yes,color line-number:yes,interval=1 text
+
+# Pager系の行数表示をON, intervalを１に
+set pager-view  = line-number:yes,interval=1 text
+set stage-view  = line-number:yes,interval=1 text
+set log-view    = line-number:yes,interval=1 text
+set blob-view   = line-number:yes,interval=1 text
+set diff-view   = line-number:yes,interval=1 text:yes,commit-title-overflow=no
+
+set line-graphics = utf-8
+set ignore-case = true
+set ignore-space = at-eol
+set mouse = true
+set refresh-mode = auto
+# set diff-highlight = true
