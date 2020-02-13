@@ -476,6 +476,7 @@ inoremap [ []<LEFT>
 inoremap ( ()<LEFT>
 inoremap ' ''<LEFT>
 inoremap " ""<LEFT>
+inoremap ` ``<LEFT>
 """"""""""""""""""""""""""""""
 " インサートモード中のキーマップ変更
 """"""""""""""""""""""""""""""
