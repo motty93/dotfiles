@@ -65,7 +65,7 @@ if dein#load_state("$HOME/.cache/dein")
   " バッファ一覧
   nnoremap <C-b> :Unite buffer<CR>
   " ファイル一覧 なければ新規ファイル
-  noremap <C-N> :Unite file/new -buffer-name=file file<CR>
+  noremap <C-N> :Unite file -buffer-name=file file/new<CR>
   " 再帰的にファイル検索
   nnoremap <leader>rec :Unite file_rec<CR>
   " 最近使ったファイルの一覧
