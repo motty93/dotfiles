@@ -64,14 +64,16 @@ if dein#load_state("$HOME/.cache/dein")
   let g:unite_enable_smart_case = 1
   " バッファ一覧
   nnoremap <C-b> :Unite buffer<CR>
-  " ファイル一覧
-  noremap <C-N> :Unite -buffer-name=file file<CR>
+  " ファイル一覧 なければ新規ファイル
+  noremap <C-N> :Unite file/new -buffer-name=file file<CR>
   " 再帰的にファイル検索
   nnoremap <leader>rec :Unite file_rec<CR>
   " 最近使ったファイルの一覧
   noremap <C-Z> :Unite file_mru<CR>
   " sourcesを「今開いているファイルのディレクトリ」とする
-  noremap :uff :<C-u>UniteWithBufferDir file -buffer-name=file<CR>
+  noremap :uff :<C-u>UniteWithBufferDir file file/new -buffer-name=file<CR>
+  " 新規ファイル作成
+  noremap :file_new :Unite -buffer-name=file file/new
   " ウィンドウを分割して開く
   au FileType unite nnoremap <silent> <buffer> <expr> <C-J> unite#do_action('split')
   au FileType unite inoremap <silent> <buffer> <expr> <C-J> unite#do_action('split')
@@ -382,23 +384,23 @@ autocmd QuickFixCmdPost *grep* cwindow
 """"""""""""""""""""""""""""""
 " javascriptの設定
 """"""""""""""""""""""""""""""
-function! EnableJavascript()
-  " Setup used libraries
-  let g:used_javascript_libs = 'jquery,underscore,react,flux,jasmine,d3'
-  let b:javascript_lib_use_jquery = 1
-  let b:javascript_lib_use_underscore = 1
-  let b:javascript_lib_use_react = 1
-  let b:javascript_lib_use_flux = 1
-  let b:javascript_lib_use_jasmine = 1
-  let b:javascript_lib_use_d3 = 1
-endfunction
-
-if has('syntax')
-  augroup Javascript
-    autocmd! FileType javascript,javascript.jsx call EnableJavascript()
-  augroup END
-endif
-
+" function! EnableJavascript()
+"   " Setup used libraries
+"   let g:used_javascript_libs = 'jquery,underscore,react,flux,jasmine,d3'
+"   let b:javascript_lib_use_jquery = 1
+"   let b:javascript_lib_use_underscore = 1
+"   let b:javascript_lib_use_react = 1
+"   let b:javascript_lib_use_flux = 1
+"   let b:javascript_lib_use_jasmine = 1
+"   let b:javascript_lib_use_d3 = 1
+" endfunction
+"
+" if has('syntax')
+"   augroup Javascript
+"     autocmd! FileType javascript,javascript.jsx call EnableJavascript()
+"   augroup END
+" endif
+"
 " 改行時に前の行のインデントを継続する
 set autoindent
 " 改行時に入力された行の末尾に合わせて次の行のインデントを増減する
