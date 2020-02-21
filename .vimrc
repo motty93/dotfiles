@@ -183,13 +183,14 @@ set runtimepath+=$HOME/.cache/dein/repos/github.com/Shougo/dein.vim
 
   " Rubyメソッド自動補完
   call dein#add('Shougo/neocomplcache.vim')
+  call dein#add('Shougo/neocomplete.vim')
+  let g:neocomplete#enable_at_startup = 1
   " call dein#add('NigoroJr/rsense')
   call dein#add('Shougo/neocomplcache-rsense.vim')
   " let g:neocomplcache_force_overwrite_completefunc=1
-  " let g:rsenseHome = expand("~/.asdf/shims/rsense")
+  " let g:rsenseHome = '/usr/local/lib/rsense'
   " let g:rsenseUseOmniFunc = 1
 
-  let g:acp_enableAtStartup = 0
   let g:neocomplcache#enable_at_startup = 1
   let g:neocomplcache#enable_smart_case = 1
 
