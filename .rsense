@@ -1,0 +1,3 @@
+home = ~/.asdf/shims/rsense
+load-path = /usr/bin/rbenv
+gem-path = ~/.asdf/shims/gem
