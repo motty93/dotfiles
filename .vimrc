@@ -4,16 +4,17 @@ filetype off
 " <leader>キー
 let mapleader = ","
 
-" dein scripts
-if &compatible
-  set nocompatible
-endif
+" auto reload .vimrc
+augroup source-vimrc
+  autocmd!
+  autocmd BufWritePost *vimrc source $MYVIMRC | set foldmethod=marker
+  autocmd BufWritePost *gvimrc if has('gui_running') source $MYGVIMRC
+augroup END
 
 set runtimepath+=$HOME/.cache/dein/repos/github.com/Shougo/dein.vim
 
-if dein#load_state("$HOME/.cache/dein")
+" if dein#load_state("$HOME/.cache/dein")
   call dein#begin("$HOME/.cache/dein")
-
   call dein#add("$HOME/.cache/dein/repos/github.com/Shougo/dein.vim")
   call dein#add('Shougo/deoplete.nvim')
   if !has('nvim')
@@ -27,21 +28,21 @@ if dein#load_state("$HOME/.cache/dein")
         \     'mac'     : 'make -f make_mac.mak',
         \     'linux'   : 'make',
         \     'unix'    : 'gmake',
-        \   },
-        \ })
+        \ }, })
 
-  " plantumlを開く
+  " plantuml
   call dein#add('aklt/plantuml-syntax')
   let g:plantuml_executable_script = "~/file/plantuml.sh"
 
   " html補完 emmet
   call dein#add('mattn/emmet-vim')
 
-  " URLを開いたりググったりできる
-  call dein#add('open-browser.vim')
-  let g:netrw_nogx = 1 " disable netrw's gx mapping.
-  nmap gx <Plug>(openbrowser-smart-search)
-  vmap gx <Plug>(openbrowser-smart-search)
+  " open-broser.vim
+  call dein#add('tyru/open-browser.vim')
+  " call dein#add('open-browser.vim')
+  let g:netrw_nogx = 1
+  nnoremap gx <Plug>(openbrowser-smart-search)
+  vnoremap gx <Plug>(openbrowser-smart-search)
   command! OpenBrowserCurrent execute "!xdg-open" expand("%:p")
 
   " html5のコードをシンタックス表示する
@@ -51,11 +52,16 @@ if dein#load_state("$HOME/.cache/dein")
   call dein#add('KabbAmine/vCoolor.vim')
   let g:vcoolor_map = '<leader>c'
 
-  " ファイル検索Ag
+  " Ag - the silver search -
   call dein#add('rking/ag.vim')
-
-  " Unite.vimで最近使ったファイルを表示できるようにする
-  call dein#add('Shougo/neomru.vim')
+  " use Ag for unite grep and ctrlpvim
+  if executable('ag')
+    let g:ctrlp_use_caching=0
+    let g:ctrlp_user_command='ag %s -i --nocolor --nogroup -g ""'
+    let g:unite_source_grep_command = 'ag'
+    let g:unite_source_grep_default_opts = '--nogroup --nocolor --column'
+    let g:unite_source_grep_recursive_opt = ''
+  endif
 
   " unite.vim
   call dein#add('Shougo/unite.vim')
@@ -83,18 +89,15 @@ if dein#load_state("$HOME/.cache/dein")
   " ESCキーを2回押すと終了する
   au FileType unite nnoremap <silent> <buffer> <ESC><ESC> :q<CR>
   au FileType unite inoremap <silent> <buffer> <ESC><ESC> <ESC>:q<CR>
-  " grep検索
-  nnoremap <silent> <leader>g :<C-u>Unite grep:. -buffer-name=search-buffer<CR>
+  " grep検索 起点を変更してgrep
+  nnoremap <silent> <leader>g :<C-u>Unite grep: -buffer-name=search-buffer<CR>
   " カーソル位置の単語をgrep検索
   nnoremap <silent> <leader>cg :<C-u>Unite grep:. -buffer-name=search-buffer<CR><C-R><C-W>
   " grep検索結果の再呼び出し
-  nnoremap <silent> <leader>r :<C-u>UniteResume search-buffer<CR>
-  " unite grepにagを使う
-  if executable('ag')
-    let g:unite_source_grep_command = 'ag'
-    let g:unite_source_grep_default_opts = '--nogroup --nocolor --column'
-    let g:unite_source_grep_recursive_opt = ''
-  endif
+  nnoremap <silent> <leader>ur :<C-u>UniteResume search-buffer<CR>
+
+  " Unite.vimで最近使ったファイルを表示できるようにする
+  call dein#add('Shougo/neomru.vim')
 
   " denite.nvim
   " call dein#add('Shougo/denite.nvim')
@@ -102,6 +105,7 @@ if dein#load_state("$HOME/.cache/dein")
   "   call dein#add('roxma/nvim-yarp')
   "   call dein#add('roxma/vim-hug-neovim-rpc')
   " endif
+  " let g:python3_host_prog = '~/.asdf/shims/python'
   " nnoremap <leader>rec :Denite file_rec<CR>
 
   " vin-devicons
@@ -162,20 +166,16 @@ if dein#load_state("$HOME/.cache/dein")
   call dein#add('kannokanno/previm')
   call dein#add('skanehira/preview-markdown.vim')
   let g:preview_markdown_vertical = 1
-
-
-  """ markdown {{{{
-    let g:previm_open_cmd = 'google-chrome'
-    augroup PrevimSetting
-      autocmd!
-      autocmd BufNewFile,BufRead *.{md,mdwn,mkd,mkdn,mark*} set filetype=markdown
-    augroup END
-    " Need: kannokanno/previm
-    nnoremap <silent> <C-p> :PrevimOpen<CR>
-    " 自動で折りたたまないようにする
-    let g:vim_markdown_folding_disabled=1
-    let g:previm_enable_realtime=1
-  " }}}}
+  let g:previm_open_cmd = 'google-chrome'
+  augroup PrevimSetting
+    autocmd!
+    autocmd BufNewFile,BufRead *.{md,mdwn,mkd,mkdn,mark*} set filetype=markdown
+  augroup END
+  " 'Need: kannokanno/previm'
+  " 自動で折りたたまないようにする
+  let g:vim_markdown_folding_disabled=1
+  let g:previm_enable_realtime=1
+  " nnoremap <silent> <C-p> :PrevimOpen<CR>
 
   " RubyMineのように自動保存する
   call dein#add('907th/vim-auto-save')
@@ -183,11 +183,15 @@ if dein#load_state("$HOME/.cache/dein")
 
   " Rubyメソッド自動補完
   call dein#add('Shougo/neocomplcache.vim')
+  " call dein#add('NigoroJr/rsense')
   call dein#add('Shougo/neocomplcache-rsense.vim')
+  " let g:neocomplcache_force_overwrite_completefunc=1
+  " let g:rsenseHome = expand("~/.asdf/shims/rsense")
+  " let g:rsenseUseOmniFunc = 1
 
-  let g:neocomplcache_enable_at_startup = 1
   let g:acp_enableAtStartup = 0
-  let g:neocomplcache_enable_smart_case = 1
+  let g:neocomplcache#enable_at_startup = 1
+  let g:neocomplcache#enable_smart_case = 1
 
   " Set minimum syntax keyword length.
   let g:neocomplcache_min_syntax_length = 3
@@ -198,16 +202,14 @@ if dein#load_state("$HOME/.cache/dein")
   " rubocop
   " call dein#add('ngmy/vim-rubocop')
   " call dein#add('scrooloose/syntastic')
-
   " let g:syntastic_mode_map = { 'mode': 'passive', 'active_filetypes': ['ruby'] }
   " let g:syntastic_ruby_checkers=['rubocop', 'mri']
 
-  " 切り替え
+  " switch vim
   call dein#add('AndrewRadev/switch.vim')
-  " -で切り替え
   let g:switch_mapping = "-"
 
-  " react native用のプラグイン追加
+  " react native plugins
   call dein#add('pangloss/vim-javascript', { 'for': ['javascript', 'javascript.jsx'] })
   call dein#add('othree/yajs.vim', { 'for': ['javascript', 'javascript.jsx'] })
   call dein#add('othree/es.next.syntax.vim', { 'for': ['javascript', 'javascript.jsx'] })
@@ -250,9 +252,10 @@ if dein#load_state("$HOME/.cache/dein")
   " mattn/sl
   " call dein#add('mattn/vim-sl')
 
+
   call dein#end()
   call dein#save_state()
-endif
+" endif
 
 " Required:
 filetype plugin indent on
@@ -268,9 +271,9 @@ endif
 " 各種オプションの設定
 """"""""""""""""""""""""""""""
 " Cicaフォント設定linux
- "set encoding=utf8
- "set guifont=Cica:h16
- "set ambiwidth=double
+set encoding=utf8
+set guifont=Cica:h16
+set ambiwidth=double
 " Mac Cicaフォント
 " set guifont=Cica:h16
 " set printfont=Cica:h12
@@ -280,6 +283,7 @@ endif
 " set printfont=Cica:h8
 " set renderingoptions=type:directx,renmode:5
 " set ambiwidth=double
+
 set tags=~/.tags
 " スワップファイルは使わない(ときどき面倒な警告が出るだけで役に立ったことがない)
 set noswapfile
@@ -487,8 +491,12 @@ inoremap <C-k> <Up>
 inoremap <C-h> <Left>
 inoremap <C-l> <Right>
 """"""""""""""""""""""""""""""
+" tabnew mapping
+nnoremap <silent> <leader>t :<C-u>tabnew<CR>
 " 現在のファイルをブラウザで開く
 nnoremap <leader>chrome :exe ':silent !google-chrome % &'<CR>
+" Edit vimrc
+nnoremap <leader>v :edit $MYVIMRC<CR>
 
 " filetypeの自動検出(最後の方に書いた方がいいらしい)
 filetype on
