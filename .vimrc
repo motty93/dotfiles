@@ -56,8 +56,8 @@ set runtimepath+=$HOME/.cache/dein/repos/github.com/Shougo/dein.vim
   call dein#add('rking/ag.vim')
   " use Ag for unite grep and ctrlpvim
   if executable('ag')
-    let g:ctrlp_use_caching=0
-    let g:ctrlp_user_command='ag %s -i --nocolor --nogroup -g ""'
+    let g:ctrlp_use_caching = 0
+    let g:ctrlp_user_command = 'ag %s -i --nocolor --nogroup -g ""'
     let g:unite_source_grep_command = 'ag'
     let g:unite_source_grep_default_opts = '--nogroup --nocolor --column'
     let g:unite_source_grep_recursive_opt = ''
@@ -173,8 +173,8 @@ set runtimepath+=$HOME/.cache/dein/repos/github.com/Shougo/dein.vim
   augroup END
   " 'Need: kannokanno/previm'
   " 自動で折りたたまないようにする
-  let g:vim_markdown_folding_disabled=1
-  let g:previm_enable_realtime=1
+  let g:vim_markdown_folding_disabled = 1
+  let g:previm_enable_realtime = 1
   " nnoremap <silent> <C-p> :PrevimOpen<CR>
 
   " RubyMineのように自動保存する
@@ -187,7 +187,7 @@ set runtimepath+=$HOME/.cache/dein/repos/github.com/Shougo/dein.vim
   let g:neocomplete#enable_at_startup = 1
   " call dein#add('NigoroJr/rsense')
   call dein#add('Shougo/neocomplcache-rsense.vim')
-  " let g:neocomplcache_force_overwrite_completefunc=1
+  " let g:neocomplcache_force_overwrite_completefunc = 1
   " let g:rsenseHome = '/usr/local/lib/rsense'
   " let g:rsenseUseOmniFunc = 1
 
@@ -204,7 +204,7 @@ set runtimepath+=$HOME/.cache/dein/repos/github.com/Shougo/dein.vim
   " call dein#add('ngmy/vim-rubocop')
   " call dein#add('scrooloose/syntastic')
   " let g:syntastic_mode_map = { 'mode': 'passive', 'active_filetypes': ['ruby'] }
-  " let g:syntastic_ruby_checkers=['rubocop', 'mri']
+  " let g:syntastic_ruby_checkers = ['rubocop', 'mri']
 
   " switch vim
   call dein#add('AndrewRadev/switch.vim')
