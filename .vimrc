@@ -286,7 +286,7 @@ set ambiwidth=double
 " set ambiwidth=double
 
 set tags=~/.tags
-" スワップファイルは使わない(ときどき面倒な警告が出るだけで役に立ったことがない)
+" スワップファイルは使わない
 set noswapfile
 " モード表示
 set showmode
@@ -300,7 +300,7 @@ set cmdheight=2
 set laststatus=2
 " バックアップを作成しない
 set nobackup
-" ステータス行に表示させる情報の指定(どこからかコピペしたので細かい意味はわかっていない)
+" ステータス行に表示させる情報の指定
 set statusline=%<%f\ %m%r%h%w%{'['.(&fenc!=''?&fenc:&enc).']['.&ff.']'}%=%l,%c%V%8P
 " ウインドウのタイトルバーにファイルのパス情報等を表示する
 set title
@@ -308,7 +308,7 @@ set title
 set wildmenu
 " 入力中のコマンドを表示する
 set showcmd
-" バッファで開いているファイルのディレクトリでエクスクローラを開始する(でもエクスプローラって使ってない)
+" バッファで開いているファイルのディレクトリでエクスクローラを開始する
 set browsedir=buffer
 " 小文字のみで検索したときに大文字小文字を無視する
 set smartcase
