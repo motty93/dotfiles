@@ -285,13 +285,13 @@ set ambiwidth=double
 " set renderingoptions=type:directx,renmode:5
 " set ambiwidth=double
 
-set tags=~/.tags
-" スワップファイルは使わない
-set noswapfile
-" モード表示
-set showmode
-" undoファイルは作成しない
-set noundofile
+set tags=~/.tags " set .tags files
+set noswapfile " no use swap file
+if has("mouse") " enable mouse
+  set mouse=a
+endif
+set showmode " display current mode
+set noundofile " not make undo files
 " カーソルが何行目の何列目に置かれているかを表示する
 set ruler
 " コマンドラインに使われる画面上の行数
