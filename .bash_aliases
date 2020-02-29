@@ -33,6 +33,7 @@ alias pbcopy='xsel --clipboard --input'
 alias mozc='/usr/lib/mozc/mozc_tool --mode=config_dialog'
 alias slack='/usr/bin/slack'
 alias my-chown="sudo chown -R $USER:$USER *"
+alias chrome-kill="ps aux | grep [c]hrome | awk '{ print $2 }' | sudo xargs kill -9"
 
 # rails bundle exec
 alias bedev='RAILS_ENV=development bundle exec'
