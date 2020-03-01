@@ -162,20 +162,7 @@ set runtimepath+=$HOME/.cache/dein/repos/github.com/Shougo/dein.vim
   " call dein#add('KohPoll/vim-less')
 
   " markdown設定
-  call dein#add('tpope/vim-markdown')
-  call dein#add('kannokanno/previm')
-  call dein#add('skanehira/preview-markdown.vim')
-  let g:preview_markdown_vertical = 1
-  let g:previm_open_cmd = 'google-chrome'
-  augroup PrevimSetting
-    autocmd!
-    autocmd BufNewFile,BufRead *.{md,mdwn,mkd,mkdn,mark*} set filetype=markdown
-  augroup END
-  " 'Need: kannokanno/previm'
-  " 自動で折りたたまないようにする
-  let g:vim_markdown_folding_disabled = 1
-  let g:previm_enable_realtime = 1
-  " nnoremap <silent> <C-p> :PrevimOpen<CR>
+  call dein#add('iamcco/markdown-preview.nvim', { 'on_ft': ['markdown', 'pandoc.markdown', 'rmd'], 'build': 'cd app & yarn install' })
 
   " RubyMineのように自動保存する
   call dein#add('907th/vim-auto-save')
