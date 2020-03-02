@@ -362,7 +362,7 @@ syn match   htmlArg "\<\(aria-[\-a-zA-Z0-9_]\+\)=" contained
 syn match   htmlArg contained "\s*data-[-a-zA-Z0-9_]\+"
 
 " HTML template
-autocmd BufNewFile *.html 0r $HOME/.vim/dein/template/html.txt
+autocmd BufNewFile *.html 0r $HOME/.cache/dein/template/html.txt
 """"""""""""""""""""""""""""""
 
 
