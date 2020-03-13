@@ -158,8 +158,6 @@ set runtimepath+=$HOME/.cache/dein/repos/github.com/Shougo/dein.vim
   call dein#add('vim-scripts/AnsiEsc.vim')
   " 行末の半角スペースを可視化
   call dein#add('bronson/vim-trailing-whitespace')
-  " less用のsyntaxハイライト
-  " call dein#add('KohPoll/vim-less')
 
   " markdown設定
   call dein#add('iamcco/markdown-preview.nvim', { 'on_ft': ['markdown', 'pandoc.markdown', 'rmd'], 'build': 'cd app & yarn install' })
@@ -236,10 +234,6 @@ set runtimepath+=$HOME/.cache/dein/repos/github.com/Shougo/dein.vim
   call dein#add('leafgarland/typescript-vim')
   call dein#add('Quramy/tsuquyomi')
   let g:syntastic_typescript_tsc_args = "--experimentalDecorators --target ES5"
-
-  " mattn/sl
-  " call dein#add('mattn/vim-sl')
-
 
   call dein#end()
   call dein#save_state()
