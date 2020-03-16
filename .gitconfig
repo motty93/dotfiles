@@ -12,3 +12,5 @@
   branch = auto
 [help]
 	autocorrect = 1
+[diff]
+	noprefix = true
