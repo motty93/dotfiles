@@ -1,7 +1,7 @@
 " 一旦ファイルタイプ関連を無効化する
 filetype off
 
-" <leader>キー
+" <leader>
 let mapleader = ","
 
 " auto reload .vimrc
@@ -34,23 +34,64 @@ set runtimepath+=$HOME/.cache/dein/repos/github.com/Shougo/dein.vim
   call dein#add('aklt/plantuml-syntax')
   let g:plantuml_executable_script = "~/file/plantuml.sh"
 
-  " html補完 emmet
-  call dein#add('mattn/emmet-vim')
-
   " open-broser.vim
   call dein#add('tyru/open-browser.vim')
-  " call dein#add('open-browser.vim')
   let g:netrw_nogx = 1
   nnoremap gx <Plug>(openbrowser-smart-search)
   vnoremap gx <Plug>(openbrowser-smart-search)
   command! OpenBrowserCurrent execute "!xdg-open" expand("%:p")
 
-  " html5のコードをシンタックス表示する
-  call dein#add('hail2u/vim-css3-syntax')
-
   " color picker
   call dein#add('KabbAmine/vCoolor.vim')
   let g:vcoolor_map = '<leader>c'
+
+  " denite.nvim
+  " call dein#add('Shougo/denite.nvim')
+  " if !has('nvim')
+  "   call dein#add('roxma/nvim-yarp')
+  "   call dein#add('roxma/vim-hug-neovim-rpc')
+  " endif
+  " let g:python3_host_prog = '~/.asdf/shims/python'
+  " nnoremap <leader>rec :Denite file_rec<CR>
+
+  " unite.vim
+  call dein#add('Shougo/unite.vim')
+  call dein#add('Shougo/neomru.vim')
+  let g:unite_enable_start_insert = 1
+  let g:unite_enable_ignore_case = 1
+  let g:unite_enable_smart_case = 1
+  " file buffer
+  nnoremap <C-b> :Unite buffer<CR>
+  " files or new file
+  noremap <C-N> :Unite file -buffer-name=file file/new<CR>
+  " recursive file search
+  nnoremap <leader>rec :Unite file_rec<CR>
+  " current files
+  noremap <C-Z> :Unite file_mru<CR>
+  " file dir change on this directory
+  noremap :uff :<C-u>UniteWithBufferDir file file/new -buffer-name=file<CR>
+  " file new
+  noremap :file_new :Unite -buffer-name=file file/new
+  " window split level
+  au FileType unite nnoremap <silent> <buffer> <expr> <C-J> unite#do_action('split')
+  au FileType unite inoremap <silent> <buffer> <expr> <C-J> unite#do_action('split')
+  " window split vertical
+  au FileType unite nnoremap <silent> <buffer> <expr> <C-K> unite#do_action('vsplit')
+  au FileType unite inoremap <silent> <buffer> <expr> <C-K> unite#do_action('vsplit')
+  " push Esc to end
+  au FileType unite nnoremap <silent> <buffer> <ESC><ESC> :q<CR>
+  au FileType unite inoremap <silent> <buffer> <ESC><ESC> <ESC>:q<CR>
+  " grep
+  nnoremap <silent> <leader>g :<C-u>Unite grep: -buffer-name=search-buffer<CR>
+  " cursor word grep
+  nnoremap <silent> <leader>cg :<C-u>Unite grep:. -buffer-name=search-buffer<CR><C-R><C-W>
+  " call result of grep
+  nnoremap <silent> <leader>ur :<C-u>UniteResume search-buffer<CR>
+
+  " file search
+  call dein#add('ctrlpvim/ctrlp.vim')
+  let g:ctrlp_map = '<c-p>'
+  let g:ctrlp_cmd = 'CtrlP'
 
   " Ag - the silver search -
   call dein#add('rking/ag.vim')
@@ -63,72 +104,15 @@ set runtimepath+=$HOME/.cache/dein/repos/github.com/Shougo/dein.vim
     let g:unite_source_grep_recursive_opt = ''
   endif
 
-  " unite.vim
-  call dein#add('Shougo/unite.vim')
-  let g:unite_enable_start_insert = 1
-  let g:unite_enable_ignore_case = 1
-  let g:unite_enable_smart_case = 1
-  " バッファ一覧
-  nnoremap <C-b> :Unite buffer<CR>
-  " ファイル一覧 なければ新規ファイル
-  noremap <C-N> :Unite file -buffer-name=file file/new<CR>
-  " 再帰的にファイル検索
-  nnoremap <leader>rec :Unite file_rec<CR>
-  " 最近使ったファイルの一覧
-  noremap <C-Z> :Unite file_mru<CR>
-  " sourcesを「今開いているファイルのディレクトリ」とする
-  noremap :uff :<C-u>UniteWithBufferDir file file/new -buffer-name=file<CR>
-  " 新規ファイル作成
-  noremap :file_new :Unite -buffer-name=file file/new
-  " ウィンドウを分割して開く
-  au FileType unite nnoremap <silent> <buffer> <expr> <C-J> unite#do_action('split')
-  au FileType unite inoremap <silent> <buffer> <expr> <C-J> unite#do_action('split')
-  " ウィンドウを縦に分割して開く
-  au FileType unite nnoremap <silent> <buffer> <expr> <C-K> unite#do_action('vsplit')
-  au FileType unite inoremap <silent> <buffer> <expr> <C-K> unite#do_action('vsplit')
-  " ESCキーを2回押すと終了する
-  au FileType unite nnoremap <silent> <buffer> <ESC><ESC> :q<CR>
-  au FileType unite inoremap <silent> <buffer> <ESC><ESC> <ESC>:q<CR>
-  " grep検索 起点を変更してgrep
-  nnoremap <silent> <leader>g :<C-u>Unite grep: -buffer-name=search-buffer<CR>
-  " カーソル位置の単語をgrep検索
-  nnoremap <silent> <leader>cg :<C-u>Unite grep:. -buffer-name=search-buffer<CR><C-R><C-W>
-  " grep検索結果の再呼び出し
-  nnoremap <silent> <leader>ur :<C-u>UniteResume search-buffer<CR>
-
-  " Unite.vimで最近使ったファイルを表示できるようにする
-  call dein#add('Shougo/neomru.vim')
-
-  " denite.nvim
-  " call dein#add('Shougo/denite.nvim')
-  " if !has('nvim')
-  "   call dein#add('roxma/nvim-yarp')
-  "   call dein#add('roxma/vim-hug-neovim-rpc')
-  " endif
-  " let g:python3_host_prog = '~/.asdf/shims/python'
-  " nnoremap <leader>rec :Denite file_rec<CR>
-
-  " vin-devicons
+  " file devicons
   call dein#add('ryanoasis/vim-devicons')
   let g:WebDeviconsUnicodeDecorateFolderNodes = 1
   let g:webdevicons_conceal_nerdtree_brackets = 1
   let g:WebDevIconsNerdTreeAfterGlyphPadding = ' '
-
-  " ファイルをtree表示してくれる
+  " NERDTree
   call dein#add('scrooloose/nerdtree')
-  nnoremap <silent><C-e> :NERDTree<CR>
-
-  " vim-elixir シンタックスハイライト
-  call dein#add('elixir-editors/vim-elixir')
-  " vim-mix :Mix でコマンド実行可能
-  call dein#add('mattreduce/vim-mix')
-  " vim-extest テスト実行プラグイン
-  call dein#add('BjRo/vim-extest')
-  " elixir alchemist.vim
-  call dein#add('slashmili/alchemist.vim')
-
-  " NerdTreeのカラーリング
   call dein#add('tiagofumo/vim-nerdtree-syntax-highlight')
+  nnoremap <silent><C-e> :NERDTree<CR>
   let s:rspec_red = 'FE405F'
   let s:git_orange = 'F54D27'
   let g:NERDTreeExactMatchHighlightColor = {} " this line is needed to avoid error
@@ -137,36 +121,43 @@ set runtimepath+=$HOME/.cache/dein/repos/github.com/Shougo/dein.vim
   let g:NERDTreePatternMatchHighlightColor['.*_spec\.rb$'] = s:rspec_red " sets the color for files ending with _spec.rb
   let g:NERDTreeLimitedSyntax = 1
 
-  " Rails向けのコマンドを提供する
-  " call dein#add('tpope/vim-rails')
-  " Ruby向けにendを自動挿入してくれる
+  " endwise
   call dein#add('tpope/vim-endwise')
-
-  " コメントON/OFFを手軽に実行
+  " comment
   call dein#add('tomtom/tcomment_vim')
-
-  " シングルクオートとダブルクオートの入れ替え等
+  " surround vim
   call dein#add('tpope/vim-surround')
+  " indent color
+  call dein#add('nathanaelkane/vim-indent-guides')
+  " logs color
+  call dein#add('vim-scripts/AnsiEsc.vim')
+  " end of line space color
+  call dein#add('bronson/vim-trailing-whitespace')
+  " markdown
+  call dein#add('iamcco/markdown-preview.nvim', { 'on_ft': ['markdown', 'pandoc.markdown', 'rmd'], 'build': 'cd app & yarn install' })
+  " auto save
+  call dein#add('907th/vim-auto-save')
+  let g:auto_save = 1
+  " switch vim
+  call dein#add('AndrewRadev/switch.vim')
+  let g:switch_mapping = "-"
+
+  " elixir syntax highlight
+  call dein#add('elixir-editors/vim-elixir')
+  " mix command :Mix
+  call dein#add('mattreduce/vim-mix')
+  " elixir test
+  call dein#add('BjRo/vim-extest')
+  " elixir alchemist.vim
+  call dein#add('slashmili/alchemist.vim')
 
   " vim-go
   call dein#add('fatih/vim-go')
   let g:go_version_warning = 0
 
-  " インデントに色を付けて見やすくする
-  call dein#add('nathanaelkane/vim-indent-guides')
-  " ログファイルを色づけしてくれる
-  call dein#add('vim-scripts/AnsiEsc.vim')
-  " 行末の半角スペースを可視化
-  call dein#add('bronson/vim-trailing-whitespace')
-
-  " markdown設定
-  call dein#add('iamcco/markdown-preview.nvim', { 'on_ft': ['markdown', 'pandoc.markdown', 'rmd'], 'build': 'cd app & yarn install' })
-
-  " RubyMineのように自動保存する
-  call dein#add('907th/vim-auto-save')
-  let g:auto_save = 1
-
-  " Rubyメソッド自動補完
+  " rails complement
+  call dein#add('tpope/vim-rails')
+  " ruby methods complement
   call dein#add('Shougo/neocomplcache.vim')
   call dein#add('Shougo/neocomplete.vim')
   let g:neocomplete#enable_at_startup = 1
@@ -175,65 +166,48 @@ set runtimepath+=$HOME/.cache/dein/repos/github.com/Shougo/dein.vim
   " let g:neocomplcache_force_overwrite_completefunc = 1
   " let g:rsenseHome = '/usr/local/lib/rsense'
   " let g:rsenseUseOmniFunc = 1
-
   let g:neocomplcache#enable_at_startup = 1
   let g:neocomplcache#enable_smart_case = 1
-
   " Set minimum syntax keyword length.
   let g:neocomplcache_min_syntax_length = 3
   let g:neocomplcache_lock_buffer_name_pattern = '\*ku\*'
   let g:neocomplcache_enable_camel_case_completion = 1
   let g:neocomplcache_enable_underbar_completion = 1
-
   " rubocop
   " call dein#add('ngmy/vim-rubocop')
   " call dein#add('scrooloose/syntastic')
   " let g:syntastic_mode_map = { 'mode': 'passive', 'active_filetypes': ['ruby'] }
   " let g:syntastic_ruby_checkers = ['rubocop', 'mri']
 
-  " switch vim
-  call dein#add('AndrewRadev/switch.vim')
-  let g:switch_mapping = "-"
-
   " react native plugins
   call dein#add('pangloss/vim-javascript', { 'for': ['javascript', 'javascript.jsx'] })
   call dein#add('othree/yajs.vim', { 'for': ['javascript', 'javascript.jsx'] })
   call dein#add('othree/es.next.syntax.vim', { 'for': ['javascript', 'javascript.jsx'] })
   call dein#add('othree/javascript-libraries-syntax.vim', { 'for': ['javascript', 'javascript.jsx'] })
-  " react native用コード補完
+  " react native complement
   call dein#add('ternjs/tern_for_vim', { 'for': ['javascript', 'javascript.jsx'], 'do': 'npm install' })
-
-  " HTML5のプラグイン
-  call dein#add('othree/html5.vim')
-
-  " vimでtwitter
-  let twitvim_enable_python = 1
-  let twitvim_browser_cmd = 'google-chrome'
-  let twitvim_force_ssl = 1
-  let twitvim_count = 100
-
-  " CtrlP ファイルをさくっと開けるやつ
-  call dein#add('ctrlpvim/ctrlp.vim')
-  let g:ctrlp_map = '<c-p>'
-  let g:ctrlp_cmd = 'CtrlP'
-
   " vim-prettier
   call dein#add('prettier/vim-prettier', { 'do': 'yarn install', 'branch': 'release/1.x' , 'for': ['javascript', 'typescript', 'css', 'less', 'scss', 'json', 'graphql', 'markdown', 'vue', 'yaml', 'html'] })
+  " autocmd BufWritePre *.js,*.jsx,*.ts,*.tsx,*.vue,*.css,*.scss,*.json PrettierAsync
   let g:prettier#autoformat = 0
   let g:prettier#quickfix_enabled = 0
   let g:prettier#config#semi = 'false'
   let g:prettier#config#single_quote = 'true'
   let g:prettier#config#bracket_spacing = 'true'
   let g:prettier#config#parser = 'babylon'
-  " autocmd BufWritePre *.js,*.jsx,*.ts,*.tsx,*.vue,*.css,*.scss,*.json PrettierAsync
-
-  " JS indent
+  " js indent
   call dein#add('jason0x43/vim-js-indent')
-
   " TypeSctipt
   call dein#add('leafgarland/typescript-vim')
   call dein#add('Quramy/tsuquyomi')
   let g:syntastic_typescript_tsc_args = "--experimentalDecorators --target ES5"
+
+  " html5 code syntax
+  call dein#add('hail2u/vim-css3-syntax')
+  " HTML5 plugins
+  call dein#add('othree/html5.vim')
+  " emmet
+  call dein#add('mattn/emmet-vim')
 
   call dein#end()
   call dein#save_state()
@@ -370,29 +344,30 @@ autocmd QuickFixCmdPost *grep* cwindow
 """"""""""""""""""""""""""""""
 " javascriptの設定
 """"""""""""""""""""""""""""""
-" function! EnableJavascript()
-"   " Setup used libraries
-"   let g:used_javascript_libs = 'jquery,underscore,react,flux,jasmine,d3'
-"   let b:javascript_lib_use_jquery = 1
-"   let b:javascript_lib_use_underscore = 1
-"   let b:javascript_lib_use_react = 1
-"   let b:javascript_lib_use_flux = 1
-"   let b:javascript_lib_use_jasmine = 1
-"   let b:javascript_lib_use_d3 = 1
-" endfunction
-"
-" if has('syntax')
-"   augroup Javascript
-"     autocmd! FileType javascript,javascript.jsx call EnableJavascript()
-"   augroup END
-" endif
-"
+function! EnableJavascript()
+  " Setup used libraries
+  let g:used_javascript_libs = 'jquery,underscore,react,flux,jasmine,d3'
+  let b:javascript_lib_use_jquery = 1
+  let b:javascript_lib_use_underscore = 1
+  let b:javascript_lib_use_react = 1
+  let b:javascript_lib_use_flux = 1
+  let b:javascript_lib_use_jasmine = 1
+  let b:javascript_lib_use_d3 = 1
+endfunction
+
+if has('syntax')
+  augroup Javascript
+    autocmd! FileType javascript,javascript.jsx call EnableJavascript()
+  augroup END
+endif
+
+
 " 改行時に前の行のインデントを継続する
 set autoindent
 " 改行時に入力された行の末尾に合わせて次の行のインデントを増減する
 set smartindent
 
-" http://inari.hatenablog.com/entry/2014/05/05/231307
+
 """"""""""""""""""""""""""""""
 " 全角スペースの表示
 """"""""""""""""""""""""""""""
@@ -410,10 +385,9 @@ if has('syntax')
 endif
 """"""""""""""""""""""""""""""
 
-" https://sites.google.com/site/fudist/Home/vim-nihongo-ban/-vimrc-sample
-""""""""""""""""""""""""""""""
+""""""""""""""""""""""""""""""""""""""""""""
 " 挿入モード時、ステータスラインの色を変更
-""""""""""""""""""""""""""""""
+""""""""""""""""""""""""""""""""""""""""""""
 let g:hi_insert = 'highlight StatusLine guifg=darkblue guibg=darkyellow gui=none ctermfg=blue ctermbg=yellow cterm=none'
 
 if has('syntax')
@@ -443,7 +417,7 @@ function! s:GetHighlight(hi)
   let hl = substitute(hl, 'xxx', '', '')
   return hl
 endfunction
-""""""""""""""""""""""""""""""
+""""""""""""""""""""""""""""""""""""""""""""
 
 """"""""""""""""""""""""""""""
 " 最後のカーソル位置を復元する
@@ -465,20 +439,21 @@ inoremap ( ()<LEFT>
 inoremap ' ''<LEFT>
 inoremap " ""<LEFT>
 inoremap ` ``<LEFT>
-""""""""""""""""""""""""""""""
+""""""""""""""""""""""""""""""""""""""
 " インサートモード中のキーマップ変更
-""""""""""""""""""""""""""""""
+""""""""""""""""""""""""""""""""""""""
 inoremap <C-j> <Down>
 inoremap <C-k> <Up>
 inoremap <C-h> <Left>
 inoremap <C-l> <Right>
-""""""""""""""""""""""""""""""
+""""""""""""""""""""""""""""""""""""""
+
 " tabnew mapping
 nnoremap <silent> <leader>t :<C-u>tabnew<CR>
-" 現在のファイルをブラウザで開く
+" browser open current file
 nnoremap <leader>chrome :exe ':silent !google-chrome % &'<CR>
 " Edit vimrc
 nnoremap <leader>v :edit $MYVIMRC<CR>
 
-" filetypeの自動検出(最後の方に書いた方がいいらしい)
+" filetype detection
 filetype on
