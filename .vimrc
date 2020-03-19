@@ -223,23 +223,19 @@ endif
 
 """"""""""""""""""""""""""""""
 
-""""""""""""""""""""""""""""""
-" 各種オプションの設定
-""""""""""""""""""""""""""""""
-" Cicaフォント設定linux
+" Cica font linux
 set encoding=utf8
 set guifont=Cica:h16
 set ambiwidth=double
-" Mac Cicaフォント
+" Mac Cica font
 " set guifont=Cica:h16
 " set printfont=Cica:h12
 " set ambiwidth=double
-" Win Cicaフォント
+" Win Cica font
 " set guifont=Cica:h11
 " set printfont=Cica:h8
 " set renderingoptions=type:directx,renmode:5
 " set ambiwidth=double
-
 set tags=~/.tags " set .tags files
 set noswapfile " no use swap file
 if has("mouse") " enable mouse
@@ -247,69 +243,43 @@ if has("mouse") " enable mouse
 endif
 set showmode " display current mode
 set noundofile " not make undo files
-" カーソルが何行目の何列目に置かれているかを表示する
-set ruler
-" コマンドラインに使われる画面上の行数
-set cmdheight=2
-" エディタウィンドウの末尾から2行目にステータスラインを常時表示させる
-set laststatus=2
-" バックアップを作成しない
-set nobackup
-" ステータス行に表示させる情報の指定
-set statusline=%<%f\ %m%r%h%w%{'['.(&fenc!=''?&fenc:&enc).']['.&ff.']'}%=%l,%c%V%8P
-" ウインドウのタイトルバーにファイルのパス情報等を表示する
-set title
-" コマンドラインモードで<Tab>キーによるファイル名補完を有効にする
-set wildmenu
-" 入力中のコマンドを表示する
-set showcmd
-" バッファで開いているファイルのディレクトリでエクスクローラを開始する
-set browsedir=buffer
-" 小文字のみで検索したときに大文字小文字を無視する
-set smartcase
-" 検索結果をハイライト表示する
-set hlsearch
-" 暗い背景色に合わせた配色にする
-set background=dark
-" タブ入力を複数の空白入力に置き換える
-set expandtab
-" 検索ワードの最初の文字を入力した時点で検索を開始する
-set incsearch
-" 保存されていないファイルがあるときでも別のファイルを開けるようにする
-set hidden
-" 不可視文字を表示する
-set list
-" タブと行の続きを可視化する
-set listchars=eol:\ ,trail:-
-" 行番号を表示する
-set number
-" 対応する括弧やブレースを表示する
-set showmatch
-" タブ文字の表示幅
-set tabstop=2
-" Vimが挿入するインデントの幅
-set shiftwidth=2
+set ruler " カーソルが何行目の何列目に置かれているかを表示する
+set cmdheight=2 " コマンドラインに使われる画面上の行数
+set laststatus=2 " エディタウィンドウの末尾から2行目にステータスラインを常時表示させる
+set nobackup " バックアップを作成しない
+set statusline=%<%f\ %m%r%h%w%{'['.(&fenc!=''?&fenc:&enc).']['.&ff.']'}%=%l,%c%V%8P " ステータス行に表示させる情報の指定
+set title " ウインドウのタイトルバーにファイルのパス情報等を表示する
+set wildmenu " コマンドラインモードで<Tab>キーによるファイル名補完を有効にする
+set showcmd " 入力中のコマンドを表示する
+set browsedir=buffer " バッファで開いているファイルのディレクトリでエクスクローラを開始する
+set smartcase " 小文字のみで検索したときに大文字小文字を無視する
+set hlsearch " 検索結果をハイライト表示する
+set background=dark " 暗い背景色に合わせた配色にする
+set expandtab " タブ入力を複数の空白入力に置き換える
+set incsearch " 検索ワードの最初の文字を入力した時点で検索を開始する
+set hidden " 保存されていないファイルがあるときでも別のファイルを開けるようにする
+set list " 不可視文字を表示する
+set listchars=eol:\ ,trail:- " タブと行の続きを可視化する
+set number " 行番号を表示する
+set showmatch " 対応する括弧やブレースを表示する
+set tabstop=2 " タブ文字の表示幅
+set shiftwidth=2 " Vimが挿入するインデントの幅
 set smarttab
-" ヤンク時クリップボードにもコピー
-set clipboard&
-set clipboard^=unnamedplus
-" カーソルを行頭、行末で止まらないようにする
-set whichwrap=b,s,h,l,<,>,[,]
-" バックスペースを使えるようにする
-set backspace=indent,eol,start
+set clipboard& " カーソルを行頭、行末で止まらないようにする
+set clipboard^=unnamedplus " ``
+set whichwrap=b,s,h,l,<,>,[,] " カーソルを行頭、行末で止まらないようにする
+set backspace=indent,eol,start " バックスペースを使えるようにする
+set autoindent " 改行時に前の行のインデントを継続する
+set smartindent " 改行時に入力された行の末尾に合わせて次の行のインデントを増減する
+set formatoptions=q " textwidthでフォーマットさせたくない
+set synmaxcol=200 " クラッシュ防止
+" set textwidth=0 " 勝手に改行するのを防ぐ
 " 構文毎に文字色を変化させる
 syntax on
 " カラースキーマの指定
 colorscheme desert
 " 行番号の色
 highlight LineNr ctermfg=darkyellow
-" 勝手に改行するのを防ぐ
-" set textwidth=0
-" textwidthでフォーマットさせたくない
-set formatoptions=q
-" クラッシュ防止（http://superuser.com/questions/810622/vim-crashes-freezes-on-specific-files-mac-osx-mavericks）
-set synmaxcol=200
-
 " vimでalias読み込み
 let $BASH_ENV = "~/.bash_alias"
 
@@ -333,16 +303,13 @@ syn match   htmlArg contained "\s*data-[-a-zA-Z0-9_]\+"
 autocmd BufNewFile *.html 0r $HOME/.cache/dein/template/html.txt
 """"""""""""""""""""""""""""""
 
-
 " vimを立ち上げたときに、自動的にvim-indent-guidesをオンにする
 let g:indent_guides_enable_on_vim_startup = 1
-
 " grep検索の実行後にQuickFix Listを表示する
 autocmd QuickFixCmdPost *grep* cwindow
 
-
 """"""""""""""""""""""""""""""
-" javascriptの設定
+" javascript
 """"""""""""""""""""""""""""""
 function! EnableJavascript()
   " Setup used libraries
@@ -361,15 +328,8 @@ if has('syntax')
   augroup END
 endif
 
-
-" 改行時に前の行のインデントを継続する
-set autoindent
-" 改行時に入力された行の末尾に合わせて次の行のインデントを増減する
-set smartindent
-
-
 """"""""""""""""""""""""""""""
-" 全角スペースの表示
+" display zenkaku space
 """"""""""""""""""""""""""""""
 function! ZenkakuSpace()
   highlight ZenkakuSpace cterm=underline ctermfg=lightblue guibg=darkgray
@@ -430,24 +390,17 @@ if has("autocmd")
 endif
 """"""""""""""""""""""""""""""
 
-""""""""""""""""""""""""""""""
-" 自動的に閉じ括弧を入力
-""""""""""""""""""""""""""""""
+" mapping
 inoremap { {}<LEFT>
 inoremap [ []<LEFT>
 inoremap ( ()<LEFT>
 inoremap ' ''<LEFT>
 inoremap " ""<LEFT>
 inoremap ` ``<LEFT>
-""""""""""""""""""""""""""""""""""""""
-" インサートモード中のキーマップ変更
-""""""""""""""""""""""""""""""""""""""
 inoremap <C-j> <Down>
 inoremap <C-k> <Up>
 inoremap <C-h> <Left>
 inoremap <C-l> <Right>
-""""""""""""""""""""""""""""""""""""""
-
 " tabnew mapping
 nnoremap <silent> <leader>t :<C-u>tabnew<CR>
 " browser open current file
