@@ -201,6 +201,8 @@ set runtimepath+=$HOME/.cache/dein/repos/github.com/Shougo/dein.vim
   call dein#add('leafgarland/typescript-vim')
   call dein#add('Quramy/tsuquyomi')
   let g:syntastic_typescript_tsc_args = "--experimentalDecorators --target ES5"
+  let g:tsuquyomi_use_vimproc = 0
+  autocmd InsertLeave,TextChanged,BufWritePost *.ts,*.tsx call tsuquyomi#asyncGeterr()
 
   " html5 code syntax
   call dein#add('hail2u/vim-css3-syntax')
@@ -302,6 +304,9 @@ syn match   htmlArg contained "\s*data-[-a-zA-Z0-9_]\+"
 " HTML template
 autocmd BufNewFile *.html 0r $HOME/.cache/dein/template/html.txt
 """"""""""""""""""""""""""""""
+" js filetype
+autocmd BufNewFile,BufRead *.ts       set filetype=typescript
+autocmd BufNewFile,BufRead *.tsx      set filetype=typescript
 
 " vimを立ち上げたときに、自動的にvim-indent-guidesをオンにする
 let g:indent_guides_enable_on_vim_startup = 1
