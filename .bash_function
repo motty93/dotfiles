@@ -17,14 +17,15 @@ function my_git_branch () {
 
 # git checkout develop or dev
 function switch_dev () {
-  git checkout develop
+  checkout=`git checkout develop 2>&1 > /dev/null`
 
   if [ $? = 1 ]; then
     echo "develop branch did not exist."
-    git checkout development
+    checkout=`git checkout development 2>&1 > /dev/null`
+
     if [ $? = 1 ]; then
       echo "development branch did not exist."
-      git checkout dev
+      checkout=`git checkout dev 2>&1 > /dev/null`
     fi
   fi
   my_prompt
@@ -42,20 +43,20 @@ function g () {
   fi
 
   expect -c "
-  set timeout 10
-  spawn git $1 origin $branch
-  expect {
-    \"Username for 'https://github.com': \" {
-      send \"$GITHUB_NAME\n\"
-      expect \"Password for 'https://$GITHUB_NAME@github.com': \"
-      send \"$GITHUB_PASSWORD\n\"
+    set timeout 10
+    spawn git $1 origin $branch
+    expect {
+      \"Username for 'https://github.com': \" {
+        send \"$GITHUB_NAME\n\"
+        expect \"Password for 'https://$GITHUB_NAME@github.com': \"
+        send \"$GITHUB_PASSWORD\n\"
+      }
+      \"Enter passphrase for key '$rsa_path':\" {
+        send \"$SSH_PASSWORD\n\"
+      }
     }
-    \"Enter passphrase for key '$rsa_path':\" {
-      send \"$SSH_PASSWORD\n\"
-    }
-  }
 
-  interact
+    interact
   "
 
   return $?
