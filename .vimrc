@@ -66,6 +66,7 @@ set runtimepath+=$HOME/.cache/dein/repos/github.com/Shougo/dein.vim
   " gtags async update
   call dein#add('jsfaint/gen_tags.vim')
   let g:gen_tags#gtags_auto_get = 1
+  let g:gen_tags#ctags_auto_get = 1
 
   " unite.vim
   call dein#add('Shougo/unite.vim')
