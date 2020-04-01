@@ -218,7 +218,9 @@ set runtimepath+=$HOME/.cache/dein/repos/github.com/Shougo/dein.vim
   call dein#add('Quramy/tsuquyomi')
   let g:syntastic_typescript_tsc_args = "--experimentalDecorators --target ES5"
   let g:tsuquyomi_use_vimproc = 0
+  let g:tsuquyomi_definition_split = 3
   autocmd InsertLeave,TextChanged,BufWritePost *.ts,*.tsx call tsuquyomi#asyncGeterr()
+  nnoremap <leader>tsu :TsuAsyncGeterr
 
   " html5 code syntax
   call dein#add('hail2u/vim-css3-syntax')
