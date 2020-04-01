@@ -423,7 +423,7 @@ inoremap <C-k> <Up>
 inoremap <C-h> <Left>
 inoremap <C-l> <Right>
 " tabnew mapping
-nnoremap <silent> <leader>t :<C-u>tabnew<CR>
+nnoremap <silent> <leader>tab :<C-u>tabnew<CR>
 " browser open current file
 nnoremap <leader>chrome :exe ':silent !google-chrome % &'<CR>
 " Edit vimrc
