@@ -54,20 +54,36 @@ set runtimepath+=$HOME/.cache/dein/repos/github.com/Shougo/dein.vim
   " let g:python3_host_prog = '~/.asdf/shims/python'
   " nnoremap <leader>rec :Denite file_rec<CR>
 
+  " gtags
+  call dein#add('lighttiger2505/gtags.vim')
+  let g:Gtags_Auto_Map = 0
+  let g:Gtags_OpenQuickFixWindow = 1
+  " Show definition of function cousor word on quickfix
+  nnoremap <silent> K :<C-u>exe("Gtags ".expand('<cword>'))<CR>
+  " Show reference of cousor word on quickfix
+  nnoremap <silent> R :<C-u>exe("Gtags -f".expand('<cword>'))<CR>
+
+  " gtags async update
+  call dein#add('jsfaint/gen_tags.vim')
+  let g:gen_tags#gtags_auto_get = 1
+
   " unite.vim
   call dein#add('Shougo/unite.vim')
   call dein#add('Shougo/neomru.vim')
   let g:unite_enable_start_insert = 1
   let g:unite_enable_ignore_case = 1
   let g:unite_enable_smart_case = 1
+  " let g:unite_source_file_mru_limit = 200
+  " let g:unite_source_rec_max_cache_files = 5000
   " file buffer
   nnoremap <C-b> :Unite buffer<CR>
   " files or new file
   noremap <C-N> :Unite file -buffer-name=file file/new<CR>
   " recursive file search
-  nnoremap <leader>rec :Unite file_rec<CR>
+  " nnoremap <leader>rec :Unite file_rec<CR>
+  nnoremap <leader>rec :<C-u>Unite -start-insert file_rec/async:! -buffer-name=file file/new<CR>
   " current files
-  noremap <C-Z> :Unite file_mru<CR>
+  noremap <C-Z> :Unite file_mru -buffer-name=file<CR>
   " file dir change on this directory
   noremap :uff :<C-u>UniteWithBufferDir file file/new -buffer-name=file<CR>
   " file new
