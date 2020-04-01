@@ -183,6 +183,7 @@ export PATH="$PATH:$ANDROID_HOME/emulator"
 export PATH="$PATH:$ANDROID_HOME/tools"
 export PATH="$PATH:$ANDROID_HOME/tools/bin"
 export PATH="$PATH:$ANDROID_HOME/platform-tools"
+export GTAGSLABEL="pygments"
 alias emu="$ANDROID_HOME/tools/emulator"
 
 # replace colon and semicolon
