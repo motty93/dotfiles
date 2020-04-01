@@ -3,7 +3,8 @@
   email = rdwbocungelt5@gmail.com
 [core]
   editor = vim
-	autocrlf = input
+  autocrlf = input
+  excludesfile = ~/.gitignore_global
 [remote "origin"]
   fetch = +refs/heads/*:refs/remotes/origin/*
 [color]
@@ -11,6 +12,6 @@
   status = auto
   branch = auto
 [help]
-	autocorrect = 1
+  autocorrect = 1
 [diff]
-	noprefix = true
+  noprefix = true
