@@ -15,6 +15,13 @@ function my_git_branch () {
   return $?
 }
 
+function current_branch () {
+  git branch
+  my_prompt
+
+  return $?
+}
+
 # git checkout develop or dev
 function switch_dev () {
   checkout=`git checkout develop 2>&1 > /dev/null`

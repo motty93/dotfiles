@@ -17,7 +17,7 @@ alias enablekey="enable_keyboard"
 # some git command
 alias push="g push"
 alias pull="g pull"
-alias gb="git branch"
+alias gb="current_branch"
 alias gc="gcheckout"
 alias gs="git status"
 alias gd="git diff"
