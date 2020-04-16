@@ -26,13 +26,24 @@ function current_branch () {
 function switch_dev () {
   checkout=`git checkout develop 2>&1 > /dev/null`
 
-  if [ $? = 1 ]; then
+  if [ $? = 0 ]; then
+    echo "change branch develop."
+  else
     echo "develop branch did not exist."
     checkout=`git checkout development 2>&1 > /dev/null`
 
-    if [ $? = 1 ]; then
+    if [ $? = 0 ]; then
+      echo "change branch development."
+    else
       echo "development branch did not exist."
       checkout=`git checkout dev 2>&1 > /dev/null`
+
+      if [ $? = 0 ]; then
+        echo "change branch dev."
+      else
+        echo "can't change branch.\n"
+        echo "Probably due to the following error (Please commit your changes or stash them before you switch branches)."
+      fi
     fi
   fi
   my_prompt
