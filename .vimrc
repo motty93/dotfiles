@@ -45,6 +45,15 @@ set runtimepath+=$HOME/.cache/dein/repos/github.com/Shougo/dein.vim
   call dein#add('KabbAmine/vCoolor.vim')
   let g:vcoolor_map = '<leader>c'
 
+  " json linter
+  call dein#add('w0rp/ale')
+  let g:ale_lint_on_enter = 0
+  let g:ale_linters = {
+    \   'json': ['jsonlint'],
+    \}
+  " ale on off switch nmap
+  nnoremap <silent> <leader>json <Plug>(ale_toggle)
+
   " denite.nvim
   " call dein#add('Shougo/denite.nvim')
   " if !has('nvim')
