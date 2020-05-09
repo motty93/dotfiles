@@ -17,6 +17,7 @@ packagelist = (
   fontforge
   wget
   gdebi
+  figlet
 
   #google drive async
   google-drive-ocamlfuse
