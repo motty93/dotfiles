@@ -166,6 +166,10 @@ xterm*|rxvt*)
     ;;
 esac
 
+function command_not_found_handle(){
+  figlet -c "command not found"
+}
+
 #export
 PATH="$HOME/bin:$HOME/.local/bin:$PATH"
 # asdfに依存するためrbenvのパスはコメントアウト
