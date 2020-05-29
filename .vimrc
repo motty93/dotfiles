@@ -311,7 +311,7 @@ colorscheme desert
 " 行番号の色
 highlight LineNr ctermfg=darkyellow
 " vimでalias読み込み
-let $BASH_ENV = "~/.bash_alias"
+let $BASH_ENV = "~/.bash_aliases"
 
 " HTML5 tags
 syn keyword htmlTagName contained article aside audio bb canvas command
