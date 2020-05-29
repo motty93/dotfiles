@@ -226,11 +226,15 @@ set runtimepath+=$HOME/.cache/dein/repos/github.com/Shougo/dein.vim
   " TypeSctipt
   call dein#add('leafgarland/typescript-vim')
   call dein#add('Quramy/tsuquyomi')
-  let g:syntastic_typescript_tsc_args = "--experimentalDecorators --target ES5"
+  let g:syntastic_typescript_tsc_args = '--experimentalDecorators --target ES6'
   let g:tsuquyomi_use_vimproc = 0
   let g:tsuquyomi_definition_split = 3
-  autocmd InsertLeave,TextChanged,BufWritePost *.ts,*.tsx call tsuquyomi#asyncGeterr()
-  nnoremap <leader>tsu :TsuAsyncGeterr
+  " let g:tsuquyomi_completion_detail = 1
+  " let g:tsuquyomi_disable_quickfix = 1
+  let g:syntastic_typescript_checkers = ['tsuquyomi']
+  autocmd InsertLeave,BufWritePost *.ts,*.tsx call tsuquyomi#asyncGeterr()
+  autocmd FileType typescript setlocal completeopt+=menu,preview
+  nnoremap <leader>tsu :TsuAsyncGeterr<CR>
 
   " html5 code syntax
   call dein#add('hail2u/vim-css3-syntax')
@@ -346,7 +350,7 @@ autocmd QuickFixCmdPost *grep* cwindow
 """"""""""""""""""""""""""""""
 function! EnableJavascript()
   " Setup used libraries
-  let g:used_javascript_libs = 'jquery,underscore,react,flux,jasmine,d3'
+  let g:used_javascript_libs = 'jquery,underscore,react,typescript,vue,flux,jasmine,d3'
   let b:javascript_lib_use_jquery = 1
   let b:javascript_lib_use_underscore = 1
   let b:javascript_lib_use_react = 1
