@@ -162,8 +162,8 @@ set runtimepath+=$HOME/.cache/dein/repos/github.com/Shougo/dein.vim
   " markdown
   call dein#add('iamcco/markdown-preview.nvim', { 'on_ft': ['markdown', 'pandoc.markdown', 'rmd'], 'build': 'cd app & yarn install' })
   " auto save
-  call dein#add('907th/vim-auto-save')
-  let g:auto_save = 1
+  " call dein#add('907th/vim-auto-save')
+  " let g:auto_save = 1
   " switch vim
   call dein#add('AndrewRadev/switch.vim')
   let g:switch_mapping = "-"
