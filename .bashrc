@@ -177,6 +177,7 @@ PATH="$HOME/bin:$HOME/.local/bin:$PATH"
 # eval "$(rbenv init -)"
 # export PATH="$HOME/.rbenv/bin:$PATH"
 # export PATH="$PATH:`yarn global bin`"
+export home="$HOME"
 export PULSE_LATENCY_MSEC=30
 export SDKMAN_DIR="$HOME/.sdkman"
 export PATH="$PATH:/usr/bin/go"
@@ -189,6 +190,7 @@ export PATH="$PATH:$ANDROID_HOME/tools/bin"
 export PATH="$PATH:$ANDROID_HOME/platform-tools"
 export GTAGSLABEL="pygments"
 alias emu="$ANDROID_HOME/tools/emulator"
+alias home="$home"
 
 # replace colon and semicolon
 xkbcomp -I$HOME/.xkb $HOME/.xkb/keymap/anne_pro2_keymap $DISPLAY 2> /dev/null
