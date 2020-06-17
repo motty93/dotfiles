@@ -161,6 +161,13 @@ set runtimepath+=$HOME/.cache/dein/repos/github.com/Shougo/dein.vim
   call dein#add('bronson/vim-trailing-whitespace')
   " markdown
   call dein#add('iamcco/markdown-preview.nvim', { 'on_ft': ['markdown', 'pandoc.markdown', 'rmd'], 'build': 'cd app & yarn install' })
+  call dein#add('godlygeek/tabular')
+  call dein#add('plasticboy/vim-markdown')
+  let g:vim_markdown_folding_disabled = 1
+  let g:vim_markdown_frontmatter = 1
+  let g:vim_markdown_toml_frontmatter = 1
+  let g:vim_markdown_json_frontmatter = 1
+  let g:vim_markdown_autowrite = 1
   " auto save
   " call dein#add('907th/vim-auto-save')
   " let g:auto_save = 1
@@ -213,7 +220,7 @@ set runtimepath+=$HOME/.cache/dein/repos/github.com/Shougo/dein.vim
   " react native complement
   call dein#add('ternjs/tern_for_vim', { 'for': ['javascript', 'javascript.jsx'], 'do': 'npm install' })
   " vim-prettier
-  call dein#add('prettier/vim-prettier', { 'do': 'yarn install', 'branch': 'release/1.x' , 'for': ['javascript', 'typescript', 'css', 'less', 'scss', 'json', 'graphql', 'markdown', 'vue', 'yaml', 'html'] })
+  call dein#add('prettier/vim-prettier', { 'do': 'yarn install', 'branch': 'release/1.x' , 'for': ['javascript', 'typescript', 'css', 'less', 'scss', 'json', 'graphql', 'vue', 'yaml', 'html'] })
   " autocmd BufWritePre *.js,*.jsx,*.ts,*.tsx,*.vue,*.css,*.scss,*.json PrettierAsync
   let g:prettier#autoformat = 0
   let g:prettier#quickfix_enabled = 0
