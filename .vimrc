@@ -34,6 +34,9 @@ set runtimepath+=$HOME/.cache/dein/repos/github.com/Shougo/dein.vim
   call dein#add('aklt/plantuml-syntax')
   let g:plantuml_executable_script = "~/file/plantuml.sh"
 
+  " REST client
+  call dein#add('sharat87/roast.vim')
+
   " open-broser.vim
   call dein#add('tyru/open-browser.vim')
   let g:netrw_nogx = 1
