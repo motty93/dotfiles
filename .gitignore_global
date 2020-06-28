@@ -4,3 +4,5 @@ GTAGS
 .DS_Store
 tags
 *.roast
+.tags
+tmux-*
