@@ -46,7 +46,8 @@ alias dps='docker ps'
 alias dpsa='docker ps -a'
 alias dpsd="docker rm -f $(docker ps -q -a)"
 alias faw="web_container_attach"
-alias dr='docker-compose run web bundle exec rails'
+alias dr='docker-compose run --rm web bundle exec rails'
+alias drspec='docker-compose run --rm -e RAILS_ENV=test web bundle exec rspec'
 
 alias vi="vim"
 alias t='tmux'
