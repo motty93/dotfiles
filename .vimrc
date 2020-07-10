@@ -280,7 +280,29 @@ set ambiwidth=double
 " set printfont=Cica:h8
 " set renderingoptions=type:directx,renmode:5
 " set ambiwidth=double
-set tags=~/.tags " set .tags files
+
+" ctags setting"""""""""""""""
+set tags=.tags;$HOME
+
+" function! s:execute_ctags() abort
+"   let tag_name = '.tags'
+"   let tags_path = findfile(tag_name, '.;')
+"   if tags_path ==# ''
+"     return
+"   endif
+"
+"   " タグファイルのディレクトリパスを取得
+"   let tags_dirpath = fnamemodify(tags_path, ':p:h')
+"   " 見つかったタグファイルのディレクトリに移動して、ctagsをバックグラウンド実行（エラーは破棄）
+"   execute 'silent !cd' tags_dirpath '&& ctags -R -f' tag_name '2> /dev/null &'
+" endfunction
+" augroup ctags
+"   autocmd!
+"   autocmd BufWritePost * call s:execute_ctags()
+"   autocmd BufWritePost * silent !ctags -R -f .tags
+" augroup END
+" end ctags setting""""""""""""
+
 set noswapfile " no use swap file
 if has("mouse") " enable mouse
   set mouse=a
@@ -303,7 +325,7 @@ set expandtab " タブ入力を複数の空白入力に置き換える
 set incsearch " 検索ワードの最初の文字を入力した時点で検索を開始する
 set hidden " 保存されていないファイルがあるときでも別のファイルを開けるようにする
 set list " 不可視文字を表示する
-set listchars=eol:\ ,trail:- " タブと行の続きを可視化する
+set listchars=eol:\ ,trail:-,tab:>>- " タブと行の続きを可視化する
 set number " 行番号を表示する
 set showmatch " 対応する括弧やブレースを表示する
 set tabstop=2 " タブ文字の表示幅
