@@ -189,6 +189,7 @@ export PATH="$PATH:$ANDROID_HOME/tools"
 export PATH="$PATH:$ANDROID_HOME/tools/bin"
 export PATH="$PATH:$ANDROID_HOME/platform-tools"
 export GTAGSLABEL="pygments"
+export CLOUDSDK_PYTHON=python3
 alias emu="$ANDROID_HOME/tools/emulator"
 alias home="$home"
 
