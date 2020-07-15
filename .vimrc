@@ -37,6 +37,12 @@ set runtimepath+=$HOME/.cache/dein/repos/github.com/Shougo/dein.vim
   " REST client
   call dein#add('sharat87/roast.vim')
 
+  " traces vim
+  call dein#add('markonm/traces.vim')
+
+  " google translate
+  call dein#add('skanehira/translate.vim')
+
   " open-broser.vim
   call dein#add('tyru/open-browser.vim')
   let g:netrw_nogx = 1
