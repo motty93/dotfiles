@@ -228,6 +228,7 @@ set runtimepath+=$HOME/.cache/dein/repos/github.com/Shougo/dein.vim
   call dein#add('othree/javascript-libraries-syntax.vim', { 'for': ['javascript', 'javascript.jsx'] })
   " react native complement
   call dein#add('ternjs/tern_for_vim', { 'for': ['javascript', 'javascript.jsx'], 'do': 'npm install' })
+
   " vim-prettier
   call dein#add('prettier/vim-prettier', { 'do': 'yarn install', 'branch': 'release/1.x' , 'for': ['javascript', 'typescript', 'css', 'less', 'scss', 'json', 'graphql', 'vue', 'yaml', 'html'] })
   " autocmd BufWritePre *.js,*.jsx,*.ts,*.tsx,*.vue,*.css,*.scss,*.json PrettierAsync
@@ -237,9 +238,24 @@ set runtimepath+=$HOME/.cache/dein/repos/github.com/Shougo/dein.vim
   let g:prettier#config#single_quote = 'true'
   let g:prettier#config#bracket_spacing = 'true'
   let g:prettier#config#parser = 'babylon'
+
   " js indent
   call dein#add('jason0x43/vim-js-indent')
-  " TypeSctipt
+  " React TypeScript code snippets
+  " with minpac
+  " pythonが動くようになってからやる
+  " function! PackInit() abort
+  "   packadd minpac
+  "   call minpac#init()
+  "   call minpac#add('k-takata/minpac', {'type': 'opt'})
+  "   call minpac#add('SirVer/ultisnips')
+  "   call minpac#add('mlaursen/vim-react-snippets')
+  " endfunction
+  " call dein#add('SirVer/ultisnips')
+  " call dein#add('mlaursen/vim-react-snippets')
+
+
+  " TypeScript
   call dein#add('leafgarland/typescript-vim')
   call dein#add('Quramy/tsuquyomi')
   let g:syntastic_typescript_tsc_args = '--experimentalDecorators --target ES6'
