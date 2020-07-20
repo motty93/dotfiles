@@ -160,11 +160,13 @@ asdf plugin-add golang https://github.com/kennyp/asdf-golang.git
 # asdf list-all golang
 # asdf install golang <latest stable version>
 # asdf global golang <latest stable version>
+# asdf reshim golang
 echo "########## install python ##########\n"
 asdf plugin-add python
 # asdf list-all python
 # asdf install python <latest stable version>
 # asdf global python <latest stable version>
+# asdf reshim python
 
 
 
