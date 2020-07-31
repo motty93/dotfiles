@@ -374,7 +374,8 @@ set synmaxcol=200 " クラッシュ防止
 " 構文毎に文字色を変化させる
 syntax on
 " カラースキーマの指定
-colorscheme desert
+" colorscheme desert
+colorscheme molokai
 " 行番号の色
 highlight LineNr ctermfg=darkyellow
 " vimでalias読み込み
