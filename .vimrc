@@ -194,8 +194,10 @@ set runtimepath+=$HOME/.cache/dein/repos/github.com/Shougo/dein.vim
   call dein#add('slashmili/alchemist.vim')
 
   " vim-go
-  call dein#add('fatih/vim-go')
+  call dein#add('fatih/vim-go', { 'do': ':GoInstallBinaries' })
   let g:go_version_warning = 0
+  let g:go_list_type = 'quickfix'
+  let g:go_fmt_command = "goimports"
 
   " rails complement
   call dein#add('tpope/vim-rails')
