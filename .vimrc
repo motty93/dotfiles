@@ -195,9 +195,16 @@ set runtimepath+=$HOME/.cache/dein/repos/github.com/Shougo/dein.vim
 
   " vim-go
   call dein#add('fatih/vim-go', { 'do': ':GoInstallBinaries' })
+  call dein#add('tomasr/molokai')
   let g:go_version_warning = 0
   let g:go_list_type = 'quickfix'
   let g:go_fmt_command = "goimports"
+  let g:go_highlight_types = 1
+  let g:go_highlight_fields = 1
+  let g:go_highlight_functions = 1
+  let g:go_highlight_function_calls = 1
+  let g:rehash256 = 1
+  let g:molokai_original = 1
 
   " rails complement
   call dein#add('tpope/vim-rails')
