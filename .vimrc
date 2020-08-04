@@ -196,8 +196,9 @@ set runtimepath+=$HOME/.cache/dein/repos/github.com/Shougo/dein.vim
   " vim-go
   call dein#add('fatih/vim-go', { 'do': ':GoInstallBinaries' })
   let g:go_version_warning = 0
-  let g:go_list_type = 'quickfix'
   let g:go_fmt_command = "goimports"
+  let g:go_addtags_transform = 'camelcase'
+  let g:go_term_mode = 'split'
   let g:go_highlight_types = 1
   let g:go_highlight_fields = 1
   let g:go_highlight_functions = 1
