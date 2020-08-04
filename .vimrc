@@ -195,7 +195,6 @@ set runtimepath+=$HOME/.cache/dein/repos/github.com/Shougo/dein.vim
 
   " vim-go
   call dein#add('fatih/vim-go', { 'do': ':GoInstallBinaries' })
-  call dein#add('tomasr/molokai')
   let g:go_version_warning = 0
   let g:go_list_type = 'quickfix'
   let g:go_fmt_command = "goimports"
@@ -203,8 +202,15 @@ set runtimepath+=$HOME/.cache/dein/repos/github.com/Shougo/dein.vim
   let g:go_highlight_fields = 1
   let g:go_highlight_functions = 1
   let g:go_highlight_function_calls = 1
-  let g:rehash256 = 1
+
+  " colorscheme
+  call dein#add('tomasr/molokai')
   let g:molokai_original = 1
+  let g:rehash256 = 1
+  call dein#add('sjl/badwolf')
+  let g:badwolf_darkgutter = 1
+  let g:badwolf_tabline = 2
+  let g:badwolf_css_props_highlight = 1
 
   " rails complement
   call dein#add('tpope/vim-rails')
@@ -375,7 +381,8 @@ set synmaxcol=200 " クラッシュ防止
 syntax on
 " カラースキーマの指定
 " colorscheme desert
-colorscheme molokai
+" colorscheme molokai
+colorscheme badwolf
 " 行番号の色
 highlight LineNr ctermfg=darkyellow
 " vimでalias読み込み
