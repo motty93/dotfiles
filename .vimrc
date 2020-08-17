@@ -377,6 +377,7 @@ set autoindent " 改行時に前の行のインデントを継続する
 set smartindent " 改行時に入力された行の末尾に合わせて次の行のインデントを増減する
 set formatoptions=q " textwidthでフォーマットさせたくない
 set synmaxcol=200 " クラッシュ防止
+set completeopt^=popup
 " set textwidth=0 " 勝手に改行するのを防ぐ
 " 構文毎に文字色を変化させる
 syntax on
