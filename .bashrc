@@ -209,3 +209,5 @@ if [ -f "$HOME/google-cloud-sdk/completion.bash.inc" ]; then source "$HOME/googl
 
 if [ -f "$HOME/.asdf/asdf.sh" ]; then source "$HOME/.asdf/asdf.sh"; fi
 if [ -f "$HOME/.asdf/completions/asdf.bash" ]; then source "$HOME/.asdf/completions/asdf.bash"; fi
+
+export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
