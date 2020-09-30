@@ -43,6 +43,9 @@ set runtimepath+=$HOME/.cache/dein/repos/github.com/Shougo/dein.vim
   " google translate
   call dein#add('skanehira/translate.vim')
 
+  " editorconfig
+  call dein#add('editorconfig/editorconfig-vim')
+
   " open-broser.vim
   call dein#add('tyru/open-browser.vim')
   let g:netrw_nogx = 1
@@ -215,6 +218,8 @@ set runtimepath+=$HOME/.cache/dein/repos/github.com/Shougo/dein.vim
 
   " rails complement
   call dein#add('tpope/vim-rails')
+  call dein#add('slim-template/vim-slim')
+  autocmd BufRead,BufNewFile *.slim setfiletype slim
   " ruby methods complement
   call dein#add('Shougo/neocomplcache.vim')
   call dein#add('Shougo/neocomplete.vim')
