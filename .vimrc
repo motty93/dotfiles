@@ -30,9 +30,15 @@ set runtimepath+=$HOME/.cache/dein/repos/github.com/Shougo/dein.vim
         \     'unix'    : 'gmake',
         \ }, })
 
+  " preview
+  call dein#add('previm/previm')
+  let g:previm_plantuml_imageprefix = 'http://localhost:8888/png/'
+
   " plantuml
   call dein#add('aklt/plantuml-syntax')
   let g:plantuml_executable_script = "~/file/plantuml.sh"
+  call dein#add('skanehira/preview-uml.vim')
+  let g:preview_uml_url = 'http://localhost:8888'
 
   " REST client
   call dein#add('sharat87/roast.vim')
