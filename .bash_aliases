@@ -36,6 +36,7 @@ alias my-chown="sudo chown -R $USER:$USER *"
 alias chrome-kill="ps aux | grep [c]hrome | awk '{ print $2 }' | sudo xargs kill -9"
 
 # rails bundle exec
+alias be='bundle exec'
 alias bedev='RAILS_ENV=development bundle exec'
 alias betest='RAILS_ENV=test bundle exec'
 
