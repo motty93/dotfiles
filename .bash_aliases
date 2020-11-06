@@ -49,6 +49,7 @@ alias dpsd="docker rm -f $(docker ps -q -a)"
 alias faw="web_container_attach"
 alias dr='docker-compose run --rm web bundle exec rails'
 alias drspec='docker-compose run --rm -e RAILS_ENV=test web bundle exec rspec'
+alias solidus-up='docker run --rm -it -p 3000:3000 solidusio/solidus-demo:latest'
 
 alias vi="vim"
 alias t='tmux'
