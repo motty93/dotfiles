@@ -214,6 +214,10 @@ set runtimepath+=$HOME/.cache/dein/repos/github.com/Shougo/dein.vim
   let g:go_highlight_function_calls = 1
 
   " colorscheme
+  call dein#add('ghifarit53/tokyonight-vim')
+  set termguicolors
+  let g:tokyonight_style = 'night' " available: night, storm
+  " let g:tokyonight_enable_italic = 1
   call dein#add('tomasr/molokai')
   let g:molokai_original = 1
   let g:rehash256 = 1
@@ -395,7 +399,8 @@ syntax on
 " カラースキーマの指定
 " colorscheme desert
 " colorscheme molokai
-colorscheme badwolf
+" colorscheme badwolf
+colorscheme tokyonight
 " 行番号の色
 highlight LineNr ctermfg=darkyellow
 " vimでalias読み込み
