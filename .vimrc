@@ -67,8 +67,13 @@ set runtimepath+=$HOME/.cache/dein/repos/github.com/Shougo/dein.vim
   call dein#add('w0rp/ale')
   let g:ale_lint_on_enter = 0
   let g:ale_linters = {
-    \   'json': ['jsonlint'],
-    \}
+  \   'json': ['jsonlint'],
+  \}
+  let g:ale_fixers = {
+  \   'ruby': ['rubocop'],
+  \}
+  let g:ale_fix_on_save = 1
+  let g:ale_ruby_rubocop_executable = 'rubocop-daemon-wrapper'
   " ale on off switch nmap
   nnoremap <silent> <leader>json <Plug>(ale_toggle)
 
@@ -247,10 +252,11 @@ set runtimepath+=$HOME/.cache/dein/repos/github.com/Shougo/dein.vim
   let g:neocomplcache_enable_camel_case_completion = 1
   let g:neocomplcache_enable_underbar_completion = 1
   " rubocop
-  " call dein#add('ngmy/vim-rubocop')
-  " call dein#add('scrooloose/syntastic')
-  " let g:syntastic_mode_map = { 'mode': 'passive', 'active_filetypes': ['ruby'] }
-  " let g:syntastic_ruby_checkers = ['rubocop', 'mri']
+  call dein#add('ngmy/vim-rubocop')
+  call dein#add('scrooloose/syntastic')
+  let g:syntastic_mode_map = { 'mode': 'passive', 'active_filetypes': ['ruby'] }
+  let g:syntastic_ruby_checkers = ['rubocop', 'mri']
+  let g:syntastic_ruby_rubocop_exe = 'bundle exec rubocop'
 
   " react native plugins
   call dein#add('pangloss/vim-javascript', { 'for': ['javascript', 'javascript.jsx'] })
