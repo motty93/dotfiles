@@ -535,6 +535,10 @@ nnoremap <silent> <leader>tab :<C-u>tabnew<CR>
 nnoremap <leader>chrome :exe ':silent !google-chrome % &'<CR>
 " Edit vimrc
 nnoremap <leader>v :edit $MYVIMRC<CR>
+" go to end sentence
+inoremap <C-a> <C-o>^
+" go to start sentence
+imap <C-s> <C-o>$
 
 " filetype detection
 filetype on
