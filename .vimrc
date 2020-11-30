@@ -239,22 +239,7 @@ set runtimepath+=$HOME/.cache/dein/repos/github.com/Shougo/dein.vim
   call dein#add('tpope/vim-rails')
   call dein#add('slim-template/vim-slim')
   autocmd BufRead,BufNewFile *.slim setfiletype slim
-  " ruby methods complement
-  call dein#add('Shougo/neocomplcache.vim')
-  call dein#add('Shougo/neocomplete.vim')
-  let g:neocomplete#enable_at_startup = 1
-  " call dein#add('NigoroJr/rsense')
-  call dein#add('Shougo/neocomplcache-rsense.vim')
-  " let g:neocomplcache_force_overwrite_completefunc = 1
-  " let g:rsenseHome = '/usr/local/lib/rsense'
-  " let g:rsenseUseOmniFunc = 1
-  let g:neocomplcache#enable_at_startup = 1
-  let g:neocomplcache#enable_smart_case = 1
-  " Set minimum syntax keyword length.
-  let g:neocomplcache_min_syntax_length = 3
-  let g:neocomplcache_lock_buffer_name_pattern = '\*ku\*'
-  let g:neocomplcache_enable_camel_case_completion = 1
-  let g:neocomplcache_enable_underbar_completion = 1
+
   " rubocop
   call dein#add('ngmy/vim-rubocop')
   call dein#add('scrooloose/syntastic')
