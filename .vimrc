@@ -55,9 +55,6 @@ set runtimepath+=$HOME/.cache/dein/repos/github.com/Shougo/dein.vim
   " google translate
   call dein#add('skanehira/translate.vim')
 
-  " editorconfig
-  call dein#add('editorconfig/editorconfig-vim')
-
   " open-broser.vim
   call dein#add('tyru/open-browser.vim')
   let g:netrw_nogx = 1
@@ -164,6 +161,7 @@ set runtimepath+=$HOME/.cache/dein/repos/github.com/Shougo/dein.vim
   let g:WebDeviconsUnicodeDecorateFolderNodes = 1
   let g:webdevicons_conceal_nerdtree_brackets = 1
   let g:WebDevIconsNerdTreeAfterGlyphPadding = ' '
+
   " NERDTree
   call dein#add('scrooloose/nerdtree')
   call dein#add('tiagofumo/vim-nerdtree-syntax-highlight')
@@ -200,6 +198,7 @@ set runtimepath+=$HOME/.cache/dein/repos/github.com/Shougo/dein.vim
   " auto save
   " call dein#add('907th/vim-auto-save')
   " let g:auto_save = 1
+
   " switch vim
   call dein#add('AndrewRadev/switch.vim')
   let g:switch_mapping = "-"
@@ -228,7 +227,6 @@ set runtimepath+=$HOME/.cache/dein/repos/github.com/Shougo/dein.vim
   call dein#add('ghifarit53/tokyonight-vim')
   set termguicolors
   let g:tokyonight_style = 'night' " available: night, storm
-  " let g:tokyonight_enable_italic = 1
   call dein#add('tomasr/molokai')
   let g:molokai_original = 1
   let g:rehash256 = 1
@@ -264,13 +262,19 @@ set runtimepath+=$HOME/.cache/dein/repos/github.com/Shougo/dein.vim
   let g:syntastic_ruby_checkers = ['rubocop', 'mri']
   let g:syntastic_ruby_rubocop_exe = 'bundle exec rubocop'
 
-  " react native plugins
-  call dein#add('pangloss/vim-javascript', { 'for': ['javascript', 'javascript.jsx'] })
+  " CoffeeScript
+  call dein#add('kchmck/vim-coffee-script')
+
+  " javascript
+  " call dein#add('neovim/node-host', { 'build': 'npm install' })
+  call dein#add('billyvg/tigris.nvim', { 'build': './install.sh' })
+  let g:tigris#enabled = 1
+  let g:tigris#on_the_fly_enabled = 1
+  let g:tigris#delay = 300
+
   call dein#add('othree/yajs.vim', { 'for': ['javascript', 'javascript.jsx'] })
   call dein#add('othree/es.next.syntax.vim', { 'for': ['javascript', 'javascript.jsx'] })
   call dein#add('othree/javascript-libraries-syntax.vim', { 'for': ['javascript', 'javascript.jsx'] })
-  " react native complement
-  call dein#add('ternjs/tern_for_vim', { 'for': ['javascript', 'javascript.jsx'], 'do': 'npm install' })
 
   " vim-prettier
   call dein#add('prettier/vim-prettier', { 'do': 'yarn install', 'branch': 'release/1.x' , 'for': ['javascript', 'typescript', 'css', 'less', 'scss', 'json', 'graphql', 'vue', 'yaml', 'html'] })
@@ -299,11 +303,12 @@ set runtimepath+=$HOME/.cache/dein/repos/github.com/Shougo/dein.vim
 
 
   " TypeScript
-  call dein#add('leafgarland/typescript-vim')
+  " call dein#add('leafgarland/typescript-vim')
   call dein#add('Quramy/tsuquyomi')
   let g:syntastic_typescript_tsc_args = '--experimentalDecorators --target ES6'
   let g:tsuquyomi_use_vimproc = 0
   let g:tsuquyomi_definition_split = 3
+  let g:tsuquyomi_disable_quickfix = 1
   " let g:tsuquyomi_completion_detail = 1
   " let g:tsuquyomi_disable_quickfix = 1
   let g:syntastic_typescript_checkers = ['tsuquyomi']
