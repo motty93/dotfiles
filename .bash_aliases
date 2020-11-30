@@ -27,6 +27,7 @@ alias gcm="gcheckout_master"
 alias gcd="switch_dev"
 alias gmd="git merge dev"
 alias mybranch="my_git_branch"
+alias ti="tig"
 
 # some tools
 alias pbcopy='xsel --clipboard --input'
