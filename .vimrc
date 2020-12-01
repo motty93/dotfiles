@@ -4,6 +4,13 @@ filetype off
 " <leader>
 let mapleader = ","
 
+" disabled modify other keys
+let &t_TI = ""
+let &t_TE = ""
+
+" clear cache
+" call map(dein#check_clean(), 'delete(v:val, 'rf')')
+
 " auto reload .vimrc
 augroup source-vimrc
   autocmd!
@@ -16,7 +23,7 @@ set runtimepath+=$HOME/.cache/dein/repos/github.com/Shougo/dein.vim
 " if dein#load_state("$HOME/.cache/dein")
   call dein#begin("$HOME/.cache/dein")
   call dein#add("$HOME/.cache/dein/repos/github.com/Shougo/dein.vim")
-  let g:python3_host_prog = '~/.asdf/shims/python'
+  let g:python3_host_prog = '~/.asdf/shims/python3'
   " call dein#add('Shougo/deoplete.nvim')
   " if !has('nvim')
   "   call dein#add('roxma/nvim-yarp')
@@ -43,7 +50,6 @@ set runtimepath+=$HOME/.cache/dein/repos/github.com/Shougo/dein.vim
       au User lsp_setup call lsp#register_server({
           \ 'name': 'solargraph',
           \ 'cmd': {server_info->[&shell, &shellcmdflag, 'solargraph stdio']},
-          \ 'initialization_options': {"diagnostics": "true"},
           \ 'whitelist': ['ruby'],
           \ })
   endif
@@ -55,8 +61,8 @@ set runtimepath+=$HOME/.cache/dein/repos/github.com/Shougo/dein.vim
   " plantuml
   call dein#add('aklt/plantuml-syntax')
   let g:plantuml_executable_script = "~/file/plantuml.sh"
-  call dein#add('skanehira/preview-uml.vim')
-  let g:preview_uml_url = 'http://localhost:8888'
+  " call dein#add('skanehira/preview-uml.vim')
+  " let g:preview_uml_url = 'http://localhost:8888'
 
   " REST client
   call dein#add('sharat87/roast.vim')
@@ -93,9 +99,9 @@ set runtimepath+=$HOME/.cache/dein/repos/github.com/Shougo/dein.vim
   nnoremap <silent> <leader>json <Plug>(ale_toggle)
 
   " denite.nvim
-  " call dein#add('Shougo/denite.nvim')
-  " let g:python3_host_prog = '~/.asdf/shims/python'
-  " nnoremap <leader>rec :Denite file_rec<CR>
+  call dein#add('Shougo/denite.nvim')
+  let g:python3_host_prog = '~/.asdf/shims/python'
+  nnoremap <leader>rec :Denite file_rec<CR>
 
   " gtags
   call dein#add('lighttiger2505/gtags.vim')
@@ -203,9 +209,6 @@ set runtimepath+=$HOME/.cache/dein/repos/github.com/Shougo/dein.vim
   let g:vim_markdown_toml_frontmatter = 1
   let g:vim_markdown_json_frontmatter = 1
   let g:vim_markdown_autowrite = 1
-  " auto save
-  " call dein#add('907th/vim-auto-save')
-  " let g:auto_save = 1
 
   " switch vim
   call dein#add('AndrewRadev/switch.vim')
@@ -283,7 +286,7 @@ set runtimepath+=$HOME/.cache/dein/repos/github.com/Shougo/dein.vim
   call dein#add('jason0x43/vim-js-indent')
   " React TypeScript code snippets
   " with minpac
-  " pythonが動くようになってからやる
+  "
   " function! PackInit() abort
   "   packadd minpac
   "   call minpac#init()
@@ -293,8 +296,6 @@ set runtimepath+=$HOME/.cache/dein/repos/github.com/Shougo/dein.vim
   " endfunction
   " call dein#add('SirVer/ultisnips')
   " call dein#add('mlaursen/vim-react-snippets')
-
-
   " TypeScript
   " call dein#add('leafgarland/typescript-vim')
   call dein#add('Quramy/tsuquyomi')
