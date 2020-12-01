@@ -331,7 +331,9 @@ endif
 """"""""""""""""""""""""""""""
 
 " Cica font linux
-set encoding=utf8
+set encoding=utf-8
+set fileencodings=iso-2022-jp,euc-jp,sjis,utf-8
+set fileformats=unix,dos,mac
 set guifont=Cica:h16
 set ambiwidth=double
 " Mac Cica font
