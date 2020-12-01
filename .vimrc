@@ -17,16 +17,12 @@ set runtimepath+=$HOME/.cache/dein/repos/github.com/Shougo/dein.vim
   call dein#begin("$HOME/.cache/dein")
   call dein#add("$HOME/.cache/dein/repos/github.com/Shougo/dein.vim")
   let g:python3_host_prog = '~/.asdf/shims/python'
-  call dein#add('Shougo/deoplete.nvim')
-  if !has('nvim')
-    call dein#add('roxma/nvim-yarp')
-    call dein#add('roxma/vim-hug-neovim-rpc')
-  endif
+  " call dein#add('Shougo/deoplete.nvim')
+  " if !has('nvim')
+  "   call dein#add('roxma/nvim-yarp')
+  "   call dein#add('roxma/vim-hug-neovim-rpc')
+  " endif
   " let g:deoplete#enable_at_startup = 1
-
-  " vim lsp
-  call dein#add('prabirshrestha/vim-lsp')
-  call dein#add('mattn/vim-lsp-settings')
 
   call dein#add('Shougo/vimproc.vim', {
         \ 'build': {
@@ -35,6 +31,22 @@ set runtimepath+=$HOME/.cache/dein/repos/github.com/Shougo/dein.vim
         \     'linux'   : 'make',
         \     'unix'    : 'gmake',
         \ }, })
+
+  " vim lsp
+  call dein#add('prabirshrestha/async.vim')
+  call dein#add('prabirshrestha/asyncomplete.vim')
+  call dein#add('prabirshrestha/vim-lsp')
+  call dein#add('mattn/vim-lsp-settings')
+  call dein#add('prabirshrestha/asyncomplete-lsp.vim')
+  if executable('solargraph')
+      " gem install solargraph
+      au User lsp_setup call lsp#register_server({
+          \ 'name': 'solargraph',
+          \ 'cmd': {server_info->[&shell, &shellcmdflag, 'solargraph stdio']},
+          \ 'initialization_options': {"diagnostics": "true"},
+          \ 'whitelist': ['ruby'],
+          \ })
+  endif
 
   " preview
   call dein#add('previm/previm')
@@ -82,10 +94,6 @@ set runtimepath+=$HOME/.cache/dein/repos/github.com/Shougo/dein.vim
 
   " denite.nvim
   " call dein#add('Shougo/denite.nvim')
-  " if !has('nvim')
-  "   call dein#add('roxma/nvim-yarp')
-  "   call dein#add('roxma/vim-hug-neovim-rpc')
-  " endif
   " let g:python3_host_prog = '~/.asdf/shims/python'
   " nnoremap <leader>rec :Denite file_rec<CR>
 
