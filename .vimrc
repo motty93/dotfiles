@@ -33,11 +33,10 @@ set runtimepath+=$HOME/.cache/dein/repos/github.com/Shougo/dein.vim
         \ }, })
 
   " vim lsp
-  call dein#add('prabirshrestha/async.vim')
-  call dein#add('prabirshrestha/asyncomplete.vim')
   call dein#add('prabirshrestha/vim-lsp')
   call dein#add('mattn/vim-lsp-settings')
-  call dein#add('prabirshrestha/asyncomplete-lsp.vim')
+  let g:lsp_log_verbose = 1
+  let g:lsp_log_file = 'vim-lsp.log'
   if executable('solargraph')
       " gem install solargraph
       au User lsp_setup call lsp#register_server({
@@ -46,6 +45,43 @@ set runtimepath+=$HOME/.cache/dein/repos/github.com/Shougo/dein.vim
           \ 'whitelist': ['ruby'],
           \ })
   endif
+  " 保存時source.organizaImports実行
+  autocmd BufWritePre <buffer>
+                \ call execute('LspCodeActionSync source.organizeImports')
+  function! s:on_lsp_buffer_enabled() abort
+      setlocal omnifunc=lsp#complete
+      setlocal signcolumn=yes
+      if exists('+tagfunc') | setlocal tagfunc=lsp#tagfunc | endif
+      nmap <buffer> gd <plug>(lsp-definition)
+      nmap <buffer> gp <plug>(lsp-peek-definition)
+      nmap <buffer> gh <plug>(lsp-hover)
+      nmap <buffer> gr <plug>(lsp-references)
+      nmap <buffer> gi <plug>(lsp-implementation)
+      nmap <buffer> gt <plug>(lsp-type-definition)
+      nmap <buffer> <leader>rn <plug>(lsp-rename)
+      nmap <buffer> [g <Plug>(lsp-previous-diagnostic)
+      nmap <buffer> ]g <Plug>(lsp-next-diagnostic)
+      " refer to doc to add more commands
+  endfunction
+
+  augroup lsp_install
+      au!
+      " call s:on_lsp_buffer_enabled only for languages that has the server registered.
+      autocmd User lsp_buffer_enabled call s:on_lsp_buffer_enabled()
+  augroup END
+  " nnoremap <silent> ld :LspDefinition<CR>
+  " nnoremap <silent> lp :LspPeekDefinition<CR>
+  " nnoremap <silent> lh :LspHover<CR>
+  call dein#add('prabirshrestha/async.vim')
+  call dein#add('prabirshrestha/asyncomplete.vim')
+  let g:asyncomplete_auto_completeopt = 0
+  inoremap <silent><expr> <TAB>
+    \ pumvisible() ? "\<C-n>" :
+    \ <SID>check_back_space() ? "\<TAB>" :
+    \ asyncomplete#force_refresh()
+  inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+  call dein#add('prabirshrestha/asyncomplete-lsp.vim')
+  call dein#add('ryanolsonx/vim-lsp-typescript')
 
   " preview
   call dein#add('previm/previm')
@@ -86,7 +122,7 @@ set runtimepath+=$HOME/.cache/dein/repos/github.com/Shougo/dein.vim
   \}
   let g:ale_fix_on_save = 1
   let g:ale_ruby_rubocop_executable = 'rubocop-daemon-wrapper'
-  " ale on off switch nmap
+  " ale on off switch nnoremap
   nnoremap <silent> <leader>json <Plug>(ale_toggle)
 
   " denite.nvim
