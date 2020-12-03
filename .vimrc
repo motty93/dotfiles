@@ -298,17 +298,17 @@ set runtimepath+=$HOME/.cache/dein/repos/github.com/Shougo/dein.vim
   " call dein#add('mlaursen/vim-react-snippets')
   " TypeScript
   " call dein#add('leafgarland/typescript-vim')
-  call dein#add('Quramy/tsuquyomi')
-  let g:syntastic_typescript_tsc_args = '--experimentalDecorators --target ES6'
-  let g:tsuquyomi_use_vimproc = 0
-  let g:tsuquyomi_definition_split = 3
-  let g:tsuquyomi_disable_quickfix = 1
+  " call dein#add('Quramy/tsuquyomi')
+  " let g:syntastic_typescript_tsc_args = '--experimentalDecorators --target ES6'
+  " let g:tsuquyomi_use_vimproc = 0
+  " let g:tsuquyomi_definition_split = 3
+  " let g:tsuquyomi_disable_quickfix = 1
   " let g:tsuquyomi_completion_detail = 1
   " let g:tsuquyomi_disable_quickfix = 1
-  let g:syntastic_typescript_checkers = ['tsuquyomi']
-  autocmd InsertLeave,BufWritePost *.ts,*.tsx call tsuquyomi#asyncGeterr()
-  autocmd FileType typescript setlocal completeopt+=menu,preview
-  nnoremap <leader>tsu :TsuAsyncGeterr<CR>
+  " let g:syntastic_typescript_checkers = ['tsuquyomi']
+  " autocmd InsertLeave,BufWritePost *.ts,*.tsx call tsuquyomi#asyncGeterr()
+  " autocmd FileType typescript setlocal completeopt+=menu,preview
+  " nnoremap <leader>tsu :TsuAsyncGeterr<CR>
 
   " html5 code syntax
   call dein#add('hail2u/vim-css3-syntax')
@@ -382,6 +382,7 @@ set nobackup " バックアップを作成しない
 set statusline=%<%f\ %m%r%h%w%{'['.(&fenc!=''?&fenc:&enc).']['.&ff.']'}%=%l,%c%V%8P " ステータス行に表示させる情報の指定
 set title " ウインドウのタイトルバーにファイルのパス情報等を表示する
 set wildmenu " コマンドラインモードで<Tab>キーによるファイル名補完を有効にする
+set wildmode=full
 set showcmd " 入力中のコマンドを表示する
 set browsedir=buffer " バッファで開いているファイルのディレクトリでエクスクローラを開始する
 set smartcase " 小文字のみで検索したときに大文字小文字を無視する
@@ -405,7 +406,7 @@ set autoindent " 改行時に前の行のインデントを継続する
 set smartindent " 改行時に入力された行の末尾に合わせて次の行のインデントを増減する
 set formatoptions=q " textwidthでフォーマットさせたくない
 set synmaxcol=200 " クラッシュ防止
-set completeopt^=popup
+set completeopt^=popup,menuone,noinsert,noselect,preview
 " set textwidth=0 " 勝手に改行するのを防ぐ
 " 構文毎に文字色を変化させる
 syntax on
