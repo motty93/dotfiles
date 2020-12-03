@@ -24,13 +24,6 @@ set runtimepath+=$HOME/.cache/dein/repos/github.com/Shougo/dein.vim
   call dein#begin("$HOME/.cache/dein")
   call dein#add("$HOME/.cache/dein/repos/github.com/Shougo/dein.vim")
   let g:python3_host_prog = '~/.asdf/shims/python3'
-  " call dein#add('Shougo/deoplete.nvim')
-  " if !has('nvim')
-  "   call dein#add('roxma/nvim-yarp')
-  "   call dein#add('roxma/vim-hug-neovim-rpc')
-  " endif
-  " let g:deoplete#enable_at_startup = 1
-
   call dein#add('Shougo/vimproc.vim', {
         \ 'build': {
         \     'cygwim'  : 'make -f make_cygwin.mak',
@@ -61,8 +54,6 @@ set runtimepath+=$HOME/.cache/dein/repos/github.com/Shougo/dein.vim
   " plantuml
   call dein#add('aklt/plantuml-syntax')
   let g:plantuml_executable_script = "~/file/plantuml.sh"
-  " call dein#add('skanehira/preview-uml.vim')
-  " let g:preview_uml_url = 'http://localhost:8888'
 
   " REST client
   call dein#add('sharat87/roast.vim')
@@ -102,20 +93,6 @@ set runtimepath+=$HOME/.cache/dein/repos/github.com/Shougo/dein.vim
   call dein#add('Shougo/denite.nvim')
   let g:python3_host_prog = '~/.asdf/shims/python'
   nnoremap <leader>rec :Denite file_rec<CR>
-
-  " gtags
-  call dein#add('lighttiger2505/gtags.vim')
-  let g:Gtags_Auto_Map = 0
-  let g:Gtags_OpenQuickFixWindow = 1
-  " Show definition of function cousor word on quickfix
-  nnoremap <silent> K :<C-u>exe("Gtags ".expand('<cword>'))<CR>
-  " Show reference of cousor word on quickfix
-  nnoremap <silent> R :<C-u>exe("Gtags -f".expand('<cword>'))<CR>
-
-  " gtags async update
-  call dein#add('jsfaint/gen_tags.vim')
-  let g:gen_tags#gtags_auto_get = 1
-  let g:gen_tags#ctags_auto_get = 1
 
   " unite.vim
   call dein#add('Shougo/unite.vim')
