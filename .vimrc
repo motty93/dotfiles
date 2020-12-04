@@ -346,8 +346,7 @@ endif
 
 " Cica font linux
 set encoding=utf-8
-set fileencodings=iso-2022-jp,euc-jp,sjis,utf-8
-set fileformats=unix,dos,mac
+set fileencodings=utf-8,iso-2022-jp,euc-jp,sjis
 set guifont=Cica:h16
 set ambiwidth=double
 " Mac Cica font
