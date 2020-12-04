@@ -57,29 +57,28 @@ set runtimepath+=$HOME/.cache/dein/repos/github.com/Shougo/dein.vim
       nnoremap <buffer> gh <plug>(lsp-hover)
       nnoremap <buffer> gr <plug>(lsp-references)
       nnoremap <buffer> gi <plug>(lsp-implementation)
-      " nmap <buffer> gt <plug>(lsp-type-definition)
       nnoremap <buffer> <leader>rn <plug>(lsp-rename)
       nnoremap <buffer> [g <Plug>(lsp-previous-diagnostic)
       nnoremap <buffer> ]g <Plug>(lsp-next-diagnostic)
-      " refer to doc to add more commands
   endfunction
-
   augroup lsp_install
       au!
-      " call s:on_lsp_buffer_enabled only for languages that has the server registered.
       autocmd User lsp_buffer_enabled call s:on_lsp_buffer_enabled()
   augroup END
-  " nnoremap <silent> ld :LspDefinition<CR>
-  " nnoremap <silent> lp :LspPeekDefinition<CR>
-  " nnoremap <silent> lh :LspHover<CR>
   call dein#add('prabirshrestha/async.vim')
   call dein#add('prabirshrestha/asyncomplete.vim')
   let g:asyncomplete_auto_completeopt = 0
+  function! s:check_back_space() abort
+    let col = col('.') - 1
+    return !col || getline('.')[col - 1]  =~ '\s'
+  endfunction
+
   inoremap <silent><expr> <TAB>
     \ pumvisible() ? "\<C-n>" :
     \ <SID>check_back_space() ? "\<TAB>" :
     \ asyncomplete#force_refresh()
   inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+
   call dein#add('prabirshrestha/asyncomplete-lsp.vim')
   call dein#add('ryanolsonx/vim-lsp-typescript')
 
