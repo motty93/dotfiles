@@ -52,15 +52,15 @@ set runtimepath+=$HOME/.cache/dein/repos/github.com/Shougo/dein.vim
       setlocal omnifunc=lsp#complete
       setlocal signcolumn=yes
       if exists('+tagfunc') | setlocal tagfunc=lsp#tagfunc | endif
-      nmap <buffer> gd <plug>(lsp-definition)
-      nmap <buffer> gp <plug>(lsp-peek-definition)
-      nmap <buffer> gh <plug>(lsp-hover)
-      nmap <buffer> gr <plug>(lsp-references)
-      nmap <buffer> gi <plug>(lsp-implementation)
-      nmap <buffer> gt <plug>(lsp-type-definition)
-      nmap <buffer> <leader>rn <plug>(lsp-rename)
-      nmap <buffer> [g <Plug>(lsp-previous-diagnostic)
-      nmap <buffer> ]g <Plug>(lsp-next-diagnostic)
+      nnoremap <buffer> gd <plug>(lsp-definition)
+      nnoremap <buffer> gp <plug>(lsp-peek-definition)
+      nnoremap <buffer> gh <plug>(lsp-hover)
+      nnoremap <buffer> gr <plug>(lsp-references)
+      nnoremap <buffer> gi <plug>(lsp-implementation)
+      " nmap <buffer> gt <plug>(lsp-type-definition)
+      nnoremap <buffer> <leader>rn <plug>(lsp-rename)
+      nnoremap <buffer> [g <Plug>(lsp-previous-diagnostic)
+      nnoremap <buffer> ]g <Plug>(lsp-next-diagnostic)
       " refer to doc to add more commands
   endfunction
 
