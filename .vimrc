@@ -37,29 +37,17 @@ set runtimepath+=$HOME/.cache/dein/repos/github.com/Shougo/dein.vim
   call dein#add('mattn/vim-lsp-settings')
   let g:lsp_log_verbose = 1
   let g:lsp_log_file = 'vim-lsp.log'
-  if executable('solargraph')
-      " gem install solargraph
-      au User lsp_setup call lsp#register_server({
-          \ 'name': 'solargraph',
-          \ 'cmd': {server_info->[&shell, &shellcmdflag, 'solargraph stdio']},
-          \ 'whitelist': ['ruby'],
-          \ })
-  endif
-  " 保存時source.organizaImports実行
+   " 保存時source.organizaImports実行
   autocmd BufWritePre <buffer>
                 \ call execute('LspCodeActionSync source.organizeImports')
   function! s:on_lsp_buffer_enabled() abort
       setlocal omnifunc=lsp#complete
       setlocal signcolumn=yes
       if exists('+tagfunc') | setlocal tagfunc=lsp#tagfunc | endif
-      nnoremap <buffer> gd <plug>(lsp-definition)
-      nnoremap <buffer> gp <plug>(lsp-peek-definition)
-      nnoremap <buffer> gh <plug>(lsp-hover)
-      nnoremap <buffer> gr <plug>(lsp-references)
-      nnoremap <buffer> gi <plug>(lsp-implementation)
-      nnoremap <buffer> <leader>rn <plug>(lsp-rename)
-      nnoremap <buffer> [g <Plug>(lsp-previous-diagnostic)
-      nnoremap <buffer> ]g <Plug>(lsp-next-diagnostic)
+      nnoremap <silent> gp :LspPeekDefinition<CR>
+      nnoremap <silent> gd :LspDefinition<CR>
+      nnoremap <silent> gh :LspHover<CR>
+      nnoremap <silent> gr :LspReferences<CR>
   endfunction
   augroup lsp_install
       au!
@@ -68,6 +56,7 @@ set runtimepath+=$HOME/.cache/dein/repos/github.com/Shougo/dein.vim
   call dein#add('prabirshrestha/async.vim')
   call dein#add('prabirshrestha/asyncomplete.vim')
   let g:asyncomplete_auto_completeopt = 0
+
   function! s:check_back_space() abort
     let col = col('.') - 1
     return !col || getline('.')[col - 1]  =~ '\s'
@@ -80,7 +69,56 @@ set runtimepath+=$HOME/.cache/dein/repos/github.com/Shougo/dein.vim
   inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
 
   call dein#add('prabirshrestha/asyncomplete-lsp.vim')
+  " lsp ruby
+  if executable('solargraph')
+      " gem install solargraph
+      au User lsp_setup call lsp#register_server({
+          \ 'name': 'solargraph',
+          \ 'cmd': {server_info->[&shell, &shellcmdflag, 'solargraph stdio']},
+          \ 'whitelist': ['ruby'],
+          \ })
+  endif
+  " lsp typescript
   call dein#add('ryanolsonx/vim-lsp-typescript')
+  if executable('typescript-language-server')
+    augroup LspTypeScript
+      au!
+      autocmd User lsp_setup call lsp#register_server({
+                  \ 'name': 'typescript-language-server',
+                  \ 'cmd': {server_info->[&shell, &shellcmdflag, 'typescript-language-server --stdio']},
+                  \ 'root_uri':{server_info->lsp#utils#path_to_uri(lsp#utils#find_nearest_parent_file_directory(lsp#utils#get_buffer_path(), 'tsconfig.json'))},
+                  \ 'whitelist': ['typescript'],
+                  \ })
+      autocmd FileType typescript setlocal omnifunc=lsp#complete
+    augroup END :echomsg "vim-lsp with `typescript-language-server` enabled"
+  else
+    :echomsg "vim-lsp for typescript unavailable"
+  endif
+  " lsp golang
+  if executable('gopls')
+    au User lsp_setup call lsp#register_server({
+        \ 'name': 'gopls',
+        \ 'cmd': {server_info->['gopls']},
+        \ 'whitelist': ['go'],
+        \ })
+    autocmd BufWritePre *.go LspDocumentFormatSync
+  endif
+  let g:lsp_settings_filetype_go = ['gopls', 'golangci-lint-langserver']
+  let g:lsp_settings = {}
+  let g:lsp_settings['gopls'] = {
+  \  'workspace_config': {
+  \    'usePlaceholders': v:true,
+  \    'analyses': {
+  \      'fillstruct': v:true,
+  \    },
+  \  },
+  \  'initialization_options': {
+  \    'usePlaceholders': v:true,
+  \    'analyses': {
+  \      'fillstruct': v:true,
+  \    },
+  \  },
+  \}
 
   " preview
   call dein#add('previm/previm')
@@ -111,15 +149,18 @@ set runtimepath+=$HOME/.cache/dein/repos/github.com/Shougo/dein.vim
   let g:vcoolor_map = '<leader>c'
 
   " json linter
-  call dein#add('w0rp/ale')
+  " call dein#add('w0rp/ale')
+  call dein#add('dense-analysis/ale')
   let g:ale_lint_on_enter = 0
+  let g:ale_fix_on_save = 1
   let g:ale_linters = {
   \   'json': ['jsonlint'],
+  \   'javascript': ['eslint'],
+  \   'typescript': ['eslint'],
   \}
   let g:ale_fixers = {
   \   'ruby': ['rubocop'],
   \}
-  let g:ale_fix_on_save = 1
   let g:ale_ruby_rubocop_executable = 'rubocop-daemon-wrapper'
   " ale on off switch nnoremap
   nnoremap <silent> <leader>json <Plug>(ale_toggle)
@@ -273,54 +314,29 @@ set runtimepath+=$HOME/.cache/dein/repos/github.com/Shougo/dein.vim
   " CoffeeScript
   call dein#add('kchmck/vim-coffee-script')
 
-  " javascript
-  " call dein#add('neovim/node-host', { 'build': 'npm install' })
-  call dein#add('billyvg/tigris.nvim', { 'build': './install.sh' })
-  let g:tigris#enabled = 1
-  let g:tigris#on_the_fly_enabled = 1
-  let g:tigris#delay = 300
-
-  call dein#add('othree/yajs.vim', { 'for': ['javascript', 'javascript.jsx'] })
-  call dein#add('othree/es.next.syntax.vim', { 'for': ['javascript', 'javascript.jsx'] })
-  call dein#add('othree/javascript-libraries-syntax.vim', { 'for': ['javascript', 'javascript.jsx'] })
-
   " vim-prettier
   call dein#add('prettier/vim-prettier', { 'do': 'yarn install', 'branch': 'release/1.x' , 'for': ['javascript', 'typescript', 'css', 'less', 'scss', 'json', 'graphql', 'vue', 'yaml', 'html'] })
-  " autocmd BufWritePre *.js,*.jsx,*.ts,*.tsx,*.vue,*.css,*.scss,*.json PrettierAsync
   let g:prettier#autoformat = 0
   let g:prettier#quickfix_enabled = 0
   let g:prettier#config#semi = 'false'
   let g:prettier#config#single_quote = 'true'
   let g:prettier#config#bracket_spacing = 'true'
   let g:prettier#config#parser = 'babylon'
+  " autocmd BufWritePre *.js,*.jsx,*.ts,*.tsx,*.vue,*.css,*.scss,*.json PrettierAsync
 
-  " js indent
-  call dein#add('jason0x43/vim-js-indent')
-  " React TypeScript code snippets
-  " with minpac
-  "
-  " function! PackInit() abort
-  "   packadd minpac
-  "   call minpac#init()
-  "   call minpac#add('k-takata/minpac', {'type': 'opt'})
-  "   call minpac#add('SirVer/ultisnips')
-  "   call minpac#add('mlaursen/vim-react-snippets')
-  " endfunction
-  " call dein#add('SirVer/ultisnips')
-  " call dein#add('mlaursen/vim-react-snippets')
+  " javascript
+  " call dein#add('yuezk/vim-js')
+  call dein#add('pangloss/vim-javascript')
+  call dein#add('maxmellon/vim-jsx-pretty')
+  call dein#add('othree/yajs.vim', { 'for': ['javascript', 'javascript.jsx'] })
+  " set filetypes as typescriptreact
+  autocmd BufNewFile,BufRead *.tsx,*.jsx set filetype=typescriptreact
+  autocmd BufNewFile,BufRead *.ts,*.tsx set filetype=typescript
+
   " TypeScript
-  " call dein#add('leafgarland/typescript-vim')
-  " call dein#add('Quramy/tsuquyomi')
-  " let g:syntastic_typescript_tsc_args = '--experimentalDecorators --target ES6'
-  " let g:tsuquyomi_use_vimproc = 0
-  " let g:tsuquyomi_definition_split = 3
-  " let g:tsuquyomi_disable_quickfix = 1
-  " let g:tsuquyomi_completion_detail = 1
-  " let g:tsuquyomi_disable_quickfix = 1
-  " let g:syntastic_typescript_checkers = ['tsuquyomi']
-  " autocmd InsertLeave,BufWritePost *.ts,*.tsx call tsuquyomi#asyncGeterr()
-  " autocmd FileType typescript setlocal completeopt+=menu,preview
-  " nnoremap <leader>tsu :TsuAsyncGeterr<CR>
+  call dein#add('leafgarland/typescript-vim')
+  call dein#add('peitalin/vim-jsx-typescript')
+  call dein#add('styled-components/vim-styled-components', { 'branch': 'main' })
 
   " html5 code syntax
   call dein#add('hail2u/vim-css3-syntax')
@@ -450,9 +466,6 @@ syn match   htmlArg contained "\s*data-[-a-zA-Z0-9_]\+"
 " HTML template
 autocmd BufNewFile *.html 0r $HOME/.cache/dein/template/html.txt
 """"""""""""""""""""""""""""""
-" js filetype
-autocmd BufNewFile,BufRead *.ts       set filetype=typescript
-autocmd BufNewFile,BufRead *.tsx      set filetype=typescript
 
 " vimを立ち上げたときに、自動的にvim-indent-guidesをオンにする
 let g:indent_guides_enable_on_vim_startup = 1
