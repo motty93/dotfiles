@@ -189,8 +189,9 @@ export PATH="$PATH:$ANDROID_HOME/tools"
 export PATH="$PATH:$ANDROID_HOME/tools/bin"
 export PATH="$PATH:$ANDROID_HOME/platform-tools"
 export GTAGSLABEL="pygments"
-export CLOUDSDK_PYTHON=python3
+export CLOUDSDK_PYTHON="$HOME/.asdf/shims/python"
 export GO111MODULE=on
+export LD_LIBRARY_PATH="/usr/local/lib"
 alias emu="$ANDROID_HOME/tools/emulator"
 alias home="$home"
 
