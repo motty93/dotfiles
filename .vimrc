@@ -94,6 +94,27 @@ set runtimepath+=$HOME/.cache/dein/repos/github.com/Shougo/dein.vim
   else
     :echomsg "vim-lsp for typescript unavailable"
   endif
+  " lsp Vue
+  call dein#add('posva/vim-vue')
+  if executable('vls')
+    augroup LspVls
+      au!
+      au User lsp_setup call lsp#register_server({
+          \ 'name': 'vue-language-server',
+          \ 'cmd': {server_info->['vls']},
+          \ 'whitelist': ['vue'],
+          \ 'initialization_options': {
+          \       'config': {
+          \           'html': {},
+          \           'vetur': {
+          \               'validation': {}
+          \           }
+          \       }
+          \   }
+          \ })
+      au FileType vue setlocal omnifunc=lsp#complete
+    augroup end
+  endif
   " lsp golang
   if executable('gopls')
     au User lsp_setup call lsp#register_server({
