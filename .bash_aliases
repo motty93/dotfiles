@@ -47,6 +47,7 @@ alias lzd='lazydocker'
 alias dps='docker ps'
 alias dpsa='docker ps -a'
 alias dpsd="docker rm -f $(docker ps -q -a)"
+alias drmi='docker images | grep none | xargs docker rmi -f `awk "{ print $3 }"`'
 alias faw="web_container_attach"
 alias dr='docker-compose run --rm web bundle exec rails'
 alias drspec='docker-compose run --rm -e RAILS_ENV=test web bundle exec rspec'
