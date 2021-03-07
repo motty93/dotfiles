@@ -124,6 +124,10 @@ set runtimepath+=$HOME/.cache/dein/repos/github.com/Shougo/dein.vim
   call dein#add('previm/previm')
   let g:previm_plantuml_imageprefix = 'http://localhost:8888/png/'
 
+  " git diff
+  call dein#add('airblade/vim-gitgutter')
+  let g:gitgutter_hightlight_lines = 1
+
   " plantuml
   call dein#add('aklt/plantuml-syntax')
   let g:plantuml_executable_script = "~/file/plantuml.sh"
