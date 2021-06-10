@@ -87,7 +87,7 @@ set runtimepath+=$HOME/.cache/dein/repos/github.com/Shougo/dein.vim
                   \ 'name': 'typescript-language-server',
                   \ 'cmd': {server_info->[&shell, &shellcmdflag, 'typescript-language-server --stdio']},
                   \ 'root_uri':{server_info->lsp#utils#path_to_uri(lsp#utils#find_nearest_parent_file_directory(lsp#utils#get_buffer_path(), 'tsconfig.json'))},
-                  \ 'whitelist': ['typescript'],
+                  \ 'whitelist': ['typescript', 'typescriptreact'],
                   \ })
       autocmd FileType typescript setlocal omnifunc=lsp#complete
     augroup END :echomsg "vim-lsp with `typescript-language-server` enabled"
@@ -145,6 +145,9 @@ set runtimepath+=$HOME/.cache/dein/repos/github.com/Shougo/dein.vim
   call dein#add('previm/previm')
   let g:previm_plantuml_imageprefix = 'http://localhost:8888/png/'
 
+  " editorconfig
+  call dein#add('editorconfig/editorconfig-vim')
+
   " git diff
   call dein#add('airblade/vim-gitgutter')
   let g:gitgutter_hightlight_lines = 1
@@ -173,27 +176,62 @@ set runtimepath+=$HOME/.cache/dein/repos/github.com/Shougo/dein.vim
   call dein#add('KabbAmine/vCoolor.vim')
   let g:vcoolor_map = '<leader>c'
 
-  " json linter
-  " call dein#add('w0rp/ale')
+  " airline
+  call dein#add('vim-airline/vim-airline')
+  call dein#add('vim-airline/vim-airline-themes')
+  let g:airline#extensions#tabline#formatter = 'unique_tail'
+  let g:airline#extensions#tabline#enabled = 1
+  let g:airline#extensions#tabline#left_sep = ' '
+  let g:airline#extensions#tabline#left_alt_sep = '|'
+  let g:airline#extensions#ale#enabled = 1
+
+  " linter
   call dein#add('dense-analysis/ale')
-  let g:ale_lint_on_enter = 0
-  let g:ale_fix_on_save = 1
+  " エラーシンボル変更・シンボルカラムを常に表示
+  let g:ale_sign_error = 'E'
+  let g:ale_sign_warning = 'W'
+  let g:ale_sign_column_always = 1
+
+  " ステータスラインの変更
+  let g:ale_statusline_format = ['⨉ %d', '⚠ %d', '⬥ ok']
+
+  " メッセージのフォーマット変更
+  let g:ale_echo_msg_error_str = 'E'
+  let g:ale_echo_msg_warning_str = 'W'
+  let g:ale_echo_msg_format = '[%linter%] %s [%severity%]'
+
+  let g:ale_lint_on_enter = 0 " ファイルオープン時のチェックなし
+  let g:ale_lint_on_save = 1
+  let g:ale_linters_explicit = 1
   let g:ale_linters = {
+  \   'ruby': ['rubocop'],
   \   'json': ['jsonlint'],
-  \   'javascript': ['eslint'],
-  \   'typescript': ['eslint'],
+  \   'javascript': ['prettier', 'eslint'],
+  \   'typescript': ['tsserver', 'eslint'],
   \}
   let g:ale_fixers = {
+  \   '*': ['remove_trailing_lines', 'trim_whitespace'],
   \   'ruby': ['rubocop'],
+  \   'javascript': ['prettier', 'eslint'],
+  \   'typescript': ['tsserver', 'eslint'],
   \}
   let g:ale_ruby_rubocop_executable = 'rubocop-daemon-wrapper'
+  let g:ale_javascript_prettier_options = '--single-quote --trailing-comma all'
+  let g:ale_javascript_prettier_use_local_config = 1
   " ale on off switch nnoremap
   nnoremap <silent> <leader>json <Plug>(ale_toggle)
+  " エラー間の移動
+  nnoremap <silent> <C-k> <Plug>(ale_previous_wrap)
+  nnoremap <silent> <C-j> <Plug>(aple_next_wrap)
+  " ALEFixの実行
+  nnoremap <silent> <leader>af :ALEFix<CR>
+  " ALELintの実行
+  nnoremap <silent> <leader>al :ALELint<CR>
 
   " denite.nvim
-  call dein#add('Shougo/denite.nvim')
-  let g:python3_host_prog = '~/.asdf/shims/python'
-  nnoremap <leader>rec :Denite file_rec<CR>
+  " call dein#add('Shougo/denite.nvim')
+  " let g:python3_host_prog = '~/.asdf/shims/python'
+  " nnoremap <leader>rec :Denite file_rec<CR>
 
   " unite.vim
   call dein#add('Shougo/unite.vim')
@@ -301,6 +339,9 @@ set runtimepath+=$HOME/.cache/dein/repos/github.com/Shougo/dein.vim
   " elixir alchemist.vim
   call dein#add('slashmili/alchemist.vim')
 
+  " vim-crystal
+  call dein#add('vim-crystal/vim-crystal')
+
   " vim-go
   call dein#add('fatih/vim-go', { 'do': ':GoInstallBinaries' })
   let g:go_version_warning = 0
@@ -339,8 +380,27 @@ set runtimepath+=$HOME/.cache/dein/repos/github.com/Shougo/dein.vim
   " CoffeeScript
   call dein#add('kchmck/vim-coffee-script')
 
+  " tailwindcss
+  call dein#add('iamcco/coc-tailwindcss',  {
+  \  'do': 'yarn install --frozen-lockfile && yarn run build'
+  \})
+
   " vim-prettier
-  call dein#add('prettier/vim-prettier', { 'do': 'yarn install', 'branch': 'release/1.x' , 'for': ['javascript', 'typescript', 'css', 'less', 'scss', 'json', 'graphql', 'vue', 'yaml', 'html'] })
+  call dein#add('prettier/vim-prettier', {
+       \ 'do': 'yarn install',
+       \ 'branch': 'release/1.x',
+       \ 'for': [
+       \ 'javascript',
+       \ 'typescript',
+       \ 'css',
+       \ 'less',
+       \ 'scss',
+       \ 'json',
+       \ 'graphql',
+       \ 'vue',
+       \ 'yaml',
+       \ 'html'
+       \]})
   let g:prettier#autoformat = 0
   let g:prettier#quickfix_enabled = 0
   let g:prettier#config#semi = 'false'
@@ -502,7 +562,7 @@ autocmd QuickFixCmdPost *grep* cwindow
 """"""""""""""""""""""""""""""
 function! EnableJavascript()
   " Setup used libraries
-  let g:used_javascript_libs = 'jquery,underscore,react,typescript,vue,flux,jasmine,d3'
+  let g:used_javascript_libs = 'jquery,underscore,react,typescript,vue,flux'
   let b:javascript_lib_use_jquery = 1
   let b:javascript_lib_use_underscore = 1
   let b:javascript_lib_use_react = 1
