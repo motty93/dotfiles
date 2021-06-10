@@ -17,3 +17,5 @@ set ignore-space = at-eol
 set mouse = true
 set refresh-mode = auto
 # set diff-highlight = true
+
+bind main   !     ?git revert %(commit)
