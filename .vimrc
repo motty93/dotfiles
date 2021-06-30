@@ -207,13 +207,14 @@ set runtimepath+=$HOME/.cache/dein/repos/github.com/Shougo/dein.vim
   \   'ruby': ['rubocop'],
   \   'json': ['jsonlint'],
   \   'javascript': ['prettier', 'eslint'],
-  \   'typescript': ['tsserver', 'eslint'],
+  \   'typescript': ['prettier', 'eslint'],
   \}
   let g:ale_fixers = {
   \   '*': ['remove_trailing_lines', 'trim_whitespace'],
   \   'ruby': ['rubocop'],
-  \   'javascript': ['prettier', 'eslint'],
-  \   'typescript': ['tsserver', 'eslint'],
+  \   'javascript': ['prettier'],
+  \   'typescript': ['prettier'],
+  \   'typescriptreact': ['prettier'],
   \}
   let g:ale_ruby_rubocop_executable = 'rubocop-daemon-wrapper'
   let g:ale_javascript_prettier_options = '--single-quote --trailing-comma all'
@@ -228,11 +229,11 @@ set runtimepath+=$HOME/.cache/dein/repos/github.com/Shougo/dein.vim
   " ALELintの実行
   nnoremap <silent> <leader>al :ALELint<CR>
 
-  " denite.nvim
-  " call dein#add('Shougo/denite.nvim')
-  " let g:python3_host_prog = '~/.asdf/shims/python'
-  " nnoremap <leader>rec :Denite file_rec<CR>
-
+  " " denite.nvim
+  " " call dein#add('Shougo/denite.nvim')
+  " " let g:python3_host_prog = '~/.asdf/shims/python'
+  " " nnoremap <leader>rec :Denite file_rec<CR>
+  "
   " unite.vim
   call dein#add('Shougo/unite.vim')
   call dein#add('Shougo/neomru.vim')
@@ -560,22 +561,22 @@ autocmd QuickFixCmdPost *grep* cwindow
 """"""""""""""""""""""""""""""
 " javascript
 """"""""""""""""""""""""""""""
-function! EnableJavascript()
-  " Setup used libraries
-  let g:used_javascript_libs = 'jquery,underscore,react,typescript,vue,flux'
-  let b:javascript_lib_use_jquery = 1
-  let b:javascript_lib_use_underscore = 1
-  let b:javascript_lib_use_react = 1
-  let b:javascript_lib_use_flux = 1
-  let b:javascript_lib_use_jasmine = 1
-  let b:javascript_lib_use_d3 = 1
-endfunction
-
-if has('syntax')
-  augroup Javascript
-    autocmd! FileType javascript,javascript.jsx call EnableJavascript()
-  augroup END
-endif
+" function! EnableJavascript()
+"   " Setup used libraries
+"   let g:used_javascript_libs = 'jquery,underscore,react,typescript,vue,flux'
+"   let b:javascript_lib_use_jquery = 1
+"   let b:javascript_lib_use_underscore = 1
+"   let b:javascript_lib_use_react = 1
+"   let b:javascript_lib_use_flux = 1
+"   let b:javascript_lib_use_jasmine = 1
+"   let b:javascript_lib_use_d3 = 1
+" endfunction
+"
+" if has('syntax')
+"   augroup Javascript
+"     autocmd! FileType javascript,javascript.jsx call EnableJavascript()
+"   augroup END
+" endif
 
 """"""""""""""""""""""""""""""
 " display zenkaku space
