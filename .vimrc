@@ -353,18 +353,22 @@ set runtimepath+=$HOME/.cache/dein/repos/github.com/Shougo/dein.vim
   let g:go_highlight_fields = 1
   let g:go_highlight_functions = 1
   let g:go_highlight_function_calls = 1
+  let g:go_highlight_operators = 1
+  let g:go_highlight_build_constraints = 1
+  " vim-delve
+  call dein#add('sebdah/vim-delve')
 
-  " colorscheme
+  " colorscheme tokyonight(それ以外はコメントアウト)
   call dein#add('ghifarit53/tokyonight-vim')
   set termguicolors
   let g:tokyonight_style = 'night' " available: night, storm
-  call dein#add('tomasr/molokai')
-  let g:molokai_original = 1
-  let g:rehash256 = 1
-  call dein#add('sjl/badwolf')
-  let g:badwolf_darkgutter = 1
-  let g:badwolf_tabline = 2
-  let g:badwolf_css_props_highlight = 1
+  " call dein#add('tomasr/molokai')
+  " let g:molokai_original = 1
+  " let g:rehash256 = 1
+  " call dein#add('sjl/badwolf')
+  " let g:badwolf_darkgutter = 1
+  " let g:badwolf_tabline = 2
+  " let g:badwolf_css_props_highlight = 1
 
   " rails complement
   call dein#add('tpope/vim-rails')
