@@ -463,9 +463,12 @@ set runtimepath+=$HOME/.cache/dein/repos/github.com/Shougo/dein.vim
   " emmet
   call dein#add('mattn/emmet-vim')
 
+  " vim polyglot
+  " syntax highlightやデフォルトフォーマットに対応してないものを適応する)
+  call dein#add('sheerun/vim-polyglot')
+
   call dein#end()
   call dein#save_state()
-" endif
 
 " Required:
 filetype plugin indent on
