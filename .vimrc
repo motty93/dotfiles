@@ -94,76 +94,77 @@ set runtimepath+=$HOME/.cache/dein/repos/github.com/Shougo/dein.vim
 
   call dein#add('prabirshrestha/asyncomplete-lsp.vim')
   " lsp ruby
-  if executable('solargraph')
-      " gem install solargraph
-      au User lsp_setup call lsp#register_server({
-          \ 'name': 'solargraph',
-          \ 'cmd': {server_info->[&shell, &shellcmdflag, 'solargraph stdio']},
-          \ 'whitelist': ['ruby'],
-          \ })
-  endif
+  " if executable('solargraph')
+  "     " gem install solargraph
+  "     au User lsp_setup call lsp#register_server({
+  "         \ 'name': 'solargraph',
+  "         \ 'cmd': {server_info->[&shell, &shellcmdflag, 'solargraph stdio']},
+  "         \ 'whitelist': ['ruby'],
+  "         \ })
+  " endif
   " lsp typescript
-  call dein#add('ryanolsonx/vim-lsp-typescript')
-  if executable('typescript-language-server')
-    augroup LspTypeScript
-      au!
-      autocmd User lsp_setup call lsp#register_server({
-                  \ 'name': 'typescript-language-server',
-                  \ 'cmd': {server_info->[&shell, &shellcmdflag, 'typescript-language-server --stdio']},
-                  \ 'root_uri':{server_info->lsp#utils#path_to_uri(lsp#utils#find_nearest_parent_file_directory(lsp#utils#get_buffer_path(), 'tsconfig.json'))},
-                  \ 'whitelist': ['typescript', 'typescriptreact'],
-                  \ })
-      autocmd FileType typescript setlocal omnifunc=lsp#complete
-    augroup END :echomsg "vim-lsp with `typescript-language-server` enabled"
-  else
-    :echomsg "vim-lsp for typescript unavailable"
-  endif
+  " if executable('typescript-language-server')
+  "   augroup LspTypeScript
+  "     au!
+  "     autocmd User lsp_setup call lsp#register_server({
+  "                 \ 'name': 'typescript-language-server',
+  "                 \ 'cmd': {server_info->[&shell, &shellcmdflag, 'typescript-language-server --stdio']},
+  "                 \ 'root_uri':{server_info->lsp#utils#path_to_uri(lsp#utils#find_nearest_parent_file_directory(lsp#utils#get_buffer_path(), 'tsconfig.json'))},
+  "                 \ 'whitelist': ['typescript', 'typescriptreact'],
+  "                 \ })
+  "     autocmd FileType typescript setlocal omnifunc=lsp#complete
+  "   augroup END :echomsg 'vim-lsp with `typescript-language-server` enabled'
+  " else
+  "   :echomsg 'vim-lsp for typescript unavailable'
+  " endif
   " lsp Vue
-  call dein#add('posva/vim-vue')
-  if executable('vls')
-    augroup LspVls
-      au!
-      au User lsp_setup call lsp#register_server({
-          \ 'name': 'vue-language-server',
-          \ 'cmd': {server_info->['vls']},
-          \ 'whitelist': ['vue'],
-          \ 'initialization_options': {
-          \       'config': {
-          \           'html': {},
-          \           'vetur': {
-          \               'validation': {}
-          \           }
-          \       }
-          \   }
-          \ })
-      au FileType vue setlocal omnifunc=lsp#complete
-    augroup end
-  endif
+  " call dein#add('posva/vim-vue')
+  " if executable('vls')
+  "   augroup LspVls
+  "     au!
+  "     au User lsp_setup call lsp#register_server({
+  "         \ 'name': 'vue-language-server',
+  "         \ 'cmd': {server_info->['vls']},
+  "         \ 'whitelist': ['vue'],
+  "         \ 'initialization_options': {
+  "         \       'config': {
+  "         \           'html': {},
+  "         \           'vetur': {
+  "         \               'validation': {}
+  "         \           }
+  "         \       }
+  "         \   }
+  "         \ })
+  "     au FileType vue setlocal omnifunc=lsp#complete
+  "   augroup end
+  " endif
   " lsp golang
-  if executable('gopls')
-    au User lsp_setup call lsp#register_server({
-        \ 'name': 'gopls',
-        \ 'cmd': {server_info->['gopls']},
-        \ 'whitelist': ['go'],
-        \ })
-    autocmd BufWritePre *.go LspDocumentFormatSync
-  endif
-  let g:lsp_settings_filetype_go = ['gopls', 'golangci-lint-langserver']
-  let g:lsp_settings = {}
-  let g:lsp_settings['gopls'] = {
-  \  'workspace_config': {
-  \    'usePlaceholders': v:true,
-  \    'analyses': {
-  \      'fillstruct': v:true,
-  \    },
-  \  },
-  \  'initialization_options': {
-  \    'usePlaceholders': v:true,
-  \    'analyses': {
-  \      'fillstruct': v:true,
-  \    },
-  \  },
-  \}
+  " if executable('gopls')
+  "   au User lsp_setup call lsp#register_server({
+  "       \ 'name': 'gopls',
+  "       \ 'cmd': {server_info->['gopls']},
+  "       \ 'whitelist': ['go'],
+  "       \ })
+  "   autocmd BufWritePre *.go LspDocumentFormatSync
+  " endif
+  " let g:lsp_settings_filetype_go = ['gopls', 'golangci-lint-langserver']
+  " let g:lsp_settings = {}
+  " let g:lsp_settings['gopls'] = {
+  " \  'workspace_config': {
+  " \    'usePlaceholders': v:true,
+  " \    'analyses': {
+  " \      'fillstruct': v:true,
+  " \    },
+  " \  },
+  " \  'initialization_options': {
+  " \    'usePlaceholders': v:true,
+  " \    'analyses': {
+  " \      'fillstruct': v:true,
+  " \    },
+  " \  },
+  " \}
+  " go auto imports
+  call dein#add('mattn/vim-goimports')
 
   " preview
   call dein#add('previm/previm')
@@ -367,18 +368,21 @@ set runtimepath+=$HOME/.cache/dein/repos/github.com/Shougo/dein.vim
   " vim-crystal
   call dein#add('vim-crystal/vim-crystal')
 
+  " vim-solidity
+  call dein#add('tomlion/vim-solidity')
+
   " vim-go
-  call dein#add('fatih/vim-go', { 'do': ':GoInstallBinaries' })
-  let g:go_version_warning = 0
-  let g:go_fmt_command = "goimports"
-  let g:go_addtags_transform = 'camelcase'
-  let g:go_term_mode = 'split'
-  let g:go_highlight_types = 1
-  let g:go_highlight_fields = 1
-  let g:go_highlight_functions = 1
-  let g:go_highlight_function_calls = 1
-  let g:go_highlight_operators = 1
-  let g:go_highlight_build_constraints = 1
+  " call dein#add('fatih/vim-go', { 'do': ':GoInstallBinaries' })
+  " let g:go_version_warning = 0
+  " let g:go_fmt_command = 'goimports'
+  " let g:go_addtags_transform = 'camelcase'
+  " let g:go_term_mode = 'split'
+  " let g:go_highlight_types = 1
+  " let g:go_highlight_fields = 1
+  " let g:go_highlight_functions = 1
+  " let g:go_highlight_function_calls = 1
+  " let g:go_highlight_operators = 1
+  " let g:go_highlight_build_constraints = 1
   " vim-delve
   call dein#add('sebdah/vim-delve')
 
@@ -488,28 +492,6 @@ set ambiwidth=double
 " set renderingoptions=type:directx,renmode:5
 " set ambiwidth=double
 
-" ctags setting"""""""""""""""
-set tags=.tags;$HOME
-
-" function! s:execute_ctags() abort
-"   let tag_name = '.tags'
-"   let tags_path = findfile(tag_name, '.;')
-"   if tags_path ==# ''
-"     return
-"   endif
-"
-"   " タグファイルのディレクトリパスを取得
-"   let tags_dirpath = fnamemodify(tags_path, ':p:h')
-"   " 見つかったタグファイルのディレクトリに移動して、ctagsをバックグラウンド実行（エラーは破棄）
-"   execute 'silent !cd' tags_dirpath '&& ctags -R -f' tag_name '2> /dev/null &'
-" endfunction
-" augroup ctags
-"   autocmd!
-"   autocmd BufWritePost * call s:execute_ctags()
-"   autocmd BufWritePost * silent !ctags -R -f .tags
-" augroup END
-" end ctags setting""""""""""""
-
 set noswapfile " no use swap file
 if has("mouse") " enable mouse
   set mouse=a
@@ -589,22 +571,22 @@ autocmd QuickFixCmdPost *grep* cwindow
 """"""""""""""""""""""""""""""
 " javascript
 """"""""""""""""""""""""""""""
-" function! EnableJavascript()
-"   " Setup used libraries
-"   let g:used_javascript_libs = 'jquery,underscore,react,typescript,vue,flux'
-"   let b:javascript_lib_use_jquery = 1
-"   let b:javascript_lib_use_underscore = 1
-"   let b:javascript_lib_use_react = 1
-"   let b:javascript_lib_use_flux = 1
-"   let b:javascript_lib_use_jasmine = 1
-"   let b:javascript_lib_use_d3 = 1
-" endfunction
-"
-" if has('syntax')
-"   augroup Javascript
-"     autocmd! FileType javascript,javascript.jsx call EnableJavascript()
-"   augroup END
-" endif
+function! EnableJavascript()
+  " Setup used libraries
+  let g:used_javascript_libs = 'jquery,underscore,react,typescript,vue,flux'
+  let b:javascript_lib_use_jquery = 1
+  let b:javascript_lib_use_underscore = 1
+  let b:javascript_lib_use_react = 1
+  let b:javascript_lib_use_flux = 1
+  let b:javascript_lib_use_jasmine = 1
+  let b:javascript_lib_use_d3 = 1
+endfunction
+
+if has('syntax')
+  augroup Javascript
+    autocmd! FileType javascript,javascript.jsx call EnableJavascript()
+  augroup END
+endif
 
 """"""""""""""""""""""""""""""
 " display zenkaku space
