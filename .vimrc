@@ -41,13 +41,26 @@ set runtimepath+=$HOME/.cache/dein/repos/github.com/Shougo/dein.vim
   autocmd BufWritePre <buffer>
                 \ call execute('LspCodeActionSync source.organizeImports')
   function! s:on_lsp_buffer_enabled() abort
-      setlocal omnifunc=lsp#complete
-      setlocal signcolumn=yes
-      if exists('+tagfunc') | setlocal tagfunc=lsp#tagfunc | endif
-      nnoremap <silent> gp :LspPeekDefinition<CR>
-      nnoremap <silent> gd :LspDefinition<CR>
-      nnoremap <silent> gh :LspHover<CR>
-      nnoremap <silent> gr :LspReferences<CR>
+    setlocal omnifunc=lsp#complete
+    setlocal signcolumn=yes
+    if exists('+tagfunc') | setlocal tagfunc=lsp#tagfunc | endif
+    nnoremap <silent> gd :LspDefinition<CR>
+    nnoremap <silent> gp :LspPeekDefinition<CR>
+    nnoremap <silent> gh :LspHover<CR>
+    nnoremap <silent> gr :LspReferences<CR>
+    nnoremap <silent> gs :LspDocumentSymbolSearch<CR>
+    nnoremap <silent> gS :LspWorkspaceSymbolSearch<CR>
+    nnoremap <silent> gi :LspImplementation<CR>
+    nnoremap <silent> gt :LspTypeDefinition<CR>
+    nnoremap <silent> <leader>rn :LspRename<CR>
+    nnoremap <silent> [g :LspPreviousDiagnostic<CR>
+    nnoremap <silent> ]g :LspNextDiagnostic<CR>
+    nnoremap <silent> K :LspHover<CR>
+    inoremap <silent> <expr><c-f> lsp#scroll(+4)
+    inoremap <silent> <expr><c-d> lsp#scroll(-4)
+
+    let g:lsp_format_sync_timeout = 1000
+    autocmd! BufWritePre *.rs,*.go call execute('LspDocumentFormatSync')
   endfunction
   augroup lsp_install
       au!
@@ -56,6 +69,17 @@ set runtimepath+=$HOME/.cache/dein/repos/github.com/Shougo/dein.vim
   call dein#add('prabirshrestha/async.vim')
   call dein#add('prabirshrestha/asyncomplete.vim')
   let g:asyncomplete_auto_completeopt = 0
+  let g:lsp_diagnostics_enabled = 1
+  let g:lsp_diagnostics_echo_cursor = 1
+  let g:asyncomplete_popup_delay = 200
+  let g:lsp_text_edit_enabled = 1
+  let g:lsp_preview_float = 1
+  let g:lsp_diagnostics_fload_cursor = 1
+  call dein#add('thomasfaingnaert/vim-lsp-snippets')
+  call dein#add('thomasfaingnaert/vim-lsp-ultisnips')
+  let g:UltiSnipsExpandTrigger="<tab>"
+  let g:UltiSnipsJumpForwardTrigger="<tab>"
+  let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
 
   function! s:check_back_space() abort
     let col = col('.') - 1
