@@ -458,6 +458,7 @@ set runtimepath+=$HOME/.cache/dein/repos/github.com/Shougo/dein.vim
   " call dein#add('yuezk/vim-js')
   call dein#add('pangloss/vim-javascript')
   call dein#add('maxmellon/vim-jsx-pretty')
+  let g:vim_jsx_pretty_colorful_config = 1
   call dein#add('othree/yajs.vim', { 'for': ['javascript', 'javascript.jsx'] })
   " set filetypes as typescriptreact
   autocmd BufNewFile,BufRead *.tsx,*.jsx set filetype=typescriptreact
