@@ -331,6 +331,16 @@ set runtimepath+=$HOME/.cache/dein/repos/github.com/Shougo/dein.vim
   let g:NERDTreePatternMatchHighlightColor['.*_spec\.rb$'] = s:rspec_red " sets the color for files ending with _spec.rb
   let g:NERDTreeLimitedSyntax = 1
 
+  " ultisnips
+  call dein#add('SirVer/ultisnips')
+  call dein#add('honza/vim-snippets')
+  let g:UltiSnipsExpandTrigger = "<c-j>"
+  let g:UltiSnipsJumpForwardTrigger = "<c-f>"
+  let g:UltiSnipsJumpBackwardTrigger = "<c-z>"
+  " if you want :UltiSnipsEdit to split your window
+  let g:UltiSnipsEditSplit = 'vertical'
+  let g:UltiSnipsSnippetDirectories=[$HOME.'/.vim/UltiSnips']
+
   " endwise
   call dein#add('tpope/vim-endwise')
   " comment
