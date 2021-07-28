@@ -314,9 +314,10 @@ set runtimepath+=$HOME/.cache/dein/repos/github.com/Shougo/dein.vim
 
   " file devicons
   call dein#add('ryanoasis/vim-devicons')
-  let g:WebDeviconsUnicodeDecorateFolderNodes = 1
-  let g:webdevicons_conceal_nerdtree_brackets = 1
-  let g:WebDevIconsNerdTreeAfterGlyphPadding = ' '
+  let g:WebDevIconsConcealNerdTreeBrackets = 1
+  let g:WebDevIconsNerdTreeBeforeGlyphPadding = ''
+  let g:WebDevIconsNerdTreeAfterGlyphPadding = ''
+  let g:WebDevIconsUnicodeDecorateFolderNodes = v:true
 
   " NERDTree
   call dein#add('scrooloose/nerdtree')
