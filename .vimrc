@@ -51,7 +51,7 @@ set runtimepath+=$HOME/.cache/dein/repos/github.com/Shougo/dein.vim
     nnoremap <silent> gs :LspDocumentSymbolSearch<CR>
     nnoremap <silent> gS :LspWorkspaceSymbolSearch<CR>
     nnoremap <silent> gi :LspImplementation<CR>
-    nnoremap <silent> gt :LspTypeDefinition<CR>
+    " nnoremap <silent> gt :LspTypeDefinition<CR>
     nnoremap <silent> <leader>rn :LspRename<CR>
     nnoremap <silent> [g :LspPreviousDiagnostic<CR>
     nnoremap <silent> ]g :LspNextDiagnostic<CR>
@@ -102,21 +102,21 @@ set runtimepath+=$HOME/.cache/dein/repos/github.com/Shougo/dein.vim
   "         \ 'whitelist': ['ruby'],
   "         \ })
   " endif
-  " lsp typescript
-  " if executable('typescript-language-server')
-  "   augroup LspTypeScript
-  "     au!
-  "     autocmd User lsp_setup call lsp#register_server({
-  "                 \ 'name': 'typescript-language-server',
-  "                 \ 'cmd': {server_info->[&shell, &shellcmdflag, 'typescript-language-server --stdio']},
-  "                 \ 'root_uri':{server_info->lsp#utils#path_to_uri(lsp#utils#find_nearest_parent_file_directory(lsp#utils#get_buffer_path(), 'tsconfig.json'))},
-  "                 \ 'whitelist': ['typescript', 'typescriptreact'],
-  "                 \ })
-  "     autocmd FileType typescript setlocal omnifunc=lsp#complete
-  "   augroup END :echomsg 'vim-lsp with `typescript-language-server` enabled'
-  " else
-  "   :echomsg 'vim-lsp for typescript unavailable'
-  " endif
+  " lsp typescript(vim-lsp-settingsだとtsxに対応してないっぽい)
+  if executable('typescript-language-server')
+    augroup LspTypeScript
+      au!
+      autocmd User lsp_setup call lsp#register_server({
+                  \ 'name': 'typescript-language-server',
+                  \ 'cmd': {server_info->[&shell, &shellcmdflag, 'typescript-language-server --stdio']},
+                  \ 'root_uri':{server_info->lsp#utils#path_to_uri(lsp#utils#find_nearest_parent_file_directory(lsp#utils#get_buffer_path(), 'tsconfig.json'))},
+                  \ 'whitelist': ['typescript', 'typescriptreact'],
+                  \ })
+      autocmd FileType typescript setlocal omnifunc=lsp#complete
+    augroup END :echomsg 'vim-lsp with `typescript-language-server` enabled'
+  else
+    :echomsg 'vim-lsp for typescript unavailable'
+  endif
   " lsp Vue
   " call dein#add('posva/vim-vue')
   " if executable('vls')
@@ -254,11 +254,11 @@ set runtimepath+=$HOME/.cache/dein/repos/github.com/Shougo/dein.vim
   " ALELintの実行
   nnoremap <silent> <leader>al :ALELint<CR>
 
-  " " denite.nvim
-  " " call dein#add('Shougo/denite.nvim')
-  " " let g:python3_host_prog = '~/.asdf/shims/python'
-  " " nnoremap <leader>rec :Denite file_rec<CR>
-  "
+  " denite.nvim
+  " call dein#add('Shougo/denite.nvim')
+  " let g:python3_host_prog = '~/.asdf/shims/python'
+  " nnoremap <leader>rec :Denite file_rec<CR>
+
   " unite.vim
   call dein#add('Shougo/unite.vim')
   call dein#add('Shougo/neomru.vim')
