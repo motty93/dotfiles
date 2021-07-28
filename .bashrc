@@ -192,6 +192,7 @@ export GTAGSLABEL="pygments"
 export CLOUDSDK_PYTHON="$HOME/.asdf/shims/python"
 export GO111MODULE=on
 export LD_LIBRARY_PATH="/usr/local/lib"
+export snippets="$HOME/.cache/dein/repos/github.com/honza/vim-snippets/UltiSnips"
 alias emu="$ANDROID_HOME/tools/emulator"
 alias home="$home"
 
