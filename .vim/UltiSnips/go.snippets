@@ -1,0 +1,39 @@
+snippet pf
+fmt.Printf("%$1", $2)
+endsnippet
+
+snippet pl
+fmt.Println($1)
+endsnippet
+
+snippet stoi
+func stoi(s string) int {
+	result, ok := strconv.Atoi(s)
+	if ok != nil {
+		panic("Failed: " + s + " can't convert to int.")
+	}
+	return result
+}
+endsnippet
+
+snippet readline
+const BUFSIZE = 10000000
+
+rdr := bufio.NewReaderSize(os.Stdin, BUFSIZE)
+
+func readline() string {
+	buf := make([]byte, 0, 16)
+	for {
+		line, prefix, e := rdr.ReadLine()
+		if e != nil {
+			panic(e)
+		}
+		buf = append(buf, line...)
+		if !prefix {
+			break
+		}
+	}
+
+	return string(buf)
+}
+endsnippet
