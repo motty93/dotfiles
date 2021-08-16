@@ -77,9 +77,9 @@ set runtimepath+=$HOME/.cache/dein/repos/github.com/Shougo/dein.vim
   let g:lsp_diagnostics_fload_cursor = 1
   call dein#add('thomasfaingnaert/vim-lsp-snippets')
   call dein#add('thomasfaingnaert/vim-lsp-ultisnips')
-  let g:UltiSnipsExpandTrigger="<tab>"
-  let g:UltiSnipsJumpForwardTrigger="<tab>"
-  let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
+  " let g:UltiSnipsExpandTrigger="<tab>"
+  " let g:UltiSnipsJumpForwardTrigger="<tab>"
+  " let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
 
   function! s:check_back_space() abort
     let col = col('.') - 1
@@ -226,7 +226,7 @@ set runtimepath+=$HOME/.cache/dein/repos/github.com/Shougo/dein.vim
   let g:ale_echo_msg_format = '[%linter%] %s [%severity%]'
 
   let g:ale_lint_on_enter = 0 " ファイルオープン時のチェックなし
-  let g:ale_lint_on_save = 1
+  let g:ale_lint_on_save = 0
   let g:ale_linters_explicit = 1
   let g:ale_linters = {
   \   'ruby': ['rubocop'],
@@ -247,8 +247,8 @@ set runtimepath+=$HOME/.cache/dein/repos/github.com/Shougo/dein.vim
   " ale on off switch nnoremap
   nnoremap <silent> <leader>json <Plug>(ale_toggle)
   " エラー間の移動
-  nnoremap <silent> <C-k> <Plug>(ale_previous_wrap)
-  nnoremap <silent> <C-j> <Plug>(aple_next_wrap)
+  " nnoremap <silent> <C-k> <Plug>(ale_previous_wrap)
+  " nnoremap <silent> <C-j> <Plug>(aple_next_wrap)
   " ALEFixの実行
   nnoremap <silent> <leader>af :ALEFix<CR>
   " ALELintの実行
@@ -334,12 +334,12 @@ set runtimepath+=$HOME/.cache/dein/repos/github.com/Shougo/dein.vim
   " ultisnips
   call dein#add('SirVer/ultisnips')
   call dein#add('honza/vim-snippets')
-  let g:UltiSnipsExpandTrigger = "<c-j>"
+  let g:UltiSnipsExpandTrigger = "<tab>"
   let g:UltiSnipsJumpForwardTrigger = "<c-f>"
   let g:UltiSnipsJumpBackwardTrigger = "<c-z>"
   " if you want :UltiSnipsEdit to split your window
   let g:UltiSnipsEditSplit = 'vertical'
-  let g:UltiSnipsSnippetDirectories=[$HOME.'/.vim/UltiSnips']
+  let g:UltiSnipsSnippetDirectories=[$HOME.'/.vim/UltiSnips',$HOME.'/.cache/dein/repos/github.com/honza/vim-snippets/UltiSnips']
 
   " endwise
   call dein#add('tpope/vim-endwise')
