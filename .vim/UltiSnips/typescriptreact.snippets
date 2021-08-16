@@ -1,0 +1,76 @@
+priority -50
+extends javascript_react
+extends typescript
+
+priority -49
+snippet rfct "react functional component"
+import React from 'react'
+
+interface Props {${4:props_types}}
+
+export const ${1:function_name}: React.VFC<Props> = (${2:props}) => {
+
+	return (
+		<>
+			<div></div>
+		</>
+	)
+}
+endsnippet
+# ReduxToolkit
+snippet rtcs "create slice"
+import { createSlice } from '@reduxjs/toolkit'
+
+const initialState = {
+	$2: [],
+}
+
+export const ${1:sliceName}Slice = createSlice({
+  name: '_$1',
+  initialState,
+  reducers: {
+  },
+	extraReducers: (_builder) => {
+	},
+});
+
+export const {} = _$1Slice.actions
+
+export const select_$2 = (state) => state._$1._$2
+
+export default _$1Slice.reducer
+endsnippet
+snippet rtcat "create async thunk"
+import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
+import axios from 'axios'
+
+const apiUrl = '${1:apiUrl}'
+
+const initialState = {
+	$2: [],
+}
+
+export const $1AsyncGet = createAsyncThunk(
+	'_$1/get', async () => {
+  const res = await axios.get(apiUrl)
+  return res.data
+})
+
+const _$1Slice = createSlice({
+  name: '_$1',
+	initialState,
+  reducers: {},
+  extraReducers: (builder) => {
+    builder.addCase(_$1AsyncGet.fulfilled, (state, action) => {
+      return {
+        ...state,
+        $2: action.payload,
+      }
+    })
+  },
+})
+
+export const select_$2 = (state) => state._$1._$2
+
+export default _$1Slice.reducer
+endsnippet
