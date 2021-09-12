@@ -166,6 +166,9 @@ set runtimepath+=$HOME/.cache/dein/repos/github.com/Shougo/dein.vim
   " go auto imports
   call dein#add('mattn/vim-goimports')
 
+  " graphql vim
+  call dein#add('jparise/vim-graphql')
+
   " preview
   call dein#add('previm/previm')
   let g:previm_plantuml_imageprefix = 'http://localhost:8888/png/'
@@ -425,9 +428,13 @@ set runtimepath+=$HOME/.cache/dein/repos/github.com/Shougo/dein.vim
   call dein#add('kchmck/vim-coffee-script')
 
   " tailwindcss
-  call dein#add('iamcco/coc-tailwindcss',  {
-  \  'do': 'yarn install --frozen-lockfile && yarn run build'
-  \})
+  " call dein#add('iamcco/coc-tailwindcss',  {
+  " \  'do': 'yarn install --frozen-lockfile && yarn run build'
+  " \})
+  call dein#add('mrdotb/vim-tailwindcss')
+  set completefunc=tailwind#complete
+  nnoremap <leader>tl :set completefunc=tailwind#complete<cr>
+  autocmd CompleteDone * pclose
 
   " vim-prettier
   call dein#add('prettier/vim-prettier', {
@@ -451,7 +458,8 @@ set runtimepath+=$HOME/.cache/dein/repos/github.com/Shougo/dein.vim
   let g:prettier#config#semi = 'false'
   let g:prettier#config#single_quote = 'true'
   let g:prettier#config#bracket_spacing = 'true'
-  let g:prettier#config#parser = 'babylon'
+  let g:prettier#config#parser = ''
+  let g:prettier#exec_cmd_path = '/home/motty/.asdf/shims/prettier'
   " autocmd BufWritePre *.js,*.jsx,*.ts,*.tsx,*.vue,*.css,*.scss,*.json PrettierAsync
 
   " javascript
