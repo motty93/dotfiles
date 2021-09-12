@@ -94,17 +94,6 @@ function enable_keyboard () {
   return $?
 }
 
-# deploy amazon project function
-function amazon () {
-  switch_dev
-  g pull
-  gcheckout_master
-  git merge dev
-  g push
-
-  return $?
-}
-
 # web container attach
 function web_container_attach() {
   process=`docker-compose ps -q web`
@@ -139,8 +128,19 @@ function gcheckout() {
   return $?
 }
 
-function gcheckout_master() {
-  git checkout master
+function switch_master() {
+  checkout=`git checkout master 2>&1 > /dev/null`
+
+  if [ $? = 0 ]; then
+    echo "change branch master."
+  else
+    echo "master branch did not exist."
+    git checkout main
+    if [ $? = 0 ]; then
+      echo "change branch main."
+    fi
+  fi
+
   my_prompt
 
   return $?
