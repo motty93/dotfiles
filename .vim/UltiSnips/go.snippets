@@ -19,7 +19,7 @@ endsnippet
 snippet readline
 const BUFSIZE = 10000000
 
-rdr := bufio.NewReaderSize(os.Stdin, BUFSIZE)
+var rdr *bufio.Reader
 
 func readline() string {
 	buf := make([]byte, 0, 16)
@@ -35,5 +35,20 @@ func readline() string {
 	}
 
 	return string(buf)
+}
+
+func init() {
+	rdr = bufio.NewReaderSize(os.Stdin, BUFSIZE)
+}
+endsnippet
+
+snippet fora
+for _, v := range $1 {
+}
+endsnippet
+
+snippet ok
+if !ok {
+	$1
 }
 endsnippet
