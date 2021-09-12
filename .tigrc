@@ -18,4 +18,8 @@ set mouse = true
 set refresh-mode = auto
 # set diff-highlight = true
 
-bind main   !     ?git revert %(commit)
+# revert
+bind main !     ?git revert %(commit)
+
+# copy commit log
+bind main C     !@git pbcopy %(commit)
