@@ -9,6 +9,10 @@ alias ll='ls -alF'
 alias la='ls -A'
 alias l='ls -CF'
 alias cd="cdls"
+alias cdd="cd ../"
+alias cddd="cd ../../"
+alias ukiyo="cd ~/github.com/ukiyocreate"
+alias sub="cd ~/github.com/subcontracting"
 
 # keyboard command
 alias disablekey="disable_keyboard"
