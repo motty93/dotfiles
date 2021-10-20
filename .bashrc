@@ -214,3 +214,5 @@ if [ -f "$HOME/.asdf/asdf.sh" ]; then source "$HOME/.asdf/asdf.sh"; fi
 if [ -f "$HOME/.asdf/completions/asdf.bash" ]; then source "$HOME/.asdf/completions/asdf.bash"; fi
 
 export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
+
+complete -C aws_completer aws
