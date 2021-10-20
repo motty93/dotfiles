@@ -166,6 +166,10 @@ set runtimepath+=$HOME/.cache/dein/repos/github.com/Shougo/dein.vim
   " go auto imports
   call dein#add('mattn/vim-goimports')
 
+  " debug vimspector
+  call dein#add('puremourning/vimspector')
+  let g:vimspector_enable_mappings = 'HUMAN'
+
   " graphql vim
   call dein#add('jparise/vim-graphql')
 
@@ -240,9 +244,9 @@ set runtimepath+=$HOME/.cache/dein/repos/github.com/Shougo/dein.vim
   let g:ale_fixers = {
   \   '*': ['remove_trailing_lines', 'trim_whitespace'],
   \   'ruby': ['rubocop'],
-  \   'javascript': ['prettier'],
-  \   'typescript': ['prettier'],
-  \   'typescriptreact': ['prettier'],
+  \   'javascript': ['prettier', 'eslint'],
+  \   'typescript': ['prettier', 'eslint'],
+  \   'typescriptreact': ['prettier', 'eslint'],
   \}
   let g:ale_ruby_rubocop_executable = 'rubocop-daemon-wrapper'
   let g:ale_javascript_prettier_options = '--single-quote --trailing-comma all'
@@ -365,6 +369,7 @@ set runtimepath+=$HOME/.cache/dein/repos/github.com/Shougo/dein.vim
   let g:vim_markdown_toml_frontmatter = 1
   let g:vim_markdown_json_frontmatter = 1
   let g:vim_markdown_autowrite = 1
+  nnoremap <leader>m :MarkdownPreview<CR>
 
   " switch vim
   call dein#add('AndrewRadev/switch.vim')
