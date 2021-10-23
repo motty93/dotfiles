@@ -1,5 +1,45 @@
 #!/bin/bash
 
+# fc カレントディレクトリ配下のディレクトリを絞り込んで移動
+function find_cd () {
+  cd "$(find . -type d | peco)"
+
+  return $?
+}
+
+# fv カレントディレクトリ配下のファイルを絞り込んでvimで開く
+function find_vim () {
+  SELECT_FILE=$(find . -type f | peco)
+
+  if [ "$SELECT_FILE" != "" ]; then
+    vim $SELECT_FILE
+  fi
+
+  return $?
+}
+
+# pk プロセスを選択してkill
+function peco-pkill () {
+  for pid in `ps aux | peco | awk '{ print $2 }'`
+  do
+    kill $pid
+    echo "Killed ${pid}"
+  done
+
+  return $?
+}
+
+# his bash_historyを選択して実行
+function peco-history () {
+  SELECTED_COMMAND=$(tail -2000 ~/.bash_history | peco)
+  if [ "$SELECTED_COMMAND" != "" ]; then
+    echo "exec: ${SELECTED_COMMAND}"
+    eval $SELECTED_COMMAND
+  fi
+
+  return $?
+}
+
 # cd alias function
 function cdls () {
   \cd "$@" && ls

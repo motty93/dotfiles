@@ -4,6 +4,12 @@ if [ -f "$HOME/.bash_function" ]; then
   . $HOME/.bash_function
 fi
 
+# peco
+alias fc='find_cd'
+alias fv='find_vim'
+alias pk='peco-pkill'
+alias his='peco-history'
+
 # some more ls aliases
 alias ll='ls -alF'
 alias la='ls -A'

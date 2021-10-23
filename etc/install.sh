@@ -18,6 +18,7 @@ packagelist = (
   wget
   gdebi
   figlet
+  peco
 
   #google drive async
   google-drive-ocamlfuse
