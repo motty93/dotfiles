@@ -23,6 +23,7 @@ alias sub="cd ~/github.com/subcontracting"
 # keyboard command
 alias disablekey="disable_keyboard"
 alias enablekey="enable_keyboard"
+alias dkey="xinput disable 17"
 
 # some git command
 alias push="g push"
