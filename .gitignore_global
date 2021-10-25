@@ -9,3 +9,4 @@ tmux-*
 vim-lsp.log
 .vagrant/
 ubuntu-xenial-16.04-cloudimg-console.log
+.tool-versions
