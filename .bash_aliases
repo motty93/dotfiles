@@ -14,6 +14,7 @@ alias his='peco-history'
 alias ll='ls -alF'
 alias la='ls -A'
 alias l='ls -CF'
+alias lp='ll | peco'
 alias cd="cdls"
 alias cdd="cd ../"
 alias cddd="cd ../../"
