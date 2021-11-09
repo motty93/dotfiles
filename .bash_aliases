@@ -9,6 +9,7 @@ alias fc='find_cd'
 alias fv='find_vim'
 alias pk='peco-pkill'
 alias his='peco-history'
+alias hiss='peco-sort-history'
 
 # some more ls aliases
 alias ll='ls -alF'
@@ -21,12 +22,12 @@ alias cddd="cd ../../"
 alias ukiyo="cd ~/github.com/ukiyocreate"
 alias sub="cd ~/github.com/subcontracting"
 
-# keyboard command
+# keyboard command aliases
 alias disablekey="disable_keyboard"
 alias enablekey="enable_keyboard"
 alias dkey="xinput disable 17"
 
-# some git command
+# some git command aliases
 alias push="g push"
 alias pull="g pull"
 alias gb="current_branch"
