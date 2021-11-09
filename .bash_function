@@ -31,7 +31,17 @@ function peco-pkill () {
 
 # his bash_historyを選択して実行
 function peco-history () {
-  SELECTED_COMMAND=$(tail -2000 ~/.bash_history | peco)
+  SELECTED_COMMAND=$(tac $HOME/.bash_history | peco)
+  if [ "$SELECTED_COMMAND" != "" ]; then
+    echo "exec: ${SELECTED_COMMAND}"
+    eval $SELECTED_COMMAND
+  fi
+
+  return $?
+}
+
+function peco-sort-history () {
+  SELECTED_COMMAND=$(sort -k1 -g $HOME/.bash_history | peco)
   if [ "$SELECTED_COMMAND" != "" ]; then
     echo "exec: ${SELECTED_COMMAND}"
     eval $SELECTED_COMMAND
@@ -48,6 +58,47 @@ function cdls () {
   return $?
 }
 
+# disable keyboard
+function disable_keyboard () {
+  sudo input-kbd -f $HOME/disable-all.map 3
+
+  return $?
+}
+
+# enable keyboard
+function enable_keyboard () {
+  sudo input-kbd -f $HOME/keyboard_setting/default.map 3
+
+  return $?
+}
+
+# web container attach
+function web_container_attach() {
+  process=`docker-compose ps -q web`
+
+  if [ -n "$process" ]; then
+    docker attach $process
+  fi
+
+  return $?
+}
+
+# prompt
+function my_prompt() {
+  branch=`git branch 2>&1 > /dev/null`
+
+  if [ $? = 0 ]; then
+    branch_name=`git rev-parse --abbrev-ref HEAD`
+
+    export PS1="\[\e[1;36m\]\w\[\e[m\] \[\e[0;35m\]${branch_name}\[\e[m\]* \n% "
+  else
+    export PS1='\[\e[1;36m\]\w\[\e[m\] \n% '
+  fi
+
+  return $?
+}
+
+# ================================ git ================================
 # my branch
 function my_git_branch () {
   git rev-parse --abbrev-ref HEAD
@@ -116,46 +167,6 @@ function g () {
 
     interact
   "
-
-  return $?
-}
-
-# disable keyboard
-function disable_keyboard () {
-  sudo input-kbd -f $HOME/disable-all.map 3
-
-  return $?
-}
-
-# enable keyboard
-function enable_keyboard () {
-  sudo input-kbd -f $HOME/keyboard_setting/default.map 3
-
-  return $?
-}
-
-# web container attach
-function web_container_attach() {
-  process=`docker-compose ps -q web`
-
-  if [ -n "$process" ]; then
-    docker attach $process
-  fi
-
-  return $?
-}
-
-# prompt
-function my_prompt() {
-  branch=`git branch 2>&1 > /dev/null`
-
-  if [ $? = 0 ]; then
-    branch_name=`git rev-parse --abbrev-ref HEAD`
-
-    export PS1="\[\e[1;36m\]\w\[\e[m\] \[\e[0;35m\]${branch_name}\[\e[m\]* \n% "
-  else
-    export PS1='\[\e[1;36m\]\w\[\e[m\] \n% '
-  fi
 
   return $?
 }
