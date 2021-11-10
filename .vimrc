@@ -35,8 +35,8 @@ set runtimepath+=$HOME/.cache/dein/repos/github.com/Shougo/dein.vim
   " vim lsp
   call dein#add('prabirshrestha/vim-lsp')
   call dein#add('mattn/vim-lsp-settings')
-  let g:lsp_log_verbose = 1
-  let g:lsp_log_file = 'vim-lsp.log'
+  " let g:lsp_log_verbose = 1
+  " let g:lsp_log_file = 'vim-lsp.log'
    " 保存時source.organizaImports実行
   autocmd BufWritePre <buffer>
                 \ call execute('LspCodeActionSync source.organizeImports')
