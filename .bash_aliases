@@ -21,6 +21,7 @@ alias cdd="cd ../"
 alias cddd="cd ../../"
 alias ukiyo="cd ~/github.com/ukiyocreate"
 alias sub="cd ~/github.com/subcontracting"
+alias ango="cd ~/github.com/subcontracting/ango-ya"
 
 # keyboard command aliases
 alias disablekey="disable_keyboard"
