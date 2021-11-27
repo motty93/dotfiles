@@ -23,7 +23,7 @@ set runtimepath+=$HOME/.cache/dein/repos/github.com/Shougo/dein.vim
 " if dein#load_state("$HOME/.cache/dein")
   call dein#begin("$HOME/.cache/dein")
   call dein#add("$HOME/.cache/dein/repos/github.com/Shougo/dein.vim")
-  let g:python3_host_prog = '~/.asdf/shims/python3'
+  let g:python3_host_prog = '~/.asdf/shims/python'
   call dein#add('Shougo/vimproc.vim', {
         \ 'build': {
         \     'cygwim'  : 'make -f make_cygwin.mak',
@@ -454,9 +454,12 @@ set runtimepath+=$HOME/.cache/dein/repos/github.com/Shougo/dein.vim
        \ 'scss',
        \ 'json',
        \ 'graphql',
+       \ 'ruby',
+       \ 'python',
        \ 'vue',
        \ 'yaml',
-       \ 'html'
+       \ 'html',
+       \ 'solidity',
        \]})
   let g:prettier#autoformat = 0
   let g:prettier#quickfix_enabled = 0
