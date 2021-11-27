@@ -307,6 +307,8 @@ set runtimepath+=$HOME/.cache/dein/repos/github.com/Shougo/dein.vim
   call dein#add('ctrlpvim/ctrlp.vim')
   let g:ctrlp_map = '<c-p>'
   let g:ctrlp_cmd = 'CtrlP'
+  call dein#add('mattn/ctrlp-matchfuzzy')
+  let g:ctrlp_match_func = {'match': 'ctrlp_matchfuzzy#matcher'}
 
   " Ag - the silver search -
   call dein#add('rking/ag.vim')
