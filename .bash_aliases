@@ -69,3 +69,4 @@ alias solidus-up='docker run --rm -it -p 3000:3000 solidusio/solidus-demo:latest
 
 alias vi="vim ."
 alias t='tmux'
+alias remix='docker run -p 8080:80 remixproject/remix-ide:latest'
