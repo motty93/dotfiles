@@ -501,6 +501,11 @@ set runtimepath+=$HOME/.cache/dein/repos/github.com/Shougo/dein.vim
   autocmd BufNewFile,BufRead *.tsx,*.jsx set filetype=typescriptreact
   autocmd BufNewFile,BufRead *.ts,*.tsx set filetype=typescript
 
+  " prisma
+  call dein#add('pantharshit00/vim-prisma')
+  " sql formatter
+  call dein#add('mattn/vim-sqlfmt')
+
   " TypeScript
   call dein#add('leafgarland/typescript-vim')
   call dein#add('peitalin/vim-jsx-typescript')
