@@ -163,6 +163,16 @@ set runtimepath+=$HOME/.cache/dein/repos/github.com/Shougo/dein.vim
   " \    },
   " \  },
   " \}
+  " elixir-ls
+  " if executable('elixir-ls')
+  "   au User lsp_setup call lsp#register_server({
+  "     \ 'name': 'elixir-ls',
+  "     \ 'cmd': {server_info->['elixir-ls']},
+  "     \ 'whitelist': ['elixir'],
+  "     \ })
+  "   autocmd BufWritePre *.exs,*.ex,*.eex,*.heex,*.leex,*.sface LspDocumentFormatSync
+  " endif
+  " let g:lsp_settings = { \ 'elixir-ls': {'cmd': $HOME . '/.elixir-ls/release/'}}
   " go auto imports
   call dein#add('mattn/vim-goimports')
 
@@ -240,10 +250,11 @@ set runtimepath+=$HOME/.cache/dein/repos/github.com/Shougo/dein.vim
   \   'json': ['jsonlint'],
   \   'javascript': ['prettier', 'eslint'],
   \   'typescript': ['prettier', 'eslint'],
+  \   'elixir': ['elixir-ls'],
   \}
   let g:ale_fixers = {
   \   '*': ['remove_trailing_lines', 'trim_whitespace'],
-  \   'ruby': ['rubocop'],
+  \   'ruby': ['prettier'],
   \   'javascript': ['prettier', 'eslint'],
   \   'typescript': ['prettier', 'eslint'],
   \   'typescriptreact': ['prettier', 'eslint'],
@@ -251,6 +262,10 @@ set runtimepath+=$HOME/.cache/dein/repos/github.com/Shougo/dein.vim
   let g:ale_ruby_rubocop_executable = 'rubocop-daemon-wrapper'
   let g:ale_javascript_prettier_options = '--single-quote --trailing-comma all'
   let g:ale_javascript_prettier_use_local_config = 1
+  " let g:ale_elixir_elixir_ls_release = expand("$HOME/.elixir-ls/release")
+  " let g:ale_elixir_elixir_ls_release = expand("$HOME/.local/share/vim-lsp-settings/servers/elixir-ls")
+  " let g:ale_elixir_elixir_ls_config = {'elixirLS': {'dialyzerEnabled': v:false}}
+  " let g:ale_completion_enabled = 1
   " ale on off switch nnoremap
   nnoremap <silent> <leader>json <Plug>(ale_toggle)
   " エラー間の移動
