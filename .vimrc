@@ -588,6 +588,8 @@ set smartindent " 改行時に入力された行の末尾に合わせて次の�
 set formatoptions=q " textwidthでフォーマットさせたくない
 set synmaxcol=200 " クラッシュ防止
 set completeopt^=popup,menuone,noinsert,noselect,preview
+" set noequalalways " 自動的にウィンドウサイズを同じにする
+" set winfixheight " ウィンドウの高さを保つ
 " set textwidth=0 " 勝手に改行するのを防ぐ
 " 構文毎に文字色を変化させる
 syntax on
