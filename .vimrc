@@ -77,9 +77,6 @@ set runtimepath+=$HOME/.cache/dein/repos/github.com/Shougo/dein.vim
   let g:lsp_diagnostics_fload_cursor = 1
   call dein#add('thomasfaingnaert/vim-lsp-snippets')
   call dein#add('thomasfaingnaert/vim-lsp-ultisnips')
-  " let g:UltiSnipsExpandTrigger="<tab>"
-  " let g:UltiSnipsJumpForwardTrigger="<tab>"
-  " let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
 
   function! s:check_back_space() abort
     let col = col('.') - 1
@@ -139,30 +136,30 @@ set runtimepath+=$HOME/.cache/dein/repos/github.com/Shougo/dein.vim
   "   augroup end
   " endif
   " lsp golang
-  " if executable('gopls')
-  "   au User lsp_setup call lsp#register_server({
-  "       \ 'name': 'gopls',
-  "       \ 'cmd': {server_info->['gopls']},
-  "       \ 'whitelist': ['go'],
-  "       \ })
-  "   autocmd BufWritePre *.go LspDocumentFormatSync
-  " endif
-  " let g:lsp_settings_filetype_go = ['gopls', 'golangci-lint-langserver']
-  " let g:lsp_settings = {}
-  " let g:lsp_settings['gopls'] = {
-  " \  'workspace_config': {
-  " \    'usePlaceholders': v:true,
-  " \    'analyses': {
-  " \      'fillstruct': v:true,
-  " \    },
-  " \  },
-  " \  'initialization_options': {
-  " \    'usePlaceholders': v:true,
-  " \    'analyses': {
-  " \      'fillstruct': v:true,
-  " \    },
-  " \  },
-  " \}
+  if executable('gopls')
+    au User lsp_setup call lsp#register_server({
+        \ 'name': 'gopls',
+        \ 'cmd': {server_info->['gopls']},
+        \ 'whitelist': ['go'],
+        \ })
+    autocmd BufWritePre *.go LspDocumentFormatSync
+  endif
+  let g:lsp_settings_filetype_go = ['gopls', 'golangci-lint-langserver']
+  let g:lsp_settings = {}
+  let g:lsp_settings['gopls'] = {
+  \  'workspace_config': {
+  \    'usePlaceholders': v:true,
+  \    'analyses': {
+  \      'fillstruct': v:true,
+  \    },
+  \  },
+  \  'initialization_options': {
+  \    'usePlaceholders': v:true,
+  \    'analyses': {
+  \      'fillstruct': v:true,
+  \    },
+  \  },
+  \}
   " elixir-ls
   " if executable('elixir-ls')
   "   au User lsp_setup call lsp#register_server({
