@@ -199,6 +199,9 @@ set runtimepath+=$HOME/.cache/dein/repos/github.com/Shougo/dein.vim
   call dein#add('gotchane/vim-git-commit-prefix')
   let g:git_commit_prefix_lang = 'ja'
 
+  " protobuf
+  call dein#add('uarun/vim-protobuf')
+
   " plantuml
   call dein#add('aklt/plantuml-syntax')
   let g:plantuml_executable_script = "~/file/plantuml.sh"
