@@ -20,10 +20,10 @@ packagelist = (
   figlet
   peco
 
-  #google drive async
+  # google drive async
   google-drive-ocamlfuse
 
-  #build tools
+  # build tools
   cmdtest
   input-utils
   cmake
@@ -40,7 +40,7 @@ packagelist = (
   dpkg-dev
   pkg-config
 
-  #fonts
+  # fonts
   language-pack-ja
   language-pack-gnome-ja
   fonts-takao-gothic
@@ -74,13 +74,13 @@ packagelist = (
   libfcitx-qt0
   libfcitx-qt5-1
 
-  #background papers
+  # background papers
   mint-backgrounds-*
   ubuntu-wallpapers-*
   ubuntustudio-wallpapers
   xubuntu-community-wallpapers-*
 
-  #asdf
+  # asdf
   automake
   autoconf
   libreadline-dev
@@ -96,7 +96,7 @@ packagelist = (
   gpg
   dirmngr
 
-  #libinput gestures
+  # libinput gestures
   xdotool
   wmctrl
   libinput-tools
@@ -111,6 +111,12 @@ packagelist = (
   adobe-flashplugin
   flashplugin-installer
   browser-plugin-freshplayer-pepperflash
+
+  # logid
+  libevdev-dev
+  libconfig-dev
+  libudev-dev
+  libconfig++-dev
 )
 
 sudo apt update; sudo apt upgrade
@@ -192,6 +198,17 @@ winetricks allfonts
 echo "########## discord install ##########\n"
 wget -O discord.deb "https://discordapp.com/api/download?platform=linux&format=deb" -P $HOME
 sudo gdebi $HOME/discord.deb
+
+
+echo "########## logid install ##########\n"
+cd ${HOME}
+git clone git@github.com:PixlOne/logiops.git
+cd logiops/
+mkdir build
+cd build/
+cmake ..
+make
+sudo make install
 
 
 sudo apt update; sudo apt upgrade; sudo apt autoremove
