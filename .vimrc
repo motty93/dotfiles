@@ -179,6 +179,7 @@ set runtimepath+=$HOME/.cache/dein/repos/github.com/Shougo/dein.vim
   " debug vimspector
   call dein#add('puremourning/vimspector')
   let g:vimspector_enable_mappings = 'HUMAN'
+  nmap bp <Plug>VimspectorToggleBreakpoint
 
   " graphql vim
   call dein#add('jparise/vim-graphql')
