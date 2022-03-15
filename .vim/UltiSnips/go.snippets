@@ -6,6 +6,14 @@ snippet pl
 fmt.Println($1)
 endsnippet
 
+snippet logfln
+log.Fatalln($1)
+endsnippet
+
+snippet logfl
+log.Fatal($1)
+endsnippet
+
 snippet scan
 fmt.Scan($1)
 endsnippet
@@ -43,6 +51,17 @@ func readline() string {
 
 func init() {
 	rdr = bufio.NewReaderSize(os.Stdin, BUFSIZE)
+}
+endsnippet
+
+snippet readString
+func readSlice() []string {
+	slice := make([]string, 0)
+	lines := strings.Split(readline(), " ")
+	for _, v := range lines {
+		slice = append(slice, v)
+	}
+	return slice
 }
 endsnippet
 
