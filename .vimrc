@@ -372,6 +372,7 @@ set runtimepath+=$HOME/.cache/dein/repos/github.com/Shougo/dein.vim
   " if you want :UltiSnipsEdit to split your window
   let g:UltiSnipsEditSplit = 'vertical'
   let g:UltiSnipsSnippetDirectories=[$HOME.'/.vim/UltiSnips',$HOME.'/.cache/dein/repos/github.com/honza/vim-snippets/UltiSnips']
+  nnoremap <leader>ul :UltiSnipsEdit<CR>
 
   " endwise
   call dein#add('tpope/vim-endwise')
