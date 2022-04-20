@@ -1,0 +1,40 @@
+snippet id
+/// @Field(() => ID)
+id Int @id @default(autoincrement())
+endsnippet
+
+snippet create
+/// @HideField({ input: true, output: true })
+createdAt DateTime @default(now())
+endsnippet
+
+snippet update
+/// @HideField({ input: true, output: true })
+updatedAt DateTime @updatedAt
+endsnippet
+
+snippet f
+/// @Field(() => $1)
+endsnippet
+
+snippet IS
+/// @IsString()
+endsnippet
+
+snippet II
+/// @IsInt()
+endsnippet
+
+snippet re
+@relation(fields: [$1], references: [id])
+endsnippet
+
+snippet name
+/// @Field(() => String, { description: '$1' }
+/// @IsString()
+name String
+endsnippet
+
+snippet ne
+/// @IsNotEmpty()
+endsnippet
