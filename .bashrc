@@ -217,3 +217,4 @@ export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
 export KERL_CONFIGURE_OPTIONS="--disable-debug --without-javac"
 
 complete -C aws_completer aws
+my_prompt

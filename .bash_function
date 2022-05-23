@@ -18,6 +18,17 @@ function find_vim () {
   return $?
 }
 
+# git change branch
+function peco-git-branch () {
+  for branch in `git branch | grep -v "*" | peco`
+  do
+    git checkout $branch
+  done
+  my_prompt
+
+  return $?
+}
+
 # pk プロセスを選択してkill
 function peco-pkill () {
   for pid in `ps aux | peco | awk '{ print $2 }'`

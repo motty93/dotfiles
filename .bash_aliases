@@ -10,6 +10,7 @@ alias fv='find_vim'
 alias pk='peco-pkill'
 alias his='peco-history'
 alias hiss='peco-sort-history'
+alias gbc='peco-git-branch'
 
 # some more ls aliases
 alias ll='ls -alF'
@@ -22,6 +23,7 @@ alias cddd="cd ../../"
 alias ukiyo="cd ~/github.com/ukiyocreate"
 alias sub="cd ~/github.com/subcontracting"
 alias ango="cd ~/github.com/subcontracting/ango-ya"
+alias blog="cd ~/github.com/home-blog"
 
 # keyboard command aliases
 alias disablekey="disable_keyboard"
