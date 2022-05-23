@@ -170,6 +170,8 @@ set runtimepath+=$HOME/.cache/dein/repos/github.com/Shougo/dein.vim
   "   autocmd BufWritePre *.exs,*.ex,*.eex,*.heex,*.leex,*.sface LspDocumentFormatSync
   " endif
   " let g:lsp_settings = { \ 'elixir-ls': {'cmd': $HOME . '/.elixir-ls/release/'}}
+  " vim notification
+  call dein#add('mattn/vim-notification')
   " go auto imports
   call dein#add('mattn/vim-goimports')
 
