@@ -24,6 +24,7 @@ alias ukiyo="cd ~/github.com/ukiyocreate"
 alias sub="cd ~/github.com/subcontracting"
 alias ango="cd ~/github.com/subcontracting/ango-ya"
 alias blog="cd ~/github.com/home-blog"
+alias ani="cd ~/github.com/subcontracting/anique"
 
 # keyboard command aliases
 alias disablekey="disable_keyboard"
