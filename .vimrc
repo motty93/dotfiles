@@ -365,6 +365,7 @@ set runtimepath+=$HOME/.cache/dein/repos/github.com/Shougo/dein.vim
   " ultisnips
   call dein#add('SirVer/ultisnips')
   call dein#add('honza/vim-snippets')
+  call dein#add('prabirshrestha/asyncomplete-ultisnips.vim')
   let g:UltiSnipsExpandTrigger = "<tab>"
   let g:UltiSnipsJumpForwardTrigger = "<c-f>"
   let g:UltiSnipsJumpBackwardTrigger = "<c-z>"
@@ -372,6 +373,12 @@ set runtimepath+=$HOME/.cache/dein/repos/github.com/Shougo/dein.vim
   let g:UltiSnipsEditSplit = 'vertical'
   let g:UltiSnipsSnippetDirectories=[$HOME.'/.vim/UltiSnips',$HOME.'/.cache/dein/repos/github.com/honza/vim-snippets/UltiSnips']
   nnoremap <leader>ul :UltiSnipsEdit<CR>
+  let g:UltiSnipsExpandTrigger="<c-e>"
+  call asyncomplete#register_source(asyncomplete#sources#ultisnips#get_source_options({
+      \ 'name': 'ultisnips',
+      \ 'allowlist': ['*'],
+      \ 'completor': function('asyncomplete#sources#ultisnips#completor'),
+      \ }))
 
   " endwise
   call dein#add('tpope/vim-endwise')
