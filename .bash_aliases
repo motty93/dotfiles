@@ -11,6 +11,7 @@ alias pk='peco-pkill'
 alias his='peco-history'
 alias hiss='peco-sort-history'
 alias gbc='peco-git-branch'
+alias cdr='peco-cd'
 
 # some more ls aliases
 alias ll='ls -alF'
