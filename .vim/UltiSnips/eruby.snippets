@@ -1,0 +1,43 @@
+snippet paginate
+<%= paginate $1 %>
+endsnippet
+
+snippet stylesheet
+<%= stylesheet_link_tag $1 %>
+endsnippet
+
+snippet sort
+<%= sort_link($1, $2) %>
+endsnippet
+
+snippet erb
+<%=$1 %>
+endsnippet
+
+snippet render
+<%= render $1 %>
+endsnippet
+
+snippet f.
+<%= f.$1 %>
+endsnippet
+
+snippet search_field
+search_field
+endsnippet
+
+snippet link
+<%= link_to $1 %>
+endsnippet
+
+snippet if
+<% if $1 %>
+	$2
+<% end %>
+endsnippet
+
+snippet search_form
+<%= search_form_for @q do |f| %>
+	$1
+<% end %>
+endsnippet

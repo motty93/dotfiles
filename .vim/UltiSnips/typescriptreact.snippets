@@ -6,9 +6,9 @@ priority -49
 snippet rfct "react functional component"
 import React from 'react'
 
-interface Props {${4:props_types}}
+type Props {${4:props_types}}
 
-export const ${1:function_name}: React.VFC<Props> = (${2:props}) => {
+export const ${1:function_name}: React.FC<Props> = (${2:props}) => {
 
 	return (
 		<>

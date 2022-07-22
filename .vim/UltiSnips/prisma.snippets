@@ -3,14 +3,20 @@ snippet id
 id Int @id @default(autoincrement())
 endsnippet
 
+snippet uid
+id String @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+endsnippet
+
 snippet create
-/// @HideField({ input: true, output: true })
-createdAt DateTime @default(now())
+createdAt      DateTime  @default(now()) @map("created_at") @db.Timestamptz(6)
 endsnippet
 
 snippet update
-/// @HideField({ input: true, output: true })
-updatedAt DateTime @updatedAt
+updatedAt      DateTime  @default(now()) @map("updated_at") @db.Timestamptz(6)
+endsnippet
+
+snippet map
+@map("$1")
 endsnippet
 
 snippet f
