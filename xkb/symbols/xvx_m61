@@ -1,0 +1,8 @@
+partial modifier_keys
+xkb_symbols "swap" {
+  replace key <AC10> { [ colon, semicolon ] };
+  replace key <CAPS> { [ Control_L ] };
+  replace key <LWIN> { [ Control_L ] };
+  replace key <LCTL> { [ Super_L ] };
+  replace key <RWIN> { [ Super_R ] };
+};
