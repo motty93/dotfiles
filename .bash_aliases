@@ -13,6 +13,10 @@ alias hiss='peco-sort-history'
 alias gbc='peco-git-branch'
 alias cdr='peco-cd'
 
+# keymapping
+alias anne='xkbcomp -I$HOME/.xkb $HOME/.xkb/keymap/anne_pro2_keymap $DISPLAY 2> /dev/null'
+alias xvx='xkbcomp -I$HOME/.xkb $HOME/.xkb/keymap/xvx_m61 $DISPLAY 2> /dev/null'
+
 # some more ls aliases
 alias ll='ls -alF'
 alias la='ls -A'
