@@ -196,8 +196,6 @@ export HISTSIZE=200000
 alias emu="$ANDROID_HOME/tools/emulator"
 alias home="$home"
 
-# replace colon and semicolon
-xkbcomp -I$HOME/.xkb $HOME/.xkb/keymap/anne_pro2_keymap $DISPLAY 2> /dev/null
 # mount google drive
 google-drive-ocamlfuse $HOME/GoogleDrive 2> /dev/null
 
