@@ -10,7 +10,9 @@ xkb_symbols "swap" {
   key <RWIN> { [ Control_R ] };
   modifier_map Control { <RWIN> };
 
+
   key <LCTL> { [ Super_L, Super_L ] };
   key <RCTL> { [ Super_R, Super_R ] };
-  modifier_map Mod1 { <LCTL>, <RCTL> };
+  modifier_map Mod3 { Super_L };
+  replace key <LCTL> { [ Super_R, Super_R, ] };
 };
