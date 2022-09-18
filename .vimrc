@@ -57,6 +57,8 @@ set runtimepath+=$HOME/.cache/dein/repos/github.com/Shougo/dein.vim
     nnoremap <silent> [g :LspPreviousDiagnostic<CR>
     nnoremap <silent> ]g :LspNextDiagnostic<CR>
     nnoremap <silent> K :LspHover<CR>
+    nnoremap <silent> ]e :LspNextError<CR>
+    nnoremap <silent> [e :LspPreviousError<CR>
     inoremap <silent> <expr><c-f> lsp#scroll(+4)
     inoremap <silent> <expr><c-d> lsp#scroll(-4)
 
@@ -277,8 +279,8 @@ set runtimepath+=$HOME/.cache/dein/repos/github.com/Shougo/dein.vim
   " ale on off switch nnoremap
   nnoremap <silent> <leader>json <Plug>(ale_toggle)
   " エラー間の移動
-  " nnoremap <silent> <C-k> <Plug>(ale_previous_wrap)
-  " nnoremap <silent> <C-j> <Plug>(aple_next_wrap)
+  nnoremap <silent> <C-k> <Plug>(ale_previous_wrap)
+  nnoremap <silent> <C-j> <Plug>(aple_next_wrap)
   " ALEFixの実行
   nnoremap <silent> <leader>af :ALEFix<CR>
   " ALELintの実行
