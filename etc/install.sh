@@ -2,7 +2,7 @@
 
 SCRIPT_DIRECTORY="${HOME}/dotfiles/etc/scripts"
 
-packagelist = (
+packagelist="
   vim
   tig
   curl
@@ -117,7 +117,7 @@ packagelist = (
   libconfig-dev
   libudev-dev
   libconfig++-dev
-)
+"
 
 sudo apt update; sudo apt upgrade
 echo "########## apt install apps... ##########\n"
