@@ -5,8 +5,8 @@
   editor = vim
   autocrlf = input
   excludesfile = ~/.gitignore_global
-[remote "origin"]
-  fetch = +refs/heads/*:refs/remotes/origin/*
+#[remote "origin"]
+#  fetch = +refs/heads/*:refs/remotes/origin/*
 [color]
   diff = auto
   status = auto
@@ -16,7 +16,7 @@
 [diff]
   noprefix = true
 [filter "lfs"]
-	clean = git-lfs clean -- %f
-	smudge = git-lfs smudge -- %f
-	process = git-lfs filter-process
-	required = true
+  clean = git-lfs clean -- %f
+  smudge = git-lfs smudge -- %f
+  process = git-lfs filter-process
+  required = true
