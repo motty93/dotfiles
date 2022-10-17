@@ -2,129 +2,13 @@
 
 SCRIPT_DIRECTORY="${HOME}/dotfiles/etc/scripts"
 
-packagelist="
-  vim
-  tig
-  curl
-  git
-  xsel
-  ufw
-  tmux
-  google-chrome
-  docker.io
-  rbenv
-  unzip
-  fontforge
-  wget
-  gdebi
-  figlet
-  peco
-
-  # google drive async
-  google-drive-ocamlfuse
-
-  # build tools
-  cmdtest
-  input-utils
-  cmake
-  buld-essential
-  libgcrypt11-dev
-  libyajl-dev
-  libboost-all-dev
-  libcurl4-openssl-dev
-  libexpat1-dev
-  libcppunit-dev
-  binutils-dev
-  debhelper
-  zlib1g-dev
-  dpkg-dev
-  pkg-config
-
-  # fonts
-  language-pack-ja
-  language-pack-gnome-ja
-  fonts-takao-gothic
-  fonts-takao-mincho
-  fonts-takao-pgothic
-  fonts-vlgothic
-  fonts-ipafont-gothic
-  fonts-ipafont-mincho
-  libreoffice-l10n-ja
-  libreoffice-help-ja
-  firefox-locale-ja
-  manpages-ja
-  thunderbird-locale-ja
-  ibus-mozc
-  ibus-anthy
-  kasumi
-  ibus-gtk
-  ibus-gtk3
-  poppler-data
-  cmap-adobe-japan1
-  fcitx-mozc
-  fcitx-anthy
-  fcitx-frontend-qt5
-  fcitx-config-gtk
-  fcitx-config-gtk2
-  fcitx-frontend-gtk2
-  fcitx-frontend-gtk3
-  mozc-utils-gui
-  fcitx-frontend-qt4
-  fcitx-frontend-qt5
-  libfcitx-qt0
-  libfcitx-qt5-1
-
-  # background papers
-  mint-backgrounds-*
-  ubuntu-wallpapers-*
-  ubuntustudio-wallpapers
-  xubuntu-community-wallpapers-*
-
-  # asdf
-  automake
-  autoconf
-  libreadline-dev
-  libncurses-dev
-  libssl-dev
-  libyaml-dev
-  libxslt-dev
-  libffi-dev
-  libtool
-  libbz2-dev
-  libsqlite3-dev
-  unixodbc-dev
-  gpg
-  dirmngr
-
-  # libinput gestures
-  xdotool
-  wmctrl
-  libinput-tools
-  dconf-cli
-  xserver-xorg-input-synaptics-hwe-18.04
-
-  #wine
-  winehq-stable
-  winetricks
-
-  #flash player
-  adobe-flashplugin
-  flashplugin-installer
-  browser-plugin-freshplayer-pepperflash
-
-  # logid
-  libevdev-dev
-  libconfig-dev
-  libudev-dev
-  libconfig++-dev
-"
-
 sudo apt update; sudo apt upgrade
 echo "########## apt install apps... ##########\n"
-for app in ${packagelist[@]}
-do
-  sudo apt install -y ${app}
-done
+cat mint_packages.list | xargs apt install -y
+# for app in ${packagelist[@]}
+# do
+#   sudo apt install -y ${app}
+# done
 
 
 echo "########## docker setting ##########\n"
