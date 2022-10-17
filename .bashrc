@@ -182,18 +182,12 @@ export SDKMAN_DIR="$HOME/.sdkman"
 export PATH="$PATH:/usr/bin/go"
 export PATH="$HOME/tools:$HOME/tools/bin:$PATH"
 export PS1='\[\e[1;36m\]\w\[\e[m\] \n% '
-export ANDROID_HOME="/opt/android-sdk"
-export PATH="$PATH:$ANDROID_HOME/emulator"
-export PATH="$PATH:$ANDROID_HOME/tools"
-export PATH="$PATH:$ANDROID_HOME/tools/bin"
-export PATH="$PATH:$ANDROID_HOME/platform-tools"
 export GTAGSLABEL="pygments"
 export CLOUDSDK_PYTHON="$HOME/.asdf/shims/python"
 export GO111MODULE=on
 export LD_LIBRARY_PATH="/usr/local/lib"
 export snippets="$HOME/.cache/dein/repos/github.com/honza/vim-snippets/UltiSnips"
 export HISTSIZE=200000
-alias emu="$ANDROID_HOME/tools/emulator"
 alias home="$home"
 
 # mount google drive
