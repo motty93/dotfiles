@@ -18,6 +18,8 @@ google-drive-ocamlfuse
 cmdtest
 input-utils
 cmake
+expect
+locate
 build-essential
 libgcrypt20-dev
 libyajl-dev
