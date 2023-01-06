@@ -171,27 +171,26 @@ function command_not_found_handle() {
 
 #export
 PATH="$HOME/bin:$HOME/.local/bin:$PATH"
-# asdfに依存するためrbenvのパスはコメントアウト
-# export PATH="$HOME/.rbenv/bin:$PATH"
-# eval "$(rbenv init -)"
-# export PATH="$HOME/.rbenv/bin:$PATH"
-# export PATH="$PATH:`yarn global bin`"
 export home="$HOME"
 export PULSE_LATENCY_MSEC=30
 export SDKMAN_DIR="$HOME/.sdkman"
+export FLYCTL_INSTALL="/home/motty/.fly"
 export PATH="$PATH:/usr/bin/go"
 export PATH="$HOME/tools:$HOME/tools/bin:$PATH"
+export PATH="$FLYCTL_INSTALL/bin:$PATH"
 export PS1='\[\e[1;36m\]\w\[\e[m\] \n% '
 export GTAGSLABEL="pygments"
 export CLOUDSDK_PYTHON="$HOME/.asdf/shims/python"
 export GO111MODULE=on
+export GOPATH="$HOME/.asdf/shims/go"
 export LD_LIBRARY_PATH="/usr/local/lib"
 export snippets="$HOME/.cache/dein/repos/github.com/honza/vim-snippets/UltiSnips"
 export HISTSIZE=200000
+export ASDF_DATA_DIR="$HOME/.asdf"
 alias home="$home"
 
 # mount google drive
-google-drive-ocamlfuse $HOME/GoogleDrive 2> /dev/null
+# google-drive-ocamlfuse $HOME/GoogleDrive 2> /dev/null
 
 
 [[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"
@@ -208,5 +207,5 @@ if [ -f "$HOME/.asdf/completions/asdf.bash" ]; then source "$HOME/.asdf/completi
 export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
 export KERL_CONFIGURE_OPTIONS="--disable-debug --without-javac"
 
-complete -C aws_completer aws
+# complete -C aws_completer aws
 my_prompt
