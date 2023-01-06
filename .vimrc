@@ -78,6 +78,8 @@ set runtimepath+=$HOME/.cache/dein/repos/github.com/Shougo/dein.vim
   let g:lsp_text_edit_enabled = 1
   let g:lsp_preview_float = 1
   let g:lsp_diagnostics_fload_cursor = 1
+  " let g:lsp_settings_filetype_ruby = ['ruby-lsp', 'steep']
+  let g:lsp_settings_filetype_ruby = ['solargraph', 'steep']
   call dein#add('thomasfaingnaert/vim-lsp-snippets')
   call dein#add('thomasfaingnaert/vim-lsp-ultisnips')
 
@@ -94,14 +96,14 @@ set runtimepath+=$HOME/.cache/dein/repos/github.com/Shougo/dein.vim
 
   call dein#add('prabirshrestha/asyncomplete-lsp.vim')
   " lsp ruby
-  " if executable('solargraph')
-  "     " gem install solargraph
-  "     au User lsp_setup call lsp#register_server({
-  "         \ 'name': 'solargraph',
-  "         \ 'cmd': {server_info->[&shell, &shellcmdflag, 'solargraph stdio']},
-  "         \ 'whitelist': ['ruby'],
-  "         \ })
-  " endif
+  if executable('solargraph')
+      " gem install solargraph
+      au User lsp_setup call lsp#register_server({
+          \ 'name': 'solargraph',
+          \ 'cmd': {server_info->[&shell, &shellcmdflag, 'solargraph stdio']},
+          \ 'whitelist': ['ruby'],
+          \ })
+  endif
   " lsp typescript(vim-lsp-settingsだとtsxに対応してないっぽい)
   if executable('typescript-language-server')
     augroup LspTypeScript
@@ -164,15 +166,16 @@ set runtimepath+=$HOME/.cache/dein/repos/github.com/Shougo/dein.vim
   \  },
   \}
   " elixir-ls
-  " if executable('elixir-ls')
-  "   au User lsp_setup call lsp#register_server({
-  "     \ 'name': 'elixir-ls',
-  "     \ 'cmd': {server_info->['elixir-ls']},
-  "     \ 'whitelist': ['elixir'],
-  "     \ })
-  "   autocmd BufWritePre *.exs,*.ex,*.eex,*.heex,*.leex,*.sface LspDocumentFormatSync
-  " endif
-  " let g:lsp_settings = { \ 'elixir-ls': {'cmd': $HOME . '/.elixir-ls/release/'}}
+  " let g:lsp_settings = { 'elixir-ls': { 'cmd': $HOME . '/.elixir-ls/release/' } }
+  if executable('elixir-ls')
+    au User lsp_setup call lsp#register_server({
+      \ 'name': 'elixir-ls',
+      \ 'cmd': {server_info->['elixir-ls']},
+      \ 'whitelist': ['elixir'],
+      \ })
+    autocmd BufWritePre *.exs,*.ex,*.eex,*.heex,*.leex,*.sface LspDocumentFormatSync
+  endif
+
   " vim notification
   call dein#add('mattn/vim-notification')
   " go auto imports
