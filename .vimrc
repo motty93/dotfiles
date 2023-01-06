@@ -238,57 +238,58 @@ set runtimepath+=$HOME/.cache/dein/repos/github.com/Shougo/dein.vim
   let g:airline#extensions#tabline#enabled = 1
   let g:airline#extensions#tabline#left_sep = ' '
   let g:airline#extensions#tabline#left_alt_sep = '|'
-  " let g:airline#extensions#ale#enabled = 1
+  let g:airline#extensions#ale#enabled = 1
 
   " linter
-  " call dein#add('dense-analysis/ale')
-  " " エラーシンボル変更・シンボルカラムを常に表示
-  " let g:ale_sign_error = 'E'
-  " let g:ale_sign_warning = 'W'
-  " let g:ale_sign_column_always = 1
-  "
-  " " ステータスラインの変更
-  " let g:ale_statusline_format = ['⨉ %d', '⚠ %d', '⬥ ok']
-  "
-  " " メッセージのフォーマット変更
-  " let g:ale_echo_msg_error_str = 'E'
-  " let g:ale_echo_msg_warning_str = 'W'
-  " let g:ale_echo_msg_format = '[%linter%] %s [%severity%]'
-  "
-  " let g:ale_lint_on_enter = 0 " ファイルオープン時のチェックなし
-  " let g:ale_lint_on_save = 0
-  " let g:ale_linters_explicit = 1
-  " let g:ale_linters = {
-  " \   'ruby': ['rubocop'],
-  " \   'json': ['jsonlint'],
-  " \   'javascript': ['prettier', 'eslint'],
-  " \   'typescript': ['prettier', 'eslint'],
-  " \   'elixir': ['elixir-ls'],
-  " \}
-  " let g:ale_fixers = {
-  " \   '*': ['remove_trailing_lines', 'trim_whitespace'],
-  " \   'ruby': ['prettier'],
-  " \   'javascript': ['prettier', 'eslint'],
-  " \   'typescript': ['prettier', 'eslint'],
-  " \   'typescriptreact': ['prettier', 'eslint'],
-  " \}
-  " let g:ale_ruby_rubocop_executable = 'rubocop-daemon-wrapper'
-  " let g:ale_javascript_prettier_options = '--single-quote --trailing-comma all'
-  " let g:ale_javascript_prettier_use_local_config = 1
-  " " let g:ale_elixir_elixir_ls_release = expand("$HOME/.elixir-ls/release")
-  " " let g:ale_elixir_elixir_ls_release = expand("$HOME/.local/share/vim-lsp-settings/servers/elixir-ls")
-  " " let g:ale_elixir_elixir_ls_config = {'elixirLS': {'dialyzerEnabled': v:false}}
-  " " let g:ale_completion_enabled = 1
-  " " ale on off switch nnoremap
-  " nnoremap <silent> <leader>json <Plug>(ale_toggle)
-  " " エラー間の移動
-  " nnoremap <silent> <C-k> <Plug>(ale_previous_wrap)
-  " nnoremap <silent> <C-j> <Plug>(aple_next_wrap)
-  " " ALEFixの実行
-  " nnoremap <silent> <leader>af :ALEFix<CR>
-  " " ALELintの実行
-  " nnoremap <silent> <leader>al :ALELint<CR>
-  "
+  call dein#add('dense-analysis/ale')
+  " エラーシンボル変更・シンボルカラムを常に表示
+  let g:ale_sign_error = 'E'
+  let g:ale_sign_warning = 'W'
+  let g:ale_sign_column_always = 1
+
+  " ステータスラインの変更
+  let g:ale_statusline_format = ['⨉ %d', '⚠ %d', '⬥ ok']
+
+  " メッセージのフォーマット変更
+  let g:ale_echo_msg_error_str = 'E'
+  let g:ale_echo_msg_warning_str = 'W'
+  let g:ale_echo_msg_format = '[%linter%] %s [%severity%]'
+
+  let g:ale_lint_on_enter = 1 " ファイルオープン時のチェック
+  let g:ale_lint_on_save = 1
+  let g:ale_linters_explicit = 1
+  let g:ale_linters = {
+  \   'ruby': ['rubocop'],
+  \   'json': ['jsonlint'],
+  \   'javascript': ['prettier', 'eslint'],
+  \   'typescript': ['prettier', 'eslint'],
+  \   'elixir': ['credo'],
+  \}
+  let g:ale_fixers = {
+  \   '*': ['remove_trailing_lines', 'trim_whitespace'],
+  \   'ruby': ['prettier'],
+  \   'javascript': ['prettier', 'eslint'],
+  \   'typescript': ['prettier', 'eslint'],
+  \   'typescriptreact': ['prettier', 'eslint'],
+  \   'elixir': ['mix_format'],
+  \}
+  let g:ale_ruby_rubocop_executable = 'rubocop-daemon-wrapper'
+  let g:ale_javascript_prettier_options = '--single-quote --trailing-comma all'
+  let g:ale_javascript_prettier_use_local_config = 1
+  " let g:ale_elixir_elixir_ls_release = expand("~/.elixir-ls/release")
+  let g:ale_elixir_elixir_ls_release = expand("~/.local/share/vim-lsp-settings/servers/elixir-ls")
+  let g:ale_elixir_elixir_ls_config = {'elixirLS': {'dialyzerEnabled': v:false}}
+  let g:ale_completion_enabled = 1
+  " ale on off switch nnoremap
+  nnoremap <silent> <leader>json <Plug>(ale_toggle)
+  " エラー間の移動
+  nnoremap <silent> <C-k> <Plug>(ale_previous_wrap)
+  nnoremap <silent> <C-j> <Plug>(aple_next_wrap)
+  " ALEFixの実行
+  nnoremap <silent> <leader>af :ALEFix<CR>
+  " ALELintの実行
+  nnoremap <silent> <leader>al :ALELint<CR>
+
   " denite.nvim
   " call dein#add('Shougo/denite.nvim')
   " let g:python3_host_prog = '~/.asdf/shims/python'
