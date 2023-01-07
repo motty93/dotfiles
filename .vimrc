@@ -278,7 +278,11 @@ set runtimepath+=$HOME/.cache/dein/repos/github.com/Shougo/dein.vim
   let g:ale_javascript_prettier_use_local_config = 1
   " let g:ale_elixir_elixir_ls_release = expand("~/.elixir-ls/release")
   let g:ale_elixir_elixir_ls_release = expand("~/.local/share/vim-lsp-settings/servers/elixir-ls")
-  let g:ale_elixir_elixir_ls_config = {'elixirLS': {'dialyzerEnabled': v:false}}
+  let g:ale_elixir_elixir_ls_config = {
+  \   'elixirLS': {
+  \     'dialyzerEnabled': v:false,
+  \   },
+  \}
   let g:ale_completion_enabled = 1
   " ale on off switch nnoremap
   nnoremap <silent> <leader>json <Plug>(ale_toggle)
