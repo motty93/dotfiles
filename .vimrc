@@ -426,6 +426,10 @@ set runtimepath+=$HOME/.cache/dein/repos/github.com/Shougo/dein.vim
   call dein#add('BjRo/vim-extest')
   " elixir alchemist.vim
   call dein#add('slashmili/alchemist.vim')
+  " elixir formatter
+  call dein#add('mhinz/vim-mix-format')
+  nnoremap <leader>mf :MixFormat<CR>
+  nnoremap <leader>mfd :MixFormatDiff<CR>
 
   " vim-crystal
   call dein#add('vim-crystal/vim-crystal')
