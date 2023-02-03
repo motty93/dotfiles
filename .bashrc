@@ -187,6 +187,8 @@ export LD_LIBRARY_PATH="/usr/local/lib"
 export snippets="$HOME/.cache/dein/repos/github.com/honza/vim-snippets/UltiSnips"
 export HISTSIZE=200000
 export ASDF_DATA_DIR="$HOME/.asdf"
+export DOCKER_BUILDKIT=0
+export COMPOSE_DOCKER_CLI_BUILD=0
 alias home="$home"
 
 # mount google drive
