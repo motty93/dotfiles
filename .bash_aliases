@@ -76,5 +76,5 @@ alias drspec='docker-compose run --rm -e RAILS_ENV=test web bundle exec rspec'
 alias solidus-up='docker run --rm -it -p 3000:3000 solidusio/solidus-demo:latest'
 
 alias vi="vim ."
-alias t='tmux'
+alias t="ttmux"
 alias remix='docker run -p 8080:80 remixproject/remix-ide:latest'

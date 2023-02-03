@@ -188,6 +188,17 @@ function switch_dev () {
   return $?
 }
 
+# named tmux function
+function ttmux () {
+  if [ -z $1 ]; then
+    tmux
+  else
+    tmux new -s $1
+  fi
+
+  return $?
+}
+
 # git pull current branch
 function g () {
   branch=`git rev-parse --abbrev-ref HEAD`
