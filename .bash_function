@@ -239,19 +239,17 @@ function g () {
 
   expect -c "
     set timeout 10
-    spawn git $1 origin $branch
+    spawn bash -c \"git $1 origin $branch\"
     expect {
       \"Username for 'https://github.com': \" {
-        send \"$GITHUB_NAME\n\"
+        send \"$GITHUB_NAME\n\"; exp_continue
         expect \"Password for 'https://$GITHUB_NAME@github.com': \"
-        send \"$GITHUB_PASSWORD\n\"
+        send \"$GITHUB_PASSWORD\n\"; exp_continue
       }
       \"Enter passphrase for key '$rsa_path':\" {
-        send \"$SSH_PASSWORD\n\"
+        send \"$SSH_PASSWORD\n\"; exp_continue
       }
     }
-
-    interact
   "
 
   return $?

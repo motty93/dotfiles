@@ -211,3 +211,22 @@ export KERL_CONFIGURE_OPTIONS="--disable-debug --without-javac"
 
 # complete -C aws_completer aws
 my_prompt
+
+# wsl2 script
+if [[ "$(uname -r)" == *microsoft* ]]; then
+  # docker start
+  sudo /etc/init.d/docker start
+
+  # xserver display
+  export DISPLAY="$(ip route show scope global | grep -o '[0-9]*\.[0-9]*\.[0-9]*\.[0-9]*'):0.0"
+
+  # if [[ ! -v INSIDE_GENIE ]]; then
+  #   read -t 3 -p "yn? * Preparing to enter genie bottle (in 3s); abort? " yn
+  #   echo
+  #
+  #   if [[ \$yn != "y" ]]; then
+  #     echo "Starting genie:"
+  #     exec /usr/bin/genie -s
+  #   fi
+  # fi
+fi
