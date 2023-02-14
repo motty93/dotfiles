@@ -404,7 +404,7 @@ set runtimepath+=$HOME/.cache/dein/repos/github.com/Shougo/dein.vim
   " end of line space color
   call dein#add('bronson/vim-trailing-whitespace')
   " markdown
-  call dein#add('iamcco/markdown-preview.nvim', { 'on_ft': ['markdown', 'pandoc.markdown', 'rmd'], 'build': 'cd app & yarn install' })
+  " call dein#add('iamcco/markdown-preview.nvim', { 'on_ft': ['markdown', 'pandoc.markdown', 'rmd'], 'build': 'cd app & yarn install' })
   call dein#add('godlygeek/tabular')
   call dein#add('plasticboy/vim-markdown')
   let g:vim_markdown_folding_disabled = 1
