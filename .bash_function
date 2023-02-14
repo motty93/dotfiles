@@ -199,6 +199,35 @@ function ttmux () {
   return $?
 }
 
+# named attach tmux function
+function tmux-attached () {
+  if [ -z $1 ]; then
+    tmux a
+  else
+    tmux a -t $1
+  fi
+
+  return $?
+}
+
+# peco select tmux session
+function tmux-session () {
+  for session in `tmux list-sessions | peco | awk '{ print $1 }' | tr -d ':'`
+  do
+    tmux a -t $session
+  done
+
+  return $1
+}
+
+# tmux session kill all
+function tmux-kill-session-all () {
+  tmux kill-session
+  echo "all tmux session killed"
+
+  return $1
+}
+
 # git pull current branch
 function g () {
   branch=`git rev-parse --abbrev-ref HEAD`
