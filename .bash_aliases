@@ -5,12 +5,13 @@ if [ -f "$HOME/.bash_function" ]; then
 fi
 
 # peco
-alias fc='find_cd'
-alias fv='find_vim'
-alias pk='peco-pkill'
+alias pcd='find_cd'
+alias pvi='find_vim'
+alias pc='peco-file-cat'
+alias pkill='peco-pkill'
+alias pgb='peco-git-branch'
 alias his='peco-history'
 alias hiss='peco-sort-history'
-alias gbc='peco-git-branch'
 alias cdr='peco-cd'
 
 # keymapping
@@ -57,6 +58,7 @@ alias mozc='/usr/lib/mozc/mozc_tool --mode=config_dialog'
 alias slack='/usr/bin/slack'
 alias my-chown="sudo chown -R $USER:$USER *"
 alias chrome-kill="ps aux | grep [c]hrome | awk '{ print $2 }' | sudo xargs kill -9"
+alias open="xdg-open"
 
 # rails bundle exec
 alias be='bundle exec'

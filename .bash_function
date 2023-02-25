@@ -96,6 +96,64 @@ function peco-sort-history () {
   return $?
 }
 
+function peco-find () {
+  if [ $# -eq 0 ]; then
+    find . -type d | peco
+  else
+    find $1 | peco
+  fi
+
+  return $?
+}
+
+function peco-findd () {
+  if [ $# -eq 0 ]; then
+    finded=`find . | peco`
+  else
+    finded=`find $1 | peco`
+  fi
+  if [ -f $finded ]; then
+    echo $finded | perl -pe 's/\/[^\/]*$/\n/g'
+  else
+    echo $finded
+  fi
+
+  return $?
+}
+
+function peco-file-cat () {
+  if [ -z $1 ]; then
+    file=$(peco-find $1)
+    cat $file
+  else
+    echo "it couldn't work by no argument."
+  fi
+
+  return $?
+}
+
+function peco-directory-ls () {
+  if [ -z $1 ]; then
+    file=$(peco-find $1)
+    ls $file
+  else
+    echo "it couldn't work by no argument."
+  fi
+
+  return $?
+}
+
+# function peco-directory-cd () {
+#   if [ -z $1 ]; then
+#     dir=$(peco-find-file-before-directory $1)
+#     cd $dir
+#   else
+#     echo "it couldn't work by no argument."
+#   fi
+#
+#   return $?
+# }
+
 # cd alias function
 function cdls () {
   \cd "$@" && ls
