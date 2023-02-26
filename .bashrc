@@ -181,10 +181,6 @@ export PATH="$FLYCTL_INSTALL/bin:$PATH"
 export PS1='\[\e[1;36m\]\w\[\e[m\] \n% '
 export GTAGSLABEL="pygments"
 export CLOUDSDK_PYTHON="$HOME/.asdf/shims/python"
-export GO111MODULE=on
-export GOBIN="$HOME/.asdf/shims"
-export GOPATH="$GOBIN/go"
-export GOMODCACHE="$(go env GOROOT)/pkg/mod"
 export LD_LIBRARY_PATH="/usr/local/lib"
 export snippets="$HOME/.cache/dein/repos/github.com/honza/vim-snippets/UltiSnips"
 export HISTSIZE=200000
@@ -192,6 +188,15 @@ export ASDF_DATA_DIR="$HOME/.asdf"
 export DOCKER_BUILDKIT=0
 export COMPOSE_DOCKER_CLI_BUILD=0
 alias home="$home"
+export GO111MODULE=on
+export GOBIN="$HOME/.asdf/shims"
+export GOPATH="$GOBIN/go"
+# goが存在する場合はGOMODCACHEを設定
+if type go > /dev/null 2>&1
+then
+  export GOMODCACHE="$(go env GOROOT)/pkg/mod"
+fi
+
 
 # mount google drive
 # google-drive-ocamlfuse $HOME/GoogleDrive 2> /dev/null
