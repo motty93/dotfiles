@@ -119,6 +119,18 @@ set runtimepath+=$HOME/.cache/dein/repos/github.com/Shougo/dein.vim
   else
     :echomsg 'vim-lsp for typescript unavailable'
   endif
+  " lsp deno
+  if executable("deno")
+    augroup LspTypeScript
+      autocmd!
+      autocmd User lsp_setup call lsp#register_server({
+      \ "name": "deno lsp",
+      \ "cmd": {server_info -> ["deno", "lsp"]},
+      \ "root_uri": {server_info->lsp#utils#path_to_uri(lsp#utils#find_nearest_parent_file_directory(lsp#utils#get_buffer_path(), "tsconfig.json"))},
+      \ "whitelist": ["typescript", "typescript.tsx"],
+      \ })
+    augroup END
+  endif
   " lsp Vue
   " call dein#add('posva/vim-vue')
   " if executable('vls')
@@ -420,6 +432,9 @@ set runtimepath+=$HOME/.cache/dein/repos/github.com/Shougo/dein.vim
 
   " elixir syntax highlight
   call dein#add('elixir-editors/vim-elixir')
+  au BufRead,BufNewFile *.ex,*.exs set filetype=elixir
+  au BufRead,BufNewFile *.eex,*.heex,*.leex,*.sface,*.lexs set filetype=eelixir
+  au BufRead,BufNewFile mix.lock set filetype=elixir
   " mix command :Mix
   call dein#add('mattreduce/vim-mix')
   " elixir test
@@ -437,18 +452,6 @@ set runtimepath+=$HOME/.cache/dein/repos/github.com/Shougo/dein.vim
   " vim-solidity
   call dein#add('tomlion/vim-solidity')
 
-  " vim-go
-  " call dein#add('fatih/vim-go', { 'do': ':GoInstallBinaries' })
-  " let g:go_version_warning = 0
-  " let g:go_fmt_command = 'goimports'
-  " let g:go_addtags_transform = 'camelcase'
-  " let g:go_term_mode = 'split'
-  " let g:go_highlight_types = 1
-  " let g:go_highlight_fields = 1
-  " let g:go_highlight_functions = 1
-  " let g:go_highlight_function_calls = 1
-  " let g:go_highlight_operators = 1
-  " let g:go_highlight_build_constraints = 1
   " vim-delve
   call dein#add('sebdah/vim-delve')
 
@@ -510,6 +513,7 @@ set runtimepath+=$HOME/.cache/dein/repos/github.com/Shougo/dein.vim
        \ 'yaml',
        \ 'html',
        \ 'solidity',
+       \ 'heex',
        \]})
   let g:prettier#autoformat = 0
   let g:prettier#quickfix_enabled = 0
