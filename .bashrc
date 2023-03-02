@@ -189,15 +189,11 @@ export DOCKER_BUILDKIT=0
 export COMPOSE_DOCKER_CLI_BUILD=0
 alias home="$home"
 export GO111MODULE=on
-export GOBIN="$HOME/.asdf/shims"
-export GOPATH="$GOBIN/go"
-# goが存在する場合はGOMODCACHEを設定
-if type go > /dev/null 2>&1
-then
-  export GOMODCACHE="$(go env GOROOT)/pkg/mod"
-fi
-
-
+export GOPATH="$HOME/go"
+export GOBIN="$GOPATH/bin"
+export PATH=$GOBIN:$PATH
+export DENO_INSTALL="$HOME/.deno"
+export PATH="$DENO_INSTALL/bin:$PATH"
 # mount google drive
 # google-drive-ocamlfuse $HOME/GoogleDrive 2> /dev/null
 
