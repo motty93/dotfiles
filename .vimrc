@@ -131,6 +131,14 @@ set runtimepath+=$HOME/.cache/dein/repos/github.com/Shougo/dein.vim
       \ })
     augroup END
   endif
+  " lsp terraform
+  if executable("terraform-ls")
+    au User lsp_setup call lsp#register_server({
+          \ 'name': 'terraform-ls',
+          \ 'cmd': {server_info -> ['terraform-ls', 'serve']},
+          \ 'whitelist': ['terraform'],
+          \ })
+  endif
   " lsp Vue
   " call dein#add('posva/vim-vue')
   " if executable('vls')
@@ -760,6 +768,8 @@ nnoremap <leader>v :edit $MYVIMRC<CR>
 inoremap <C-a> <C-o>^
 " go to start sentence
 imap <C-s> <C-o>$
+" deno fmt
+nnoremap <silent> <leader>df :!deno fmt<CR>
 
 " filetype detection
 filetype on
