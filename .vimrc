@@ -120,27 +120,28 @@ set runtimepath+=$HOME/.cache/dein/repos/github.com/Shougo/dein.vim
     :echomsg 'vim-lsp for typescript unavailable'
   endif
   " lsp deno
-  if executable("deno")
-    augroup LspTypeScript
-      autocmd!
-      autocmd User lsp_setup call lsp#register_server({
-      \ "name": "deno lsp",
-      \ "cmd": {server_info -> ["deno", "lsp"]},
-      \ "root_uri": {server_info->lsp#utils#path_to_uri(lsp#utils#find_nearest_parent_file_directory(lsp#utils#get_buffer_path(), "tsconfig.json"))},
-      \ "whitelist": ["typescript", "typescript.tsx"],
-      \ })
-    augroup END
-  endif
+  " if executable("deno")
+  "   augroup LspTypeScript
+  "     autocmd!
+  "     autocmd User lsp_setup call lsp#register_server({
+  "     \ "name": "deno lsp",
+  "     \ "cmd": {server_info -> ["deno", "lsp"]},
+  "     \ "root_uri": {server_info->lsp#utils#path_to_uri(lsp#utils#find_nearest_parent_file_directory(lsp#utils#get_buffer_path(), "tsconfig.json"))},
+  "     \ "whitelist": ["typescript", "typescript.tsx"],
+  "     \ })
+  "   augroup END
+  " endif
   " lsp terraform
   if executable("terraform-ls")
     au User lsp_setup call lsp#register_server({
-          \ 'name': 'terraform-ls',
-          \ 'cmd': {server_info -> ['terraform-ls', 'serve']},
-          \ 'whitelist': ['terraform'],
-          \ })
+      \ 'name': 'terraform-ls',
+      \ 'cmd': {server_info -> ['terraform-ls', 'serve']},
+      \ 'whitelist': ['terraform'],
+      \ })
+    autocmd BufWritePre *.tf LspDocumentFormatSync
   endif
   " lsp Vue
-  " call dein#add('posva/vim-vue')
+  call dein#add('posva/vim-vue')
   " if executable('vls')
   "   augroup LspVls
   "     au!
@@ -462,6 +463,8 @@ set runtimepath+=$HOME/.cache/dein/repos/github.com/Shougo/dein.vim
 
   " vim-delve
   call dein#add('sebdah/vim-delve')
+  nnoremap <silent> <leader>dlv :DlvDebug<CR>
+  nnoremap <silent> <leader>dlb :DlvToggleBreakpoint<CR>
 
   " colorscheme tokyonight(それ以外はコメントアウト)
   call dein#add('ghifarit53/tokyonight-vim')
@@ -558,6 +561,9 @@ set runtimepath+=$HOME/.cache/dein/repos/github.com/Shougo/dein.vim
   call dein#add('othree/html5.vim')
   " emmet
   call dein#add('mattn/emmet-vim')
+
+  " terraform
+  call dein#add('hashivim/vim-terraform')
 
   call dein#end()
   call dein#save_state()
