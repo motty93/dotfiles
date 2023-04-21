@@ -1,0 +1,11 @@
+snippet tx
+ActiveRecord::Base.transaction do
+	$1
+end
+rescue ActiveRecord::RecordInvalid
+false
+endsnippet
+
+snippet pry
+binding.pry
+endsnippet
