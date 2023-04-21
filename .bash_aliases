@@ -31,6 +31,7 @@ alias sub="cd ~/github.com/subcontracting"
 alias ango="cd ~/github.com/subcontracting/ango-ya"
 alias blog="cd ~/github.com/home-blog"
 alias ani="cd ~/github.com/subcontracting/anique"
+alias cavin="cd ~/github.com/subcontracting/cavin"
 
 # keyboard command aliases
 alias disablekey="disable_keyboard"
