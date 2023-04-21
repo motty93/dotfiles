@@ -194,6 +194,9 @@ export GOBIN="$GOPATH/bin"
 export PATH=$GOBIN:$PATH
 export DENO_INSTALL="$HOME/.deno"
 export PATH="$DENO_INSTALL/bin:$PATH"
+# export GOOGLE_IMPERSONATE_SERVICE_ACCOUNT="terraform@amazon-ban-staging.iam.gserviceaccount.com"
+export GOOGLE_IMPERSONATE_SERVICE_ACCOUNT="terraform@recomend-mail.iam.gserviceaccount.com"
+export GOOGLE_APPLICATION_CREDENTIALS="$HOME/.config/gcloud/application_default_credentials.json"
 # mount google drive
 # google-drive-ocamlfuse $HOME/GoogleDrive 2> /dev/null
 
