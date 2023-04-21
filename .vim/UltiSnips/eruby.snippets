@@ -11,7 +11,7 @@ snippet sort
 endsnippet
 
 snippet erb
-<%=$1 %>
+<%= $1 %>
 endsnippet
 
 snippet render
@@ -33,11 +33,20 @@ endsnippet
 snippet if
 <% if $1 %>
 	$2
+<% else %>
+	$3
 <% end %>
 endsnippet
 
 snippet search_form
 <%= search_form_for @q do |f| %>
 	$1
+<% end %>
+endsnippet
+
+snippet fw
+<%= form_with mode: form, local: true do |f| %>
+  <%= f.$1 :$2 %>
+  <%= f.submit %>
 <% end %>
 endsnippet
