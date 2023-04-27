@@ -76,7 +76,7 @@ alias drmi='docker images | grep none | xargs docker rmi -f `awk "{ print $3 }"`
 alias faw="web_container_attach"
 alias dr='docker-compose run --rm web bundle exec rails'
 alias drspec='docker-compose run --rm -e RAILS_ENV=test web bundle exec rspec'
-alias solidus-up='docker run --rm -it -p 3000:3000 solidusio/solidus-demo:latest'
+alias dvr='specific_docker_volume_rm'
 
 alias vi="vim ."
 alias t="ttmux"
