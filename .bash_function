@@ -246,46 +246,6 @@ function switch_dev () {
   return $?
 }
 
-# named tmux function
-function ttmux () {
-  if [ -z $1 ]; then
-    tmux
-  else
-    tmux new -s $1
-  fi
-
-  return $?
-}
-
-# named attach tmux function
-function tmux-attached () {
-  if [ -z $1 ]; then
-    tmux a
-  else
-    tmux a -t $1
-  fi
-
-  return $?
-}
-
-# peco select tmux session
-function tmux-session () {
-  for session in `tmux list-sessions | peco | awk '{ print $1 }' | tr -d ':'`
-  do
-    tmux a -t $session
-  done
-
-  return $1
-}
-
-# tmux session kill all
-function tmux-kill-session-all () {
-  tmux kill-session
-  echo "all tmux session killed"
-
-  return $1
-}
-
 # git pull current branch
 function g () {
   branch=`git rev-parse --abbrev-ref HEAD`
@@ -338,3 +298,64 @@ function switch_master() {
 
   return $?
 }
+
+function specific_docker_volume_rm() {
+  arg=$1
+
+  if [ -z "$arg" ]; then
+    echo "volumeを指定して下さい。"
+  else
+    docker volume ls | grep "$arg" > volume.txt
+
+    if [ -n "$(cat volume.txt)" ]; then
+      cat volume.txt | awk '{print $2}' | xargs docker volume rm
+    else
+      echo "$argのvolumeは存在しません。"
+    fi
+  fi
+
+  return $?
+}
+
+# tmux
+# named tmux function
+function ttmux () {
+  if [ -z $1 ]; then
+    tmux
+  else
+    tmux new -s $1
+  fi
+
+  return $?
+}
+
+# named attach tmux function
+function tmux-attached () {
+  if [ -z $1 ]; then
+    tmux a
+  else
+    tmux a -t $1
+  fi
+
+  return $?
+}
+
+# peco select tmux session
+function tmux-session () {
+  for session in `tmux list-sessions | peco | awk '{ print $1 }' | tr -d ':'`
+  do
+    tmux a -t $session
+  done
+
+  return $1
+}
+
+# tmux session kill all
+function tmux-kill-session-all () {
+  tmux kill-session
+  echo "all tmux session killed"
+
+  return $1
+}
+
+

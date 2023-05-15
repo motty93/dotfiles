@@ -478,6 +478,18 @@ set runtimepath+=$HOME/.cache/dein/repos/github.com/Shougo/dein.vim
   " let g:badwolf_tabline = 2
   " let g:badwolf_css_props_highlight = 1
 
+  " vim ruby
+  call dein#add('vim-ruby/vim-ruby')
+  " ruby move block mapping
+  function! GoToMatchingPair()
+    let l:cur_pos = getpos('.')
+    let l:matchpairs = 'do:end,' . &matchpairs
+    let old_matchpairs = &matchpairs
+    let &matchpairs = l:matchpairs
+    exe "normal! %"
+    let &matchpairs = old_matchpairs
+  endfunction  nnoremap [r :call GoToMatchingPair()<CR>
+
   " rails complement
   call dein#add('tpope/vim-rails')
   call dein#add('slim-template/vim-slim')
@@ -492,9 +504,6 @@ set runtimepath+=$HOME/.cache/dein/repos/github.com/Shougo/dein.vim
 
   " ruby style recommended
   let g:ruby_recommended_style = 1
-
-  " CoffeeScript
-  call dein#add('kchmck/vim-coffee-script')
 
   " tailwindcss
   " call dein#add('iamcco/coc-tailwindcss',  {
