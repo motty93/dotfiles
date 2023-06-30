@@ -481,14 +481,14 @@ set runtimepath+=$HOME/.cache/dein/repos/github.com/Shougo/dein.vim
   " vim ruby
   call dein#add('vim-ruby/vim-ruby')
   " ruby move block mapping
-  function! GoToMatchingPair()
-    let l:cur_pos = getpos('.')
-    let l:matchpairs = 'do:end,' . &matchpairs
-    let old_matchpairs = &matchpairs
-    let &matchpairs = l:matchpairs
-    exe "normal! %"
-    let &matchpairs = old_matchpairs
-  endfunction  nnoremap [r :call GoToMatchingPair()<CR>
+  " function! GoToMatchingPair()
+  "   let l:cur_pos = getpos('.')
+  "   let l:matchpairs = 'do:end,' . &matchpairs
+  "   let old_matchpairs = &matchpairs
+  "   let &matchpairs = l:matchpairs
+  "   exe "normal! %"
+  "   let &matchpairs = old_matchpairs
+  " endfunction  nnoremap [r :call GoToMatchingPair()<CR>
 
   " rails complement
   call dein#add('tpope/vim-rails')
@@ -541,6 +541,7 @@ set runtimepath+=$HOME/.cache/dein/repos/github.com/Shougo/dein.vim
   let g:prettier#config#single_quote = 'true'
   let g:prettier#config#bracket_spacing = 'true'
   let g:prettier#config#parser = ''
+  let g:prettier#config#tab_width = 2
   let g:prettier#exec_cmd_path = '/home/motty/.asdf/shims/prettier'
   " autocmd BufWritePre *.js,*.jsx,*.ts,*.tsx,*.vue,*.css,*.scss,*.json PrettierAsync
 
@@ -573,6 +574,7 @@ set runtimepath+=$HOME/.cache/dein/repos/github.com/Shougo/dein.vim
 
   " terraform
   call dein#add('hashivim/vim-terraform')
+  let g:terraform_fmt_on_save=1
 
   call dein#end()
   call dein#save_state()
