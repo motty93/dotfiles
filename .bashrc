@@ -165,9 +165,11 @@ xterm*|rxvt*)
     ;;
 esac
 
-function command_not_found_handle() {
-  figlet -c "command not found"
-}
+# function command_not_found_handle() {
+#   figlet -c "command not found"
+# 
+#   return $?
+# }
 
 #export
 PATH="$HOME/bin:$HOME/.local/bin:$PATH"
