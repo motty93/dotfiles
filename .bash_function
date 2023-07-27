@@ -155,12 +155,12 @@ function peco-directory-ls () {
 # }
 
 # cd alias function
-function cdls () {
-  \cd "$@" && ls
-  my_prompt
-
-  return $?
-}
+# function cdls () {
+#   \cd "$@" && ls
+#   my_prompt
+#
+#   return $?
+# }
 
 # disable keyboard
 function disable_keyboard () {
