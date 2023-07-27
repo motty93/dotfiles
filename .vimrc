@@ -358,6 +358,24 @@ set runtimepath+=$HOME/.cache/dein/repos/github.com/Shougo/dein.vim
   nnoremap <silent> <leader>cg :<C-u>Unite grep:. -buffer-name=search-buffer<CR><C-R><C-W>
   " call result of grep
   nnoremap <silent> <leader>ur :<C-u>UniteResume search-buffer<CR>
+  function! s:unite_gitignore_source()
+    let sources = []
+    if filereadable('./.gitignore')
+      for file in readfile('./.gitignore')
+        " コメント行と空行は追加しない
+        if file !~ "^#\\|^\s\*$"
+          call add(sources, file)
+        endif
+      endfor
+    endif
+    if isdirectory('./.git')
+      call add(sources, '.git')
+    endif
+    let pattern = escape(join(sources, '|'), './|')
+    call unite#custom#source('file_rec', 'ignore_pattern', pattern)
+    call unite#custom#source('grep', 'ignore_pattern', pattern)
+  endfunction
+  call s:unite_gitignore_source()
 
   " file search
   call dein#add('ctrlpvim/ctrlp.vim')
