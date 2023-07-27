@@ -556,7 +556,7 @@ set runtimepath+=$HOME/.cache/dein/repos/github.com/Shougo/dein.vim
        \ 'heex',
        \]})
   let g:prettier#autoformat = 0
-  let g:prettier#quickfix_enabled = 0
+  let g:prettier#quickfix_enabled = 1
   let g:prettier#config#semi = 'false'
   let g:prettier#config#single_quote = 'true'
   let g:prettier#config#bracket_spacing = 'true'
