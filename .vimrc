@@ -291,9 +291,9 @@ set runtimepath+=$HOME/.cache/dein/repos/github.com/Shougo/dein.vim
   let g:ale_fixers = {
   \   '*': ['remove_trailing_lines', 'trim_whitespace'],
   \   'ruby': ['prettier'],
-  \   'javascript': ['prettier', 'eslint'],
-  \   'typescript': ['prettier', 'eslint'],
-  \   'typescriptreact': ['prettier', 'eslint'],
+  \   'javascript': ['prettier'],
+  \   'typescript': ['prettier'],
+  \   'typescriptreact': ['prettier'],
   \   'elixir': ['mix_format'],
   \}
   let g:ale_ruby_rubocop_executable = 'rubocop-daemon-wrapper'
@@ -415,22 +415,22 @@ set runtimepath+=$HOME/.cache/dein/repos/github.com/Shougo/dein.vim
   let g:NERDTreeLimitedSyntax = 1
 
   " ultisnips
-  call dein#add('SirVer/ultisnips')
-  call dein#add('honza/vim-snippets')
-  call dein#add('prabirshrestha/asyncomplete-ultisnips.vim')
-  let g:UltiSnipsExpandTrigger = "<tab>"
-  let g:UltiSnipsJumpForwardTrigger = "<c-f>"
-  let g:UltiSnipsJumpBackwardTrigger = "<c-z>"
-  " if you want :UltiSnipsEdit to split your window
-  let g:UltiSnipsEditSplit = 'vertical'
-  let g:UltiSnipsSnippetDirectories=[$HOME.'/.vim/UltiSnips',$HOME.'/.cache/dein/repos/github.com/honza/vim-snippets/UltiSnips']
-  nnoremap <leader>ul :UltiSnipsEdit<CR>
-  let g:UltiSnipsExpandTrigger="<c-e>"
-  call asyncomplete#register_source(asyncomplete#sources#ultisnips#get_source_options({
-      \ 'name': 'ultisnips',
-      \ 'allowlist': ['*'],
-      \ 'completor': function('asyncomplete#sources#ultisnips#completor'),
-      \ }))
+  " call dein#add('SirVer/ultisnips')
+  " call dein#add('honza/vim-snippets')
+  " call dein#add('prabirshrestha/asyncomplete-ultisnips.vim')
+  " let g:UltiSnipsExpandTrigger = "<tab>"
+  " let g:UltiSnipsJumpForwardTrigger = "<c-f>"
+  " let g:UltiSnipsJumpBackwardTrigger = "<c-z>"
+  " " if you want :UltiSnipsEdit to split your window
+  " let g:UltiSnipsEditSplit = 'vertical'
+  " let g:UltiSnipsSnippetDirectories=[$HOME.'/.vim/UltiSnips',$HOME.'/.cache/dein/repos/github.com/honza/vim-snippets/UltiSnips']
+  " nnoremap <leader>ul :UltiSnipsEdit<CR>
+  " let g:UltiSnipsExpandTrigger="<c-e>"
+  " call asyncomplete#register_source(asyncomplete#sources#ultisnips#get_source_options({
+  "     \ 'name': 'ultisnips',
+  "     \ 'allowlist': ['*'],
+  "     \ 'completor': function('asyncomplete#sources#ultisnips#completor'),
+  "     \ }))
 
   " endwise
   call dein#add('tpope/vim-endwise')
