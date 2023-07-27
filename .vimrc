@@ -81,7 +81,9 @@ set runtimepath+=$HOME/.cache/dein/repos/github.com/Shougo/dein.vim
   " let g:lsp_settings_filetype_ruby = ['ruby-lsp', 'steep']
   let g:lsp_settings_filetype_ruby = ['solargraph', 'steep']
   call dein#add('thomasfaingnaert/vim-lsp-snippets')
-  call dein#add('thomasfaingnaert/vim-lsp-ultisnips')
+  " call dein#add('thomasfaingnaert/vim-lsp-ultisnips')
+
+  call dein#add('tyru/capture.vim')
 
   function! s:check_back_space() abort
     let col = col('.') - 1
