@@ -36,6 +36,7 @@ set runtimepath+=$HOME/.cache/dein/repos/github.com/Shougo/dein.vim
   " vim lsp
   call dein#add('prabirshrestha/vim-lsp')
   call dein#add('mattn/vim-lsp-settings')
+  call dein#add('mattn/vim-lsp-icons')
   " let g:lsp_log_verbose = 1
   " let g:lsp_log_file = 'vim-lsp.log'
    " 保存時source.organizaImports実行
@@ -48,15 +49,15 @@ set runtimepath+=$HOME/.cache/dein/repos/github.com/Shougo/dein.vim
     nnoremap <silent> gd :LspDefinition<CR>
     nnoremap <silent> gp :LspPeekDefinition<CR>
     nnoremap <silent> gh :LspHover<CR>
+    nnoremap <silent> K :LspHover<CR>
     nnoremap <silent> gr :LspReferences<CR>
-    nnoremap <silent> gs :LspDocumentSymbolSearch<CR>
-    nnoremap <silent> gS :LspWorkspaceSymbolSearch<CR>
+    nnoremap <silent> gS :LspDocumentSymbolSearch<CR>
+    nnoremap <silent> gs :LspWorkspaceSymbolSearch<CR>
     nnoremap <silent> gi :LspImplementation<CR>
     " nnoremap <silent> gt :LspTypeDefinition<CR>
     nnoremap <silent> <leader>rn :LspRename<CR>
     nnoremap <silent> [g :LspPreviousDiagnostic<CR>
     nnoremap <silent> ]g :LspNextDiagnostic<CR>
-    nnoremap <silent> K :LspHover<CR>
     nnoremap <silent> ]e :LspNextError<CR>
     nnoremap <silent> [e :LspPreviousError<CR>
     inoremap <silent> <expr><c-f> lsp#scroll(+4)
@@ -69,7 +70,8 @@ set runtimepath+=$HOME/.cache/dein/repos/github.com/Shougo/dein.vim
       au!
       autocmd User lsp_buffer_enabled call s:on_lsp_buffer_enabled()
   augroup END
-  call dein#add('prabirshrestha/async.vim')
+  " NOTE: vim-lspに統合されたのでコメントアウト
+  " call dein#add('prabirshrestha/async.vim')
   call dein#add('prabirshrestha/asyncomplete.vim')
   let g:asyncomplete_auto_completeopt = 0
   let g:lsp_diagnostics_enabled = 1
