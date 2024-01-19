@@ -612,6 +612,9 @@ set runtimepath+=$HOME/.cache/dein/repos/github.com/Shougo/dein.vim
   call dein#add('hashivim/vim-terraform')
   let g:terraform_fmt_on_save=1
 
+  " copilot
+  call dein#add('github/copilot.vim')
+
   call dein#end()
   call dein#save_state()
 
