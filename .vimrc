@@ -515,6 +515,7 @@ set runtimepath+=$HOME/.cache/dein/repos/github.com/Shougo/dein.vim
 
   " vim ruby
   call dein#add('vim-ruby/vim-ruby')
+  call dein#add('vim-scripts/ruby-matchit')
   " ruby move block mapping
   " function! GoToMatchingPair()
   "   let l:cur_pos = getpos('.')
