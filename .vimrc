@@ -80,8 +80,8 @@ set runtimepath+=$HOME/.cache/dein/repos/github.com/Shougo/dein.vim
   let g:lsp_text_edit_enabled = 1
   let g:lsp_preview_float = 1
   let g:lsp_diagnostics_fload_cursor = 1
-  " let g:lsp_settings_filetype_ruby = ['ruby-lsp', 'steep']
-  let g:lsp_settings_filetype_ruby = ['solargraph', 'steep']
+  let g:lsp_settings_filetype_ruby = ['ruby-lsp', 'steep', 'typeprof']
+  " let g:lsp_settings_filetype_ruby = ['solargraph', 'steep']
   call dein#add('thomasfaingnaert/vim-lsp-snippets')
   " call dein#add('thomasfaingnaert/vim-lsp-ultisnips')
 
