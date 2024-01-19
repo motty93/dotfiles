@@ -289,6 +289,7 @@ set runtimepath+=$HOME/.cache/dein/repos/github.com/Shougo/dein.vim
   \   'javascript': ['prettier', 'eslint'],
   \   'typescript': ['prettier', 'eslint'],
   \   'elixir': ['credo'],
+  \   'markdown': ['remark-lint'],
   \}
   let g:ale_fixers = {
   \   '*': ['remove_trailing_lines', 'trim_whitespace'],
@@ -297,6 +298,13 @@ set runtimepath+=$HOME/.cache/dein/repos/github.com/Shougo/dein.vim
   \   'typescript': ['prettier'],
   \   'typescriptreact': ['prettier'],
   \   'elixir': ['mix_format'],
+  \   'markdown': ['remark-lint'],
+  \   'yaml': ['prettier'],
+  \   'sql': [
+  \     { buffer -> {
+  \       'command': 'sql-formatter -l mysql'
+  \     }},
+  \   ],
   \}
   let g:ale_ruby_rubocop_executable = 'rubocop-daemon-wrapper'
   let g:ale_javascript_prettier_options = '--single-quote --trailing-comma all'
@@ -319,10 +327,15 @@ set runtimepath+=$HOME/.cache/dein/repos/github.com/Shougo/dein.vim
   " ALELintの実行
   nnoremap <silent> <leader>al :ALELint<CR>
 
-  " denite.nvim
-  " call dein#add('Shougo/denite.nvim')
-  " let g:python3_host_prog = '~/.asdf/shims/python'
-  " nnoremap <leader>rec :Denite file_rec<CR>
+  " denops.vim
+  call dein#add('vim-denops/denops.vim')
+
+  " ddu.vim
+  " call dein#add('Shougo/ddu.vim')
+  " call dein#add('Shougo/ddu-ui-ff')
+  " call ddu#custom#patch_global(#{
+  "       \   ui: 'ff',
+  "       \ })
 
   " unite.vim
   call dein#add('Shougo/unite.vim')
@@ -537,34 +550,35 @@ set runtimepath+=$HOME/.cache/dein/repos/github.com/Shougo/dein.vim
   autocmd CompleteDone * pclose
 
   " vim-prettier
-  call dein#add('prettier/vim-prettier', {
-       \ 'do': 'yarn install',
-       \ 'branch': 'release/1.x',
-       \ 'for': [
-       \ 'javascript',
-       \ 'typescript',
-       \ 'typescriptreact',
-       \ 'css',
-       \ 'less',
-       \ 'scss',
-       \ 'json',
-       \ 'graphql',
-       \ 'ruby',
-       \ 'python',
-       \ 'vue',
-       \ 'yaml',
-       \ 'html',
-       \ 'solidity',
-       \ 'heex',
-       \]})
-  let g:prettier#autoformat = 0
-  let g:prettier#quickfix_enabled = 1
-  let g:prettier#config#semi = 'false'
-  let g:prettier#config#single_quote = 'true'
-  let g:prettier#config#bracket_spacing = 'true'
-  let g:prettier#config#parser = ''
-  let g:prettier#config#tab_width = 2
-  let g:prettier#exec_cmd_path = '/home/motty/.asdf/shims/prettier'
+  " NOTE: メンテされてないのでaleへ移行
+  " call dein#add('prettier/vim-prettier', {
+  "      \ 'do': 'yarn install',
+  "      \ 'branch': 'release/1.x',
+  "      \ 'for': [
+  "      \ 'javascript',
+  "      \ 'typescript',
+  "      \ 'typescriptreact',
+  "      \ 'css',
+  "      \ 'less',
+  "      \ 'scss',
+  "      \ 'json',
+  "      \ 'graphql',
+  "      \ 'ruby',
+  "      \ 'python',
+  "      \ 'vue',
+  "      \ 'yaml',
+  "      \ 'html',
+  "      \ 'solidity',
+  "      \ 'heex',
+  "      \]})
+  " let g:prettier#autoformat = 0
+  " let g:prettier#quickfix_enabled = 1
+  " let g:prettier#config#semi = 'false'
+  " let g:prettier#config#single_quote = 'true'
+  " let g:prettier#config#bracket_spacing = 'true'
+  " let g:prettier#config#parser = ''
+  " let g:prettier#config#tab_width = 2
+  " let g:prettier#exec_cmd_path = '/home/motty/.asdf/shims/prettier'
   " autocmd BufWritePre *.js,*.jsx,*.ts,*.tsx,*.vue,*.css,*.scss,*.json PrettierAsync
 
   " javascript
