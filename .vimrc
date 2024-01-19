@@ -592,7 +592,7 @@ set runtimepath+=$HOME/.cache/dein/repos/github.com/Shougo/dein.vim
   autocmd BufNewFile,BufRead *.ts,*.tsx set filetype=typescript
 
   " prisma
-  call dein#add('pantharshit00/vim-prisma')
+  call dein#add('prisma/vim-prisma')
   " sql formatter
   call dein#add('mattn/vim-sqlfmt')
 
