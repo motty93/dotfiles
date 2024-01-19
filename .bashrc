@@ -171,8 +171,16 @@ esac
 #   return $?
 # }
 
+function sshs {
+  t=$(cat ~/.ssh/config | grep 'Host ' | cut -f2 -d' ' | fzf --preview "cat ~/.ssh/config | sed -ne '/^Host {}$/,/^\s*$/p'")
+  if [ -n "$t" ]; then
+    ssh "$t"
+  fi
+}
+
 #export
 PATH="$HOME/bin:$HOME/.local/bin:$PATH"
+# PATH="/usr/local/bin/rubocop-daemon-wrapper:$PATH"
 export home="$HOME"
 export PULSE_LATENCY_MSEC=30
 export SDKMAN_DIR="$HOME/.sdkman"
@@ -187,6 +195,7 @@ export LD_LIBRARY_PATH="/usr/local/lib"
 export snippets="$HOME/.cache/dein/repos/github.com/honza/vim-snippets/UltiSnips"
 export HISTSIZE=200000
 export ASDF_DATA_DIR="$HOME/.asdf"
+export ASDF_GOLANG_MOD_VERSION_ENABLED=true
 export DOCKER_BUILDKIT=0
 export COMPOSE_DOCKER_CLI_BUILD=0
 alias home="$home"
@@ -197,7 +206,7 @@ export PATH=$GOBIN:$PATH
 export DENO_INSTALL="$HOME/.deno"
 export PATH="$DENO_INSTALL/bin:$PATH"
 # export GOOGLE_IMPERSONATE_SERVICE_ACCOUNT="terraform@amazon-ban-staging.iam.gserviceaccount.com"
-export GOOGLE_IMPERSONATE_SERVICE_ACCOUNT="terraform@recomend-mail.iam.gserviceaccount.com"
+export GOOGLE_IMPERSONATE_SERVICE_ACCOUNT="terraform@ad-automation-tool.iam.gserviceaccount.com"
 export GOOGLE_APPLICATION_CREDENTIALS="$HOME/.config/gcloud/application_default_credentials.json"
 # mount google drive
 # google-drive-ocamlfuse $HOME/GoogleDrive 2> /dev/null

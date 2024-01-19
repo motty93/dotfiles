@@ -86,3 +86,4 @@ alias ts="tmux-session"
 alias tl="tmux list-sessions"
 alias tkill="tmux-kill-session-all"
 alias remix='docker run -p 8080:80 remixproject/remix-ide:latest'
+alias rain='era'
