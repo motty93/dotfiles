@@ -601,6 +601,10 @@ set runtimepath+=$HOME/.cache/dein/repos/github.com/Shougo/dein.vim
   call dein#add('peitalin/vim-jsx-typescript')
   call dein#add('styled-components/vim-styled-components', { 'branch': 'main' })
 
+  " Svelte
+  call dein#add('evanleck/vim-svelte')
+  let g:svelte_preprocessors = ['typescript']
+
   " html5 code syntax
   call dein#add('hail2u/vim-css3-syntax')
   " HTML5 plugins
