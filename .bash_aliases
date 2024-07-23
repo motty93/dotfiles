@@ -4,7 +4,7 @@ if [ -f "$HOME/.bash_function" ]; then
   . $HOME/.bash_function
 fi
 
-# peco
+# tools
 alias pcd='find_cd'
 alias pvi='find_vim'
 alias pc='peco-file-cat'
@@ -13,6 +13,7 @@ alias pgb='peco-git-branch'
 alias his='peco-history'
 alias hiss='peco-sort-history'
 alias cdr='peco-cd'
+alias fd='fdfind'
 
 # keymapping
 alias anne='xkbcomp -I$HOME/.xkb $HOME/.xkb/keymap/anne_pro2_keymap $DISPLAY 2> /dev/null'
@@ -80,6 +81,7 @@ alias drspec='docker-compose run --rm -e RAILS_ENV=test web bundle exec rspec'
 alias dvr='specific_docker_volume_rm'
 
 alias vi="vim ."
+alias mvim="vim -u NONE -N --noplugin -c 'set swapfile nobackup nowritebackup noswapfile noundofile' -c 'syntax off'"
 alias t="ttmux"
 alias ta="tmux-attached"
 alias ts="tmux-session"
@@ -87,3 +89,4 @@ alias tl="tmux list-sessions"
 alias tkill="tmux-kill-session-all"
 alias remix='docker run -p 8080:80 remixproject/remix-ide:latest'
 alias rain='era'
+alias tree='tree -a -I "\.DS_Store|\.git|node_modules|vendor\/bundle" -N'

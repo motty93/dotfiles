@@ -329,6 +329,8 @@ set runtimepath+=$HOME/.cache/dein/repos/github.com/Shougo/dein.vim
 
   " denops.vim
   call dein#add('vim-denops/denops.vim')
+  " deno fmt
+  nnoremap <silent> <leader>df :!deno fmt<CR>
 
   " ddu.vim
   " call dein#add('Shougo/ddu.vim')
@@ -620,6 +622,39 @@ set runtimepath+=$HOME/.cache/dein/repos/github.com/Shougo/dein.vim
   " copilot
   call dein#add('github/copilot.vim')
 
+  " vimmemo
+  call dein#add('glidenote/memolist.vim')
+  let g:memolist_prompt_tags = 1
+  let g:memolist_prompt_categories = 1
+  let g:memolist_path = "~/github.com/motty-memo/memo"
+  let g:memolist_memo_suffix = "md"
+  " let g:memolist_template_dir_path = "~/.vim/template/memolist"
+  let g:memolist_unite = 1
+  map <leader>mn :MemoNew<CR>
+  map <leader>ml :MemoList<CR>
+  map <leader>mg :MemoGrep<CR>
+  " augroup MemoNew
+  "   autocmd!
+  "   autocmd BufNewFile ~/github.com/motty-memo/memo/*.md call InsertTemplate()
+  " augroup END
+  " function! InsertTemplate()
+  "   " 既存の第一行が'titile:'を含む場合、先頭行を削除
+  "   if getline(1) =~ 'title:'
+  "     execute '1delete'
+  "   endif
+  "
+  "   let template_file = expand('~/.vim/template/memolist/memo_template.txt')
+  "   if filereadable(template_file)
+  "     execute '0r ' . template_file
+  "     " {{DATE}}を今日の日付に置換
+  "     let l:today = strftime('%Y-%m-%d')
+  "     execute '%s/##DATE##/' . l:today . '/e'
+  "     " {{CURSOR}をカーソル位置に設定}
+  "     call search('##CURSOR##')
+  "     execute 'normal!' "_diw"
+  "   endif
+  " endfunction
+
   call dein#end()
   call dein#save_state()
 
@@ -825,12 +860,8 @@ nnoremap <silent> <leader>tab :<C-u>tabnew<CR>
 nnoremap <leader>chrome :exe ':silent !google-chrome % &'<CR>
 " Edit vimrc
 nnoremap <leader>v :edit $MYVIMRC<CR>
-" go to end sentence
-inoremap <C-a> <C-o>^
-" go to start sentence
-imap <C-s> <C-o>$
-" deno fmt
-nnoremap <silent> <leader>df :!deno fmt<CR>
+" vim cache clear
+nnoremap <leader>cc :call dein#recache_runtimepath()<CR>
 
 " filetype detection
 filetype on
