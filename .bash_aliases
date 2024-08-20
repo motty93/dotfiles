@@ -82,7 +82,8 @@ alias dvr='specific_docker_volume_rm'
 
 alias vi="vim ."
 alias mvim="vim -u NONE -N --noplugin -c 'set swapfile nobackup nowritebackup noswapfile noundofile' -c 'syntax off'"
-alias t="ttmux"
+alias t="tmux"
+alias tn="tmux new -s"
 alias ta="tmux-attached"
 alias ts="tmux-session"
 alias tl="tmux list-sessions"
