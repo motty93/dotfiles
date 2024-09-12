@@ -207,7 +207,13 @@ export DENO_INSTALL="$HOME/.deno"
 export PATH="$DENO_INSTALL/bin:$PATH"
 export RUST_WITHOUT=rust-docs
 # export GOOGLE_IMPERSONATE_SERVICE_ACCOUNT="terraform@amazon-ban-staging.iam.gserviceaccount.com"
-export GOOGLE_IMPERSONATE_SERVICE_ACCOUNT="terraform@ad-automation-tool.iam.gserviceaccount.com"
+if which gcloud >/dev/null; then
+  PROJECT_NAME=$(gcloud config get-value project)
+  export GOOGLE_IMPERSONATE_SERVICE_ACCOUNT="terraform@$PROJECT_NAME.iam.gserviceaccount.com"
+else
+  echo "gcloud command not found. Please install gcloud."
+fi
+
 export GOOGLE_APPLICATION_CREDENTIALS="$HOME/.config/gcloud/application_default_credentials.json"
 export NODE_OPTIONS=--openssl-legacy-provider
 # mount google drive
