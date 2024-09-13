@@ -300,6 +300,7 @@ set runtimepath+=$HOME/.cache/dein/repos/github.com/Shougo/dein.vim
   \   'elixir': ['mix_format'],
   \   'markdown': ['remark-lint'],
   \   'yaml': ['prettier'],
+  \   'dart': ['dart-format'],
   \   'sql': [
   \     { buffer -> {
   \       'command': 'sql-formatter -l mysql'
