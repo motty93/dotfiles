@@ -109,14 +109,17 @@ set runtimepath+=$HOME/.cache/dein/repos/github.com/Shougo/dein.vim
           \ })
   endif
   " lsp typescript(vim-lsp-settingsだとtsxに対応してないっぽい)
+  let g:lsp_settings_filetype_javascript = ['typescript-language-server']
+  let g:lsp_settings_filetype_javascriptreact = ['typescript-language-server']
+  let g:lsp_settings_filetype_typescript = ['typescript-language-server']
+  let g:lsp_settings_filetype_typescriptreact = ['typescript-language-server']
   if executable('typescript-language-server')
-    augroup LspTypeScript
-      au!
+    augroup lsp_typescriptreact
+      autocmd!
       autocmd User lsp_setup call lsp#register_server({
                   \ 'name': 'typescript-language-server',
-                  \ 'cmd': {server_info->[&shell, &shellcmdflag, 'typescript-language-server --stdio']},
-                  \ 'root_uri':{server_info->lsp#utils#path_to_uri(lsp#utils#find_nearest_parent_file_directory(lsp#utils#get_buffer_path(), 'tsconfig.json'))},
-                  \ 'whitelist': ['typescript', 'typescriptreact'],
+                  \ 'cmd': {server_info->['typescript-language-server', '--stdio']},
+                  \ 'whitelist': ['javascript', 'javascriptreact', 'typescript', 'typescriptreact'],
                   \ })
       autocmd FileType typescript setlocal omnifunc=lsp#complete
     augroup END :echomsg 'vim-lsp with `typescript-language-server` enabled'
@@ -267,6 +270,8 @@ set runtimepath+=$HOME/.cache/dein/repos/github.com/Shougo/dein.vim
 
   " linter
   call dein#add('dense-analysis/ale')
+  " lspを無効化
+  let g:ale_disable_lsp = 1
   " エラーシンボル変更・シンボルカラムを常に表示
   let g:ale_sign_error = 'E'
   let g:ale_sign_warning = 'W'
@@ -286,17 +291,18 @@ set runtimepath+=$HOME/.cache/dein/repos/github.com/Shougo/dein.vim
   let g:ale_linters = {
   \   'ruby': ['rubocop'],
   \   'json': ['jsonlint'],
-  \   'javascript': ['prettier', 'eslint'],
-  \   'typescript': ['prettier', 'eslint'],
+  \   'javascript': ['prettier', 'eslint', 'biome'],
+  \   'typescript': ['prettier', 'eslint', 'biome'],
   \   'elixir': ['credo'],
   \   'markdown': ['remark-lint'],
   \}
   let g:ale_fixers = {
   \   '*': ['remove_trailing_lines', 'trim_whitespace'],
   \   'ruby': ['prettier'],
-  \   'javascript': ['prettier'],
-  \   'typescript': ['prettier'],
-  \   'typescriptreact': ['prettier'],
+  \   'javascript': ['biome'],
+  \   'javascriptreact': ['biome'],
+  \   'typescript': ['biome'],
+  \   'typescriptreact': ['biome'],
   \   'elixir': ['mix_format'],
   \   'markdown': ['remark-lint'],
   \   'yaml': ['prettier'],
@@ -562,6 +568,7 @@ set runtimepath+=$HOME/.cache/dein/repos/github.com/Shougo/dein.vim
   " set filetypes as typescriptreact
   autocmd BufNewFile,BufRead *.tsx,*.jsx set filetype=typescriptreact
   autocmd BufNewFile,BufRead *.ts,*.tsx set filetype=typescript
+  autocmd BufEnter *.tsx set filetype=typescriptreact
 
   " prisma
   call dein#add('prisma/vim-prisma')
