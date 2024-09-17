@@ -178,16 +178,16 @@ function sshs {
   fi
 }
 
-#export
 PATH="$HOME/bin:$HOME/.local/bin:$PATH"
-# PATH="/usr/local/bin/rubocop-daemon-wrapper:$PATH"
-export home="$HOME"
 export PULSE_LATENCY_MSEC=30
 export SDKMAN_DIR="$HOME/.sdkman"
 export FLYCTL_INSTALL="/home/motty/.fly"
 export PATH="$PATH:/usr/bin/go"
 export PATH="$HOME/tools:$HOME/tools/bin:$PATH"
 export PATH="$FLYCTL_INSTALL/bin:$PATH"
+export PATH="$DENO_INSTALL/bin:$PATH"
+export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
+export PATH=$GOBIN:$PATH
 export PS1='\[\e[1;36m\]\w\[\e[m\] \n% '
 export GTAGSLABEL="pygments"
 export CLOUDSDK_PYTHON="$HOME/.asdf/shims/python"
@@ -198,26 +198,34 @@ export ASDF_DATA_DIR="$HOME/.asdf"
 export ASDF_GOLANG_MOD_VERSION_ENABLED=true
 export DOCKER_BUILDKIT=0
 export COMPOSE_DOCKER_CLI_BUILD=0
-alias home="$home"
 export GO111MODULE=on
 export GOPATH="$HOME/go"
 export GOBIN="$GOPATH/bin"
-export PATH=$GOBIN:$PATH
 export DENO_INSTALL="$HOME/.deno"
-export PATH="$DENO_INSTALL/bin:$PATH"
 export RUST_WITHOUT=rust-docs
-# export GOOGLE_IMPERSONATE_SERVICE_ACCOUNT="terraform@amazon-ban-staging.iam.gserviceaccount.com"
+export NODE_OPTIONS=--openssl-legacy-provider
+export GOOGLE_APPLICATION_CREDENTIALS="$HOME/.config/gcloud/application_default_credentials.json"
+export NODE_OPTIONS=--openssl-legacy-provider
+export PROMPT_COMMAND=my_prompt
+export KERL_CONFIGURE_OPTIONS="--disable-debug --without-javac"
 if which gcloud >/dev/null; then
   PROJECT_NAME=$(gcloud config get-value project)
   export GOOGLE_IMPERSONATE_SERVICE_ACCOUNT="terraform@$PROJECT_NAME.iam.gserviceaccount.com"
 else
   echo "gcloud command not found. Please install gcloud."
 fi
-
-export GOOGLE_APPLICATION_CREDENTIALS="$HOME/.config/gcloud/application_default_credentials.json"
-export NODE_OPTIONS=--openssl-legacy-provider
-# mount google drive
-# google-drive-ocamlfuse $HOME/GoogleDrive 2> /dev/null
+# luajit, lua
+# pathは適宜修正
+if which asdf >/dev/null; then
+  export LUAJIT_PREFIX=$(asdf where luajit)
+  export LUA_PREFIX=$(asdf where lua)
+  export LDFLAGS="-L$LUAJIT_PREFIX/lib -L$LUA_PREFIX/lib"
+  export CPPFLAGS="-I$LUAJIT_PREFIX/include/luajit-2.0 -I$LUA_PREFIX/include"
+  export LD_LIBRARY_PATH="$LUAJIT_PREFIX/lib:$LD_LIBRARY_PATH"
+  export LD_LIBRARY_PATH="/usr/local/cuda-11.0/lib64:$LD_LIBRARY_PATH"
+else
+  echo "asdf command not found. Please install asdf."
+fi
 
 
 [[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"
@@ -231,27 +239,3 @@ if [ -f "$HOME/google-cloud-sdk/completion.bash.inc" ]; then source "$HOME/googl
 if [ -f "$HOME/.asdf/asdf.sh" ]; then source "$HOME/.asdf/asdf.sh"; fi
 if [ -f "$HOME/.asdf/completions/asdf.bash" ]; then source "$HOME/.asdf/completions/asdf.bash"; fi
 
-export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
-export KERL_CONFIGURE_OPTIONS="--disable-debug --without-javac"
-
-# complete -C aws_completer aws
-my_prompt
-
-# wsl2 script
-if [[ "$(uname -r)" == *microsoft* ]]; then
-  # docker start
-  sudo /etc/init.d/docker start
-
-  # xserver display
-  export DISPLAY="$(ip route show scope global | grep -o '[0-9]*\.[0-9]*\.[0-9]*\.[0-9]*'):0.0"
-
-  # if [[ ! -v INSIDE_GENIE ]]; then
-  #   read -t 3 -p "yn? * Preparing to enter genie bottle (in 3s); abort? " yn
-  #   echo
-  #
-  #   if [[ \$yn != "y" ]]; then
-  #     echo "Starting genie:"
-  #     exec /usr/bin/genie -s
-  #   fi
-  # fi
-fi
