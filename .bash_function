@@ -24,7 +24,6 @@ function peco-git-branch () {
   do
     git checkout $branch
   done
-  my_prompt
 
   return $?
 }
@@ -157,7 +156,6 @@ function peco-directory-ls () {
 # cd alias function
 # function cdls () {
 #   \cd "$@" && ls
-#   my_prompt
 #
 #   return $?
 # }
@@ -212,7 +210,6 @@ function my_git_branch () {
 
 function current_branch () {
   git branch
-  my_prompt
 
   return $?
 }
@@ -241,7 +238,6 @@ function switch_dev () {
       fi
     fi
   fi
-  my_prompt
 
   return $?
 }
@@ -276,7 +272,6 @@ function g () {
 # git checkout branch name
 function gcheckout() {
   git checkout $@
-  my_prompt
 
   return $?
 }
@@ -294,7 +289,6 @@ function switch_master() {
     fi
   fi
 
-  my_prompt
 
   return $?
 }
