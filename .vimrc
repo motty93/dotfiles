@@ -295,18 +295,20 @@ set runtimepath+=$HOME/.cache/dein/repos/github.com/Shougo/dein.vim
   \   'typescript': ['prettier', 'eslint', 'biome'],
   \   'elixir': ['credo'],
   \   'markdown': ['remark-lint'],
+  \   'python': ['flake8'],
   \}
   let g:ale_fixers = {
   \   '*': ['remove_trailing_lines', 'trim_whitespace'],
   \   'ruby': ['prettier'],
-  \   'javascript': ['biome'],
-  \   'javascriptreact': ['biome'],
-  \   'typescript': ['biome'],
-  \   'typescriptreact': ['biome'],
+  \   'javascript': ['biome', 'prettier'],
+  \   'javascriptreact': ['biome', 'prettier'],
+  \   'typescript': ['biome', 'prettier'],
+  \   'typescriptreact': ['biome', 'prettier'],
   \   'elixir': ['mix_format'],
   \   'markdown': ['remark-lint'],
   \   'yaml': ['prettier'],
   \   'dart': ['dart-format'],
+  \   'python': ['autopep8', 'black', 'isort'],
   \   'sql': [
   \     { buffer -> {
   \       'command': 'sql-formatter -l mysql'
@@ -323,6 +325,14 @@ set runtimepath+=$HOME/.cache/dein/repos/github.com/Shougo/dein.vim
   \     'dialyzerEnabled': v:false,
   \   },
   \}
+  let g:ale_python_flake8_executable = g:python3_host_prog
+  let g:ale_python_flake8_options = '-m flask8'
+  let g:ale_python_autopep8_executable = g:python3_host_prog
+  let g:ale_python_autopep8_options = '-m autopep8'
+  let g:ale_python_black_executable = g:python3_host_prog
+  let g:ale_python_black_options = '-m black'
+  let g:ale_python_isort_executable = g:python3_host_prog
+  let g:ale_python_isort_options = '-m isort'
   let g:ale_completion_enabled = 1
   " ale on off switch nnoremap
   nnoremap <silent> <leader>json <Plug>(ale_toggle)
@@ -437,24 +447,6 @@ set runtimepath+=$HOME/.cache/dein/repos/github.com/Shougo/dein.vim
   let g:NERDTreePatternMatchHighlightColor = {} " this line is needed to avoid error
   let g:NERDTreePatternMatchHighlightColor['.*_spec\.rb$'] = s:rspec_red " sets the color for files ending with _spec.rb
   let g:NERDTreeLimitedSyntax = 1
-
-  " ultisnips
-  " call dein#add('SirVer/ultisnips')
-  " call dein#add('honza/vim-snippets')
-  " call dein#add('prabirshrestha/asyncomplete-ultisnips.vim')
-  " let g:UltiSnipsExpandTrigger = "<tab>"
-  " let g:UltiSnipsJumpForwardTrigger = "<c-f>"
-  " let g:UltiSnipsJumpBackwardTrigger = "<c-z>"
-  " " if you want :UltiSnipsEdit to split your window
-  " let g:UltiSnipsEditSplit = 'vertical'
-  " let g:UltiSnipsSnippetDirectories=[$HOME.'/.vim/UltiSnips',$HOME.'/.cache/dein/repos/github.com/honza/vim-snippets/UltiSnips']
-  " nnoremap <leader>ul :UltiSnipsEdit<CR>
-  " let g:UltiSnipsExpandTrigger="<c-e>"
-  " call asyncomplete#register_source(asyncomplete#sources#ultisnips#get_source_options({
-  "     \ 'name': 'ultisnips',
-  "     \ 'allowlist': ['*'],
-  "     \ 'completor': function('asyncomplete#sources#ultisnips#completor'),
-  "     \ }))
 
   " endwise
   call dein#add('tpope/vim-endwise')
@@ -838,6 +830,7 @@ nnoremap <leader>chrome :exe ':silent !google-chrome % &'<CR>
 nnoremap <leader>v :edit $MYVIMRC<CR>
 " vim cache clear
 nnoremap <leader>cc :call dein#recache_runtimepath()<CR>
-
+"  github copilot tab
+imap <silent><script><expr> <Tab> copilot#Accept("\<CR>")
 " filetype detection
 filetype on
