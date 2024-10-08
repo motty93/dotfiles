@@ -299,6 +299,7 @@ set runtimepath+=$HOME/.cache/dein/repos/github.com/Shougo/dein.vim
   \}
   let g:ale_fixers = {
   \   '*': ['remove_trailing_lines', 'trim_whitespace'],
+  \   'html': ['html-beautify'],
   \   'ruby': ['prettier'],
   \   'javascript': ['biome', 'prettier'],
   \   'javascriptreact': ['biome', 'prettier'],
@@ -308,13 +309,14 @@ set runtimepath+=$HOME/.cache/dein/repos/github.com/Shougo/dein.vim
   \   'markdown': ['remark-lint'],
   \   'yaml': ['prettier'],
   \   'dart': ['dart-format'],
-  \   'python': ['autopep8', 'black', 'isort'],
+  \   'python': ['black', 'isort', 'autopep8'],
   \   'sql': [
   \     { buffer -> {
   \       'command': 'sql-formatter -l mysql'
   \     }},
   \   ],
   \}
+  let g:ale_html_beautify_options = '--indent-with-tabs --indent-size 1'
   let g:ale_ruby_rubocop_executable = 'rubocop-daemon-wrapper'
   let g:ale_javascript_prettier_options = '--single-quote --trailing-comma all'
   let g:ale_javascript_prettier_use_local_config = 1
@@ -325,14 +327,6 @@ set runtimepath+=$HOME/.cache/dein/repos/github.com/Shougo/dein.vim
   \     'dialyzerEnabled': v:false,
   \   },
   \}
-  let g:ale_python_flake8_executable = g:python3_host_prog
-  let g:ale_python_flake8_options = '-m flask8'
-  let g:ale_python_autopep8_executable = g:python3_host_prog
-  let g:ale_python_autopep8_options = '-m autopep8'
-  let g:ale_python_black_executable = g:python3_host_prog
-  let g:ale_python_black_options = '-m black'
-  let g:ale_python_isort_executable = g:python3_host_prog
-  let g:ale_python_isort_options = '-m isort'
   let g:ale_completion_enabled = 1
   " ale on off switch nnoremap
   nnoremap <silent> <leader>json <Plug>(ale_toggle)
