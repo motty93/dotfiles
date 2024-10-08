@@ -297,6 +297,10 @@ set runtimepath+=$HOME/.cache/dein/repos/github.com/Shougo/dein.vim
   \   'markdown': ['remark-lint'],
   \   'python': ['flake8'],
   \}
+  " npm i -g @biomejs/biome
+  " npm i -g js-beautify
+  " pip install flake8 flake8-import-order black isort autopep8
+  " npm i -g prettier
   let g:ale_fixers = {
   \   '*': ['remove_trailing_lines', 'trim_whitespace'],
   \   'html': ['html-beautify'],
