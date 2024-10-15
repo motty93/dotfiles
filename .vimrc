@@ -8,6 +8,10 @@ let mapleader = ","
 let &t_TI = ""
 let &t_TE = ""
 
+" shell
+let $SHELL = '/bin/bash'
+let $PATH = system('bash -c "echo -n $PATH"')
+
 " clear cache
 " call map(dein#check_clean(), 'delete(v:val, 'rf')')
 
@@ -39,6 +43,7 @@ set runtimepath+=$HOME/.cache/dein/repos/github.com/Shougo/dein.vim
   call dein#add('mattn/vim-lsp-icons')
   " let g:lsp_log_verbose = 1
   " let g:lsp_log_file = 'vim-lsp.log'
+  " let g:lsp_log_level = 'debug'
    " 保存時source.organizaImports実行
   autocmd BufWritePre <buffer>
                 \ call execute('LspCodeActionSync source.organizeImports')
@@ -80,7 +85,7 @@ set runtimepath+=$HOME/.cache/dein/repos/github.com/Shougo/dein.vim
   let g:lsp_text_edit_enabled = 1
   let g:lsp_preview_float = 1
   let g:lsp_diagnostics_fload_cursor = 1
-  let g:lsp_settings_filetype_ruby = ['ruby-lsp', 'steep', 'typeprof']
+  " let g:lsp_settings_filetype_ruby = ['ruby-lsp', 'steep', 'typeprof']
   " let g:lsp_settings_filetype_ruby = ['solargraph', 'steep']
   call dein#add('thomasfaingnaert/vim-lsp-snippets')
   " call dein#add('thomasfaingnaert/vim-lsp-ultisnips')
@@ -161,7 +166,7 @@ set runtimepath+=$HOME/.cache/dein/repos/github.com/Shougo/dein.vim
   "         \           'html': {},
   "         \           'vetur': {
   "         \               'validation': {}
-  "         \           }
+  "         \           echo -n $PATH}
   "         \       }
   "         \   }
   "         \ })
@@ -204,21 +209,63 @@ set runtimepath+=$HOME/.cache/dein/repos/github.com/Shougo/dein.vim
     autocmd BufWritePre *.exs,*.ex,*.eex,*.heex,*.leex,*.sface LspDocumentFormatSync
   endif
 
-  " ruby-lsp
-  if executable('ruby-lsp')
+  " ruby lsp
+  " Rubyのメジャーバージョンを取得して返す関数
+  function! GetRubyVersion()
+    let l:version = system("ruby -e 'print RUBY_VERSION.split(\".\")[0]'")
+    return str2nr(substitute(l:version, '\n', '', ''))
+  endfunction
+  " 親ディレクトリを取得してURIを返す関数
+  function! GetRubyRootURI()
+    " 親ディレクトリを取得
+    let l:dir = lsp#utils#find_nearest_parent_directory(
+          \ lsp#utils#get_buffer_path(), ['Gemfile', '.git']
+          \ )
+
+    " デバッグ用の出力
+    echom "Value: " . string(l:dir)
+    echom "Type: " . string(type(l:dir))
+
+    " 数値型または無効な型の場合のフォールバック処理
+    if type(l:dir) != type('') || l:dir == 1
+      echom "Warning: Invalid directory, using fallback."
+      let l:dir = fnamemodify(lsp#utils#get_buffer_path(), ':h')
+    endif
+
+    " URI形式に変換して返す
+    return lsp#utils#path_to_uri(l:dir)
+  endfunction
+
+  " RubyのバージョンによってLSPを切り替える
+  if GetRubyVersion() >= 3 && executable('ruby-lsp')
+    " Ruby 3以上の場合: ruby-lspを使用
     augroup RubyLsp
       autocmd!
       autocmd User lsp_setup call lsp#register_server({
-        \   'name': 'ruby-lsp',
-        \   'cmd': {server_info->['ruby-lsp']},
-        \   'whitelist': ['ruby'],
-        \   'root_uri': {server_info -> lsp#utils#path_to_uri(
-        \     lsp#utils#find_nearest_parent_directory(lsp#utils#get_buffer_path(), ['Gemfile', '.git'])
-        \   )},
-        \ })
-      autocmd BufWritePre *.rb LspDocumentFormatSync
+            \ 'name': 'ruby-lsp',
+            \ 'cmd': ['ruby-lsp'],
+            \ 'whitelist': ['ruby'],
+            "\ 'root_uri': {server_info -> GetRubyRootURI()},
+            \ })
     augroup END
+    let g:lsp_settings_filetype_ruby = ['ruby-lsp']
+  elseif executable('solargraph')
+    " Ruby 2.x以下の場合: solargraphを使用
+    augroup Solargraph
+      autocmd!
+      autocmd User lsp_setup call lsp#register_server({
+            \ 'name': 'solargraph',
+            \ 'cmd': ['solargraph', 'stdio'],
+            \ 'whitelist': ['ruby'],
+            "\ 'root_uri': {server_info -> GetRubyRootURI()},
+            \ })
+    augroup END
+    let g:lsp_settings_filetype_ruby = ['solargraph']
   endif
+
+  " 保存時の自動フォーマット
+  autocmd BufWritePre *.rb LspDocumentFormatSync
+
 
   " vim notification
   call dein#add('mattn/vim-notification')
@@ -287,7 +334,7 @@ set runtimepath+=$HOME/.cache/dein/repos/github.com/Shougo/dein.vim
   " linter
   call dein#add('dense-analysis/ale')
   " lspを無効化
-  let g:ale_disable_lsp = 1
+  " let g:ale_disable_lsp = 1
   " エラーシンボル変更・シンボルカラムを常に表示
   let g:ale_sign_error = 'E'
   let g:ale_sign_warning = 'W'
@@ -320,7 +367,6 @@ set runtimepath+=$HOME/.cache/dein/repos/github.com/Shougo/dein.vim
   let g:ale_fixers = {
   \   '*': ['remove_trailing_lines', 'trim_whitespace'],
   \   'html': ['html-beautify'],
-  \   'ruby': ['prettier'],
   \   'javascript': ['biome', 'prettier'],
   \   'javascriptreact': ['biome', 'prettier'],
   \   'typescript': ['biome', 'prettier'],
@@ -337,7 +383,8 @@ set runtimepath+=$HOME/.cache/dein/repos/github.com/Shougo/dein.vim
   \   ],
   \}
   let g:ale_html_beautify_options = '--indent-with-tabs --indent-size 1'
-  let g:ale_ruby_rubocop_executable = 'rubocop-daemon-wrapper'
+  " let g:ale_ruby_rubocop_executable = 'rubocop-daemon-wrapper'
+  let g:ale_ruby_rubocop_options = ''
   let g:ale_javascript_prettier_options = '--single-quote --trailing-comma all'
   let g:ale_javascript_prettier_use_local_config = 1
   " let g:ale_elixir_elixir_ls_release = expand("~/.elixir-ls/release")
@@ -546,16 +593,6 @@ set runtimepath+=$HOME/.cache/dein/repos/github.com/Shougo/dein.vim
   call dein#add('slim-template/vim-slim')
   autocmd BufRead,BufNewFile *.slim setfiletype slim
 
-  " rubocop
-  call dein#add('ngmy/vim-rubocop')
-  call dein#add('scrooloose/syntastic')
-  let g:syntastic_mode_map = { 'mode': 'passive', 'active_filetypes': ['ruby'] }
-  let g:syntastic_ruby_checkers = ['rubocop', 'mri']
-  let g:syntastic_ruby_rubocop_exe = 'bundle exec rubocop'
-
-  " ruby style recommended
-  let g:ruby_recommended_style = 1
-
   " tailwindcss
   " call dein#add('iamcco/coc-tailwindcss',  {
   " \  'do': 'yarn install --frozen-lockfile && yarn run build'
@@ -703,6 +740,7 @@ set smartindent " 改行時に入力された行の末尾に合わせて次の�
 set formatoptions=q " textwidthでフォーマットさせたくない
 set synmaxcol=200 " クラッシュ防止
 set completeopt^=popup,menuone,noinsert,noselect,preview
+set shell=/bin/bash
 " set noequalalways " 自動的にウィンドウサイズを同じにする
 " set winfixheight " ウィンドウの高さを保つ
 " set textwidth=0 " 勝手に改行するのを防ぐ
