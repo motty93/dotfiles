@@ -204,6 +204,22 @@ set runtimepath+=$HOME/.cache/dein/repos/github.com/Shougo/dein.vim
     autocmd BufWritePre *.exs,*.ex,*.eex,*.heex,*.leex,*.sface LspDocumentFormatSync
   endif
 
+  " ruby-lsp
+  if executable('ruby-lsp')
+    augroup RubyLsp
+      autocmd!
+      autocmd User lsp_setup call lsp#register_server({
+        \   'name': 'ruby-lsp',
+        \   'cmd': {server_info->['ruby-lsp']},
+        \   'whitelist': ['ruby'],
+        \   'root_uri': {server_info -> lsp#utils#path_to_uri(
+        \     lsp#utils#find_nearest_parent_directory(lsp#utils#get_buffer_path(), ['Gemfile', '.git'])
+        \   )},
+        \ })
+      autocmd BufWritePre *.rb LspDocumentFormatSync
+    augroup END
+  endif
+
   " vim notification
   call dein#add('mattn/vim-notification')
   " go auto imports
