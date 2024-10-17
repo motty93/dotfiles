@@ -28,6 +28,7 @@ alias lp='ll | peco'
 alias cdd="cd ../"
 alias cddd="cd ../../"
 alias ukiyo="cd ~/github.com/ukiyocreate"
+alias roots="cd ~/github.com/androots"
 alias sub="cd ~/github.com/subcontracting"
 alias ango="cd ~/github.com/subcontracting/ango-ya"
 alias blog="cd ~/github.com/home-blog"
