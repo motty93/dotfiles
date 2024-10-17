@@ -208,6 +208,32 @@ set runtimepath+=$HOME/.cache/dein/repos/github.com/Shougo/dein.vim
       \ })
     autocmd BufWritePre *.exs,*.ex,*.eex,*.heex,*.leex,*.sface LspDocumentFormatSync
   endif
+  " pylsp-all
+  if executable('pylsp')
+    let g:lsp_settings = {
+    \  'pylsp-all': {
+    \    'workspace_config': {
+    \      'pylsp': {
+    \        'configurationSources': ['flake8'],
+    \        'plugins': {
+    \          'flake8': {
+    \            'enabled': 1
+    \          },
+    \          'mccabe': {
+    \            'enabled': 0
+    \          },
+    \          'pycodestyle': {
+    \            'enabled': 0
+    \          },
+    \          'pyflakes': {
+    \            'enabled': 0
+    \          },
+    \        }
+    \      }
+    \    }
+    \  }
+    \}
+  endif
 
   " ruby lsp
   " Rubyのメジャーバージョンを取得して返す関数
@@ -375,7 +401,7 @@ set runtimepath+=$HOME/.cache/dein/repos/github.com/Shougo/dein.vim
   \   'markdown': ['remark-lint'],
   \   'yaml': ['prettier'],
   \   'dart': ['dart-format'],
-  \   'python': ['black', 'isort', 'autopep8'],
+  \   'python': ['black', 'isort'],
   \   'sql': [
   \     { buffer -> {
   \       'command': 'sql-formatter -l mysql'
