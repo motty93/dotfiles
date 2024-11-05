@@ -384,7 +384,7 @@ set runtimepath+=$HOME/.cache/dein/repos/github.com/Shougo/dein.vim
   \   'typescript': ['prettier', 'eslint', 'biome'],
   \   'elixir': ['credo'],
   \   'markdown': ['remark-lint'],
-  \   'python': ['flake8'],
+  \   'python': ['flake8', 'pylint'],
   \}
   " npm i -g @biomejs/biome
   " npm i -g js-beautify
@@ -393,10 +393,11 @@ set runtimepath+=$HOME/.cache/dein/repos/github.com/Shougo/dein.vim
   let g:ale_fixers = {
   \   '*': ['remove_trailing_lines', 'trim_whitespace'],
   \   'html': ['html-beautify'],
-  \   'javascript': ['biome', 'prettier'],
-  \   'javascriptreact': ['biome', 'prettier'],
-  \   'typescript': ['biome', 'prettier'],
-  \   'typescriptreact': ['biome', 'prettier'],
+  \   'css': ['prettier'],
+  \   'javascript': ['biome'],
+  \   'javascriptreact': ['biome'],
+  \   'typescript': ['biome'],
+  \   'typescriptreact': ['biome'],
   \   'elixir': ['mix_format'],
   \   'markdown': ['remark-lint'],
   \   'yaml': ['prettier'],
@@ -479,24 +480,6 @@ set runtimepath+=$HOME/.cache/dein/repos/github.com/Shougo/dein.vim
   nnoremap <silent> <leader>cg :<C-u>Unite grep:. -buffer-name=search-buffer<CR><C-R><C-W>
   " call result of grep
   nnoremap <silent> <leader>ur :<C-u>UniteResume search-buffer<CR>
-  function! s:unite_gitignore_source()
-    let sources = []
-    if filereadable('./.gitignore')
-      for file in readfile('./.gitignore')
-        " コメント行と空行は追加しない
-        if file !~ "^#\\|^\s\*$"
-          call add(sources, file)
-        endif
-      endfor
-    endif
-    if isdirectory('./.git')
-      call add(sources, '.git')
-    endif
-    let pattern = escape(join(sources, '|'), './|')
-    call unite#custom#source('file_rec', 'ignore_pattern', pattern)
-    call unite#custom#source('grep', 'ignore_pattern', pattern)
-  endfunction
-  call s:unite_gitignore_source()
 
   " file search
   call dein#add('ctrlpvim/ctrlp.vim')
@@ -511,9 +494,8 @@ set runtimepath+=$HOME/.cache/dein/repos/github.com/Shougo/dein.vim
   if executable('ag')
     let g:ctrlp_use_caching = 0
     let g:ctrlp_user_command = 'ag %s -i --nocolor --nogroup -g ""'
-    let g:unite_source_grep_command = 'ag'
-    let g:unite_source_grep_default_opts = '--nogroup --nocolor --column'
-    let g:unite_source_grep_recursive_opt = ''
+    let g:unite_source_grep_command = '/usr/bin/ag'
+    let g:unite_source_grep_default_opts = '--nogroup --nocolor --ignore .git --ignore .svn --ignore .hg --ignore .DS_Store --ignore node_modules'
   endif
 
   " file devicons
@@ -747,7 +729,6 @@ set browsedir=buffer " バッファで開いているファイルのディレク
 set smartcase " 小文字のみで検索したときに大文字小文字を無視する
 set hlsearch " 検索結果をハイライト表示する
 set background=dark " 暗い背景色に合わせた配色にする
-set expandtab " タブ入力を複数の空白入力に置き換える
 set incsearch " 検索ワードの最初の文字を入力した時点で検索を開始する
 set hidden " 保存されていないファイルがあるときでも別のファイルを開けるようにする
 set list " 不可視文字を表示する
@@ -755,6 +736,7 @@ set listchars=eol:\ ,trail:-,tab:>>- " タブと行の続きを可視化する
 set number " 行番号を表示する
 set showmatch " 対応する括弧やブレースを表示する
 set tabstop=2 " タブ文字の表示幅
+set expandtab " タブ入力を複数の空白入力に置き換える
 set shiftwidth=2 " Vimが挿入するインデントの幅
 set smarttab
 set clipboard& " カーソルを行頭、行末で止まらないようにする
@@ -767,6 +749,9 @@ set formatoptions=q " textwidthでフォーマットさせたくない
 set synmaxcol=200 " クラッシュ防止
 set completeopt^=popup,menuone,noinsert,noselect,preview
 set shell=/bin/bash
+set regexpengine=1
+set noignorecase
+set nosmartcase
 " set noequalalways " 自動的にウィンドウサイズを同じにする
 " set winfixheight " ウィンドウの高さを保つ
 " set textwidth=0 " 勝手に改行するのを防ぐ
@@ -908,7 +893,9 @@ nnoremap <leader>chrome :exe ':silent !google-chrome % &'<CR>
 nnoremap <leader>v :edit $MYVIMRC<CR>
 " vim cache clear
 nnoremap <leader>cc :call dein#recache_runtimepath()<CR>
-"  github copilot tab
-imap <silent><script><expr> <Tab> copilot#Accept("\<CR>")
+"  github copilot C-j
+imap <silent><script><expr> <C-j> copilot#Accept("\<CR>")
 " filetype detection
 filetype on
+
+source $VIMRUNTIME/macros/matchit.vim
