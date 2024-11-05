@@ -353,3 +353,11 @@ function tmux-kill-session-all () {
 }
 
 
+function chrome() {
+  if [ -z "$1" ]; then
+    echo "ファイルを していしてください。"
+    return 1
+  fi
+
+  /mnt/c/Program\ Files/Google/Chrome/Application/chrome.exe "$(wslpath -w "$(realpath "$1")")"
+}
