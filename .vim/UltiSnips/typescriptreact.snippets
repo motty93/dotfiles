@@ -17,6 +17,7 @@ export const ${1:function_name}: React.FC<Props> = (${2:props}) => {
 	)
 }
 endsnippet
+
 # ReduxToolkit
 snippet rtcs "create slice"
 import { createSlice } from '@reduxjs/toolkit'
@@ -40,6 +41,7 @@ export const select_$2 = (state) => state._$1._$2
 
 export default _$1Slice.reducer
 endsnippet
+
 snippet rtcat "create async thunk"
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
 import axios from 'axios'
@@ -96,9 +98,17 @@ type ${1:type_name} = {
 }
 endsnippet
 
-# functional component
+# functional component with filename
 snippet func "Create async function with filename"
-export async function ${1:$(expand('%:t:r'))}() {
+export async function ${1:`!v expand('%:t:r')`}() {
+	return (
+		<div>${0}</div>
+	)
+}
+endsnippet
+
+snippet afunc "Create arrow function with filename"
+export const ${1:`!v expand('%:t:r')`} = () => {
 	${0}
 }
 endsnippet
