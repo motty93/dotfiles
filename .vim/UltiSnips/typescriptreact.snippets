@@ -96,3 +96,9 @@ type ${1:type_name} = {
 }
 endsnippet
 
+# functional component
+snippet func "Create async function with filename"
+export async function ${1:$(expand('%:t:r'))}() {
+	${0}
+}
+endsnippet
