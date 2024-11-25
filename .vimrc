@@ -380,8 +380,8 @@ set runtimepath+=$HOME/.cache/dein/repos/github.com/Shougo/dein.vim
   let g:ale_linters = {
   \   'ruby': ['rubocop'],
   \   'json': ['jsonlint'],
-  \   'javascript': ['prettier', 'eslint', 'biome'],
-  \   'typescript': ['prettier', 'eslint', 'biome'],
+  \   'javascript': ['biome'],
+  \   'typescript': ['biome'],
   \   'elixir': ['credo'],
   \   'markdown': ['remark-lint'],
   \   'python': ['flake8', 'pylint'],
@@ -398,6 +398,7 @@ set runtimepath+=$HOME/.cache/dein/repos/github.com/Shougo/dein.vim
   \   'javascriptreact': ['biome'],
   \   'typescript': ['biome'],
   \   'typescriptreact': ['biome'],
+  \   'ruby': ['prettier'],
   \   'elixir': ['mix_format'],
   \   'markdown': ['remark-lint'],
   \   'yaml': ['prettier'],
@@ -516,6 +517,24 @@ set runtimepath+=$HOME/.cache/dein/repos/github.com/Shougo/dein.vim
   let g:NERDTreePatternMatchHighlightColor = {} " this line is needed to avoid error
   let g:NERDTreePatternMatchHighlightColor['.*_spec\.rb$'] = s:rspec_red " sets the color for files ending with _spec.rb
   let g:NERDTreeLimitedSyntax = 1
+
+  " ultisnips
+  call dein#add('SirVer/ultisnips')
+  call dein#add('honza/vim-snippets')
+  call dein#add('prabirshrestha/asyncomplete-ultisnips.vim')
+  let g:UltiSnipsExpandTrigger = "<tab>"
+  let g:UltiSnipsJumpForwardTrigger = "<c-f>"
+  let g:UltiSnipsJumpBackwardTrigger = "<c-z>"
+  " if you want :UltiSnipsEdit to split your window
+  let g:UltiSnipsEditSplit = 'vertical'
+  let g:UltiSnipsSnippetDirectories=[$HOME.'/.vim/UltiSnips',$HOME.'/.cache/dein/repos/github.com/honza/vim-snippets/UltiSnips']
+  nnoremap <leader>ul :UltiSnipsEdit<CR>
+  let g:UltiSnipsExpandTrigger="<c-e>"
+  call asyncomplete#register_source(asyncomplete#sources#ultisnips#get_source_options({
+      \ 'name': 'ultisnips',
+      \ 'allowlist': ['*'],
+      \ 'completor': function('asyncomplete#sources#ultisnips#completor'),
+      \ }))
 
   " endwise
   call dein#add('tpope/vim-endwise')
