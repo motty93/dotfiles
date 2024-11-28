@@ -355,7 +355,7 @@ function tmux-kill-session-all () {
 
 function chrome() {
   if [ -z "$1" ]; then
-    echo "ファイルを していしてください。"
+    echo "ファイルを 指定してください。"
     return 1
   fi
 
