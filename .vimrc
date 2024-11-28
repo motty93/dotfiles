@@ -197,6 +197,14 @@ let g:lsp_settings['gopls'] = {
 \    },
 \  },
 \}
+" lsp go template
+if executable('vscode-html-languageserver')
+  au User lsp_setup call lsp#register_server({
+    \ 'name': 'html-languageserver',
+    \ 'cmd': {server_info->['vscode-html-languageserver', '--stdio']},
+    \ 'whitelist': ['html', 'gohtmltmpl'],
+    \ })
+endif
 " elixir-ls
 " let g:lsp_settings = { 'elixir-ls': { 'cmd': $HOME . '/.elixir-ls/release/' } }
 if executable('elixir-ls')
@@ -308,6 +316,8 @@ call dein#add('jparise/vim-graphql')
 " preview
 call dein#add('previm/previm')
 let g:previm_plantuml_imageprefix = 'http://localhost:8888/png/'
+let g:previm_open_cmd = '/mnt/c/Program\ Files/Google/Chrome/Application/chrome.exe'
+let g:previm_wsl_mode = 1
 
 " editorconfig
 call dein#add('editorconfig/editorconfig-vim')
