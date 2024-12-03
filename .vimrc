@@ -906,6 +906,9 @@ if has("autocmd")
 endif
 """"""""""""""""""""""""""""""
 
+" command
+command! AICommitMessage execute ':r !bash $HOME/.config/generate_commit_message.sh'
+
 " mapping
 inoremap { {}<LEFT>
 inoremap [ []<LEFT>
