@@ -327,8 +327,9 @@ call dein#add('airblade/vim-gitgutter')
 let g:gitgutter_hightlight_lines = 1
 
 " git commit prefix autocomplete
-call dein#add('gotchane/vim-git-commit-prefix')
-let g:git_commit_prefix_lang = 'ja'
+" :AICommitMessageのおかげで不要になった
+" call dein#add('gotchane/vim-git-commit-prefix')
+" let g:git_commit_prefix_lang = 'ja'
 
 " protobuf
 call dein#add('uarun/vim-protobuf')
@@ -907,7 +908,30 @@ endif
 """"""""""""""""""""""""""""""
 
 " command
-command! AICommitMessage execute ':r !bash $HOME/.config/generate_commit_message.sh'
+command! -nargs=0 AICommitMessage call AICommitMessage()
+function! AICommitMessage()
+  " コマンドの出力を取得
+  let l:message = system("~/.config/generate_commit_message 2> /dev/null")
+
+  " messageが空であれば何もしない
+  if l:message == ''
+    return
+  endif
+
+  " 出力のエラーハンドリング
+  if v:shell_error != 0
+    echohl ErrorMsg
+    echo "Error running generate_commit_message"
+    echohl None
+    return
+  endif
+
+  " 出力結果の改行をtrim
+  let l:message = substitute(l:message, '\n\+$', '', '')
+
+  " カーソル位置に挿入（改行しない）
+  call setline('.', getline('.') . l:message)
+endfunction
 
 " mapping
 inoremap { {}<LEFT>
@@ -928,6 +952,10 @@ nnoremap <leader>chrome :exe ':silent !google-chrome % &'<CR>
 nnoremap <leader>v :edit $MYVIMRC<CR>
 " vim cache clear
 nnoremap <leader>cc :call dein#recache_runtimepath()<CR>
+" ai commit message
+nnoremap <silent> <leader>cm :silent! AICommitMessage<CR>
+" remove hightlight
+nnoremap <silent> <leader>n :nohlsearch<CR>
 "  github copilot C-j
 imap <silent><script><expr> <C-j> copilot#Accept("\<CR>")
 " filetype detection
