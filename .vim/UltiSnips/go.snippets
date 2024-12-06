@@ -1,9 +1,22 @@
-snippet pm
+snippet main
 package main
 
 func main() {
 	$1
 }
+endsnippet
+
+snippet tools
+// tools.go
+// go:build tools
+//go:build tools
+// +build tools
+
+package main
+
+import (
+	_ "github.com/cosmtrek/air"
+)
 endsnippet
 
 snippet pf
