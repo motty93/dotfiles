@@ -433,6 +433,17 @@ let g:ale_elixir_elixir_ls_config = {
 \   },
 \}
 let g:ale_completion_enabled = 1
+
+" npm i -g prisma
+function! PrismaFormat()
+  " prisma formatを実行
+  call system('prisma format --schema ' . shellescape(expand('%')))
+  " バッファを再読み込みしてファイルに反映
+  edit!
+endfunction
+" prisma format
+nnoremap <silent> <leader>pf :call PrismaFormat()<CR>
+
 " ale on off switch nnoremap
 nnoremap <silent> <leader>json <Plug>(ale_toggle)
 " エラー間の移動
@@ -652,6 +663,7 @@ autocmd BufEnter *.tsx set filetype=typescriptreact
 
 " prisma
 call dein#add('prisma/vim-prisma')
+autocmd BufRead,BufNewFile *.prisma set filetype=prisma
 " sql formatter
 call dein#add('mattn/vim-sqlfmt')
 
