@@ -89,6 +89,6 @@ alias ta="tmux-attached"
 alias ts="tmux-session"
 alias tl="tmux list-sessions"
 alias tkill="tmux-kill-session-all"
-alias remix='docker run -p 8080:80 remixproject/remix-ide:latest'
+# alias remix='docker run -p 8080:80 remixproject/remix-ide:latest'
 alias rain='era'
 alias tree='tree -a -I "\.DS_Store|\.git|node_modules|vendor\/bundle" -N'
