@@ -235,6 +235,9 @@ if executable('pylsp')
   \          'pyflakes': {
   \            'enabled': 0
   \          },
+  \          'pylsp_mypy': {
+  \            'enabled': 1
+  \          },
   \        }
   \      }
   \    }
@@ -394,7 +397,7 @@ let g:ale_linters = {
 \   'typescript': ['biome'],
 \   'elixir': ['credo'],
 \   'markdown': ['remark-lint'],
-\   'python': ['flake8', 'pylint'],
+\   'python': ['flake8', 'mypy'],
 \}
 " npm i -g @biomejs/biome
 " npm i -g js-beautify
@@ -824,8 +827,8 @@ syn keyword htmlArg contained hidden role
 syn match   htmlArg "\<\(aria-[\-a-zA-Z0-9_]\+\)=" contained
 syn match   htmlArg contained "\s*data-[-a-zA-Z0-9_]\+"
 
-" .templ, .tmpl ファイルをgohtmltmpl ファイルタイプとして認識
-autocmd BufNewFile,BufRead *.templ,*.tmpl set filetype=gohtmltmpl
+" .templ, .tmpl ファイルをhtml ファイルタイプとして認識
+autocmd BufNewFile,BufRead *.html,*.templ,*.tmpl set filetype=html
 
 
 " HTML template
