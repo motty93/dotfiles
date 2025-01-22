@@ -216,6 +216,7 @@ if executable('elixir-ls')
   autocmd BufWritePre *.exs,*.ex,*.eex,*.heex,*.leex,*.sface LspDocumentFormatSync
 endif
 " pylsp-all
+" pip install python-lsp-server[pylint] pylint
 if executable('pylsp')
   let g:lsp_settings = {
   \  'pylsp-all': {
@@ -237,6 +238,10 @@ if executable('pylsp')
   \          },
   \          'pylsp_mypy': {
   \            'enabled': 1
+  \          },
+  \          'pylint': {
+  \            'enabled': 1,
+  \            'executable': '~/.asdf/shims/pylint'
   \          },
   \        }
   \      }
