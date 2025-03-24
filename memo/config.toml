@@ -1,0 +1,11 @@
+memodir = "/home/motty93/github.com/motty93/memotty/memo"
+editor = "vim"
+column = 20
+width = 0
+selectcmd = "peco"
+grepcmd = "grep -nH ${PATTERN} ${FILES}"
+memotemplate = ""
+assetsdir = "."
+pluginsdir = "/home/motty93/.config/memo/plugins"
+templatedirfile = ""
+templatebodyfile = ""
