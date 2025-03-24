@@ -702,7 +702,7 @@ call dein#add('github/copilot.vim')
 call dein#add('glidenote/memolist.vim')
 let g:memolist_prompt_tags = 1
 let g:memolist_prompt_categories = 1
-let g:memolist_path = "~/github.com/motty-memo/memo"
+let g:memolist_path = "~/github.com/motty93/memotty/memo"
 let g:memolist_memo_suffix = "md"
 " let g:memolist_template_dir_path = "~/.vim/template/memolist"
 let g:memolist_unite = 1

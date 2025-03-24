@@ -34,6 +34,7 @@ alias ango="cd ~/github.com/subcontracting/ango-ya"
 alias blog="cd ~/github.com/home-blog"
 alias ani="cd ~/github.com/subcontracting/anique"
 alias cavin="cd ~/github.com/subcontracting/cavin"
+alias sales="cd ~/github.com/subcontracting/salesbrain"
 alias mint="cd /mnt/linux_mint/home/motty"
 
 # keyboard command aliases
