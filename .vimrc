@@ -416,6 +416,7 @@ let g:ale_fixers = {
 \   'javascriptreact': ['biome'],
 \   'typescript': ['biome'],
 \   'typescriptreact': ['biome'],
+\   'json': ['biome'],
 \   'ruby': ['prettier'],
 \   'elixir': ['mix_format'],
 \   'markdown': ['remark-lint'],
@@ -441,6 +442,7 @@ let g:ale_elixir_elixir_ls_config = {
 \   },
 \}
 let g:ale_completion_enabled = 1
+" let g:ale_fix_on_save = 1
 
 " npm i -g prisma
 function! PrismaFormat()
@@ -704,7 +706,7 @@ let g:memolist_prompt_tags = 1
 let g:memolist_prompt_categories = 1
 let g:memolist_path = "~/github.com/motty93/memotty/memo"
 let g:memolist_memo_suffix = "md"
-" let g:memolist_template_dir_path = "~/.vim/template/memolist"
+let g:memolist_template_dir_path = "~/.vim/template/memolist"
 let g:memolist_unite = 1
 map <leader>mn :MemoNew<CR>
 map <leader>ml :MemoList<CR>
