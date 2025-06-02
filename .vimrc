@@ -131,17 +131,17 @@ else
   :echomsg 'vim-lsp for typescript unavailable'
 endif
 " lsp deno
-" if executable("deno")
-"   augroup LspTypeScript
-"     autocmd!
-"     autocmd User lsp_setup call lsp#register_server({
-"     \ "name": "deno lsp",
-"     \ "cmd": {server_info -> ["deno", "lsp"]},
-"     \ "root_uri": {server_info->lsp#utils#path_to_uri(lsp#utils#find_nearest_parent_file_directory(lsp#utils#get_buffer_path(), "tsconfig.json"))},
-"     \ "whitelist": ["typescript", "typescript.tsx"],
-"     \ })
-"   augroup END
-" endif
+if executable("deno")
+  augroup LspTypeScript
+    autocmd!
+    autocmd User lsp_setup call lsp#register_server({
+    \ "name": "deno lsp",
+    \ "cmd": {server_info -> ["deno", "lsp"]},
+    \ "root_uri": {server_info->lsp#utils#path_to_uri(lsp#utils#find_nearest_parent_file_directory(lsp#utils#get_buffer_path(), "tsconfig.json"))},
+    \ "whitelist": ["typescript", "typescript.tsx"],
+    \ })
+  augroup END
+endif
 " lsp terraform
 if executable("terraform-ls")
   au User lsp_setup call lsp#register_server({
@@ -966,6 +966,7 @@ inoremap <C-j> <Down>
 inoremap <C-k> <Up>
 inoremap <C-h> <Left>
 inoremap <C-l> <Right>
+inoremap <expr> <leader>cd strftime("%Y-%m-%d")
 " tabnew mapping
 nnoremap <silent> <leader>tab :<C-u>tabnew<CR>
 " browser open current file
