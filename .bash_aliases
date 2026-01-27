@@ -58,7 +58,7 @@ alias mybranch="my_git_branch"
 alias ti="tig"
 
 # some tools
-alias pbcopy='xsel --clipboard --input'
+alias pbcopy='clip.exe'
 alias mozc='/usr/lib/mozc/mozc_tool --mode=config_dialog'
 alias slack='/usr/bin/slack'
 alias my-chown="sudo chown -R $USER:$USER *"
@@ -93,3 +93,11 @@ alias tkill="tmux-kill-session-all"
 # alias remix='docker run -p 8080:80 remixproject/remix-ide:latest'
 alias rain='era'
 alias tree='tree -a -I "\.DS_Store|\.git|node_modules|vendor\/bundle" -N'
+
+# claude
+alias serena='uv run --directory ~/serena serena-mcp-server --transport sse --port 9121'
+# alias claude='DISABLE_AUTOUPDATER=1 claude'
+alias gpt='codex'
+
+# nas
+alias sshnas="sshpass -p 'dashimakitamago' ssh nas"
