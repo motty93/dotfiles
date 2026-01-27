@@ -15,6 +15,9 @@ let $PATH = system('bash -c "echo -n $PATH"')
 " clear cache
 " call map(dein#check_clean(), 'delete(v:val, 'rf')')
 
+" 外部変更検知して自動読み込み
+set autoread
+
 " auto reload .vimrc
 augroup source-vimrc
   autocmd!
@@ -377,6 +380,10 @@ let g:airline#extensions#ale#enabled = 1
 
 " linter
 call dein#add('dense-analysis/ale')
+autocmd BufRead,BufNewFile *.tmpl,*.templ set filetype=html
+autocmd BufRead,BufNewFile *.tmpl,*.templ syntax region goTemplate start=/{{/ end=/}}/
+autocmd BufRead,BufNewFile *.tmpl,*.templ highlight goTemplate ctermfg=yellow guifg=yellow
+
 " lspを無効化
 " let g:ale_disable_lsp = 1
 " エラーシンボル変更・シンボルカラムを常に表示
@@ -407,34 +414,36 @@ let g:ale_linters = {
 " npm i -g @biomejs/biome
 " npm i -g js-beautify
 " pip install flake8 flake8-import-order black isort autopep8
-" npm i -g prettier
+" npm i -g prettier prettier-plugin-go-template
 let g:ale_fixers = {
 \   '*': ['remove_trailing_lines', 'trim_whitespace'],
-\   'html': ['html-beautify'],
+\   'html': ['prettier'],
 \   'css': ['prettier'],
 \   'javascript': ['biome'],
 \   'javascriptreact': ['biome'],
 \   'typescript': ['biome'],
 \   'typescriptreact': ['biome'],
-\   'json': ['biome'],
+\   'json': ['prettier'],
 \   'ruby': ['prettier'],
 \   'elixir': ['mix_format'],
 \   'markdown': ['remark-lint'],
 \   'yaml': ['prettier'],
 \   'dart': ['dart-format'],
 \   'python': ['black', 'isort'],
+\   'gotmpl': ['prettier'],
 \   'sql': [
 \     { buffer -> {
 \       'command': 'sql-formatter -l mysql'
 \     }},
 \   ],
 \}
-let g:ale_html_beautify_options = '--indent-with-tabs --indent-size 1'
-" let g:ale_ruby_rubocop_executable = 'rubocop-daemon-wrapper'
-let g:ale_ruby_rubocop_options = ''
-let g:ale_javascript_prettier_options = '--single-quote --trailing-comma all'
+" Prettier を gotmpl でも使えるように登録（最重要）
+let g:ale_javascript_prettier_executable = 'prettier'
+let g:ale_javascript_prettier_options = ''
 let g:ale_javascript_prettier_use_local_config = 1
-" let g:ale_elixir_elixir_ls_release = expand("~/.elixir-ls/release")
+
+let g:ale_html_beautify_options = '--indent-with-tabs --indent-size 1'
+let g:ale_ruby_rubocop_options = ''
 let g:ale_elixir_elixir_ls_release = expand("~/.local/share/vim-lsp-settings/servers/elixir-ls")
 let g:ale_elixir_elixir_ls_config = {
 \   'elixirLS': {
@@ -589,6 +598,7 @@ let g:vim_markdown_toml_frontmatter = 1
 let g:vim_markdown_json_frontmatter = 1
 let g:vim_markdown_autowrite = 1
 nnoremap <leader>m :MarkdownPreview<CR>
+autocmd BufNewFile,BufRead *.mdx set filetype=markdown
 
 " switch vim
 call dein#add('AndrewRadev/switch.vim')
@@ -835,7 +845,9 @@ syn match   htmlArg "\<\(aria-[\-a-zA-Z0-9_]\+\)=" contained
 syn match   htmlArg contained "\s*data-[-a-zA-Z0-9_]\+"
 
 " .templ, .tmpl ファイルをhtml ファイルタイプとして認識
-autocmd BufNewFile,BufRead *.html,*.templ,*.tmpl set filetype=html
+" formatterが反応しないのでtmplは削除
+" autocmd BufNewFile,BufRead *.html,*.templ,*.tmpl set filetype=html
+autocmd BufNewFile,BufRead *.html set filetype=html
 
 
 " HTML template
@@ -954,6 +966,11 @@ function! AICommitMessage()
   " カーソル位置に挿入（改行しない）
   call setline('.', getline('.') . l:message)
 endfunction
+
+" highlight
+highlight Normal ctermbg=NONE guibg=NONE
+highlight NonText ctermbg=NONE guibg=NONE
+highlight LineNr ctermbg=NONE guibg=NONE
 
 " mapping
 inoremap { {}<LEFT>
