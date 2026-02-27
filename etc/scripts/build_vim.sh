@@ -5,12 +5,12 @@
 
 set -eu
 
-# asdfから各言語のバージョンを取得
-RUBY_VERSION=$(asdf current ruby 2>/dev/null | awk '{print $2}')
-PYTHON_VERSION=$(asdf current python 2>/dev/null | awk '{print $2}')
-LUA_VERSION=$(asdf current lua 2>/dev/null | awk '{print $2}')
-LUAJIT_VERSION=$(asdf current luajit 2>/dev/null | awk '{print $2}')
-PERL_VERSION=$(asdf current perl 2>/dev/null | awk '{print $2}')
+# asdfから各言語のバージョンを取得 (ヘッダー行をスキップ)
+RUBY_VERSION=$(asdf current ruby 2>/dev/null | awk 'NR==2{print $2}')
+PYTHON_VERSION=$(asdf current python 2>/dev/null | awk 'NR==2{print $2}')
+LUA_VERSION=$(asdf current lua 2>/dev/null | awk 'NR==2{print $2}')
+LUAJIT_VERSION=$(asdf current luajit 2>/dev/null | awk 'NR==2{print $2}')
+PERL_VERSION=$(asdf current perl 2>/dev/null | awk 'NR==2{print $2}')
 
 ASDF_DIR="${HOME}/.asdf/installs"
 
