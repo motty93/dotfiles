@@ -20,8 +20,8 @@ HISTCONTROL=ignoreboth
 shopt -s histappend
 
 # for setting history length see HISTSIZE and HISTFILESIZE in bash(1)
-HISTSIZE=1000
-HISTFILESIZE=2000
+HISTSIZE=200000
+HISTFILESIZE=400000
 
 # check the window size after each command and, if necessary,
 # update the values of LINES and COLUMNS.
@@ -188,12 +188,10 @@ export PATH="$FLYCTL_INSTALL/bin:$PATH"
 export PATH="$DENO_INSTALL/bin:$PATH"
 export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
 export PATH=$GOBIN:$PATH
-export PS1='\[\e[1;36m\]\w\[\e[m\] \n% '
 export GTAGSLABEL="pygments"
 export CLOUDSDK_PYTHON="$HOME/.asdf/shims/python"
 export LD_LIBRARY_PATH="/usr/local/lib"
 export snippets="$HOME/.cache/dein/repos/github.com/honza/vim-snippets/UltiSnips"
-export HISTSIZE=200000
 export ASDF_DATA_DIR="$HOME/.asdf"
 export ASDF_GOLANG_MOD_VERSION_ENABLED=true
 export DOCKER_BUILDKIT=0
@@ -205,7 +203,6 @@ export DENO_INSTALL="$HOME/.deno"
 export RUST_WITHOUT=rust-docs
 export NODE_OPTIONS=--openssl-legacy-provider
 export GOOGLE_APPLICATION_CREDENTIALS="$HOME/.config/gcloud/application_default_credentials.json"
-export NODE_OPTIONS=--openssl-legacy-provider
 export PROMPT_COMMAND=my_prompt
 export KERL_CONFIGURE_OPTIONS="--disable-debug --without-javac"
 if which gcloud >/dev/null; then

@@ -108,4 +108,4 @@ alias serena='uv run --directory ~/serena serena-mcp-server --transport sse --po
 alias gpt='codex'
 
 # nas
-alias sshnas="sshpass -p 'dashimakitamago' ssh nas"
+alias sshnas="ssh nas"
