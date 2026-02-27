@@ -37,8 +37,8 @@ git clone https://github.com/asdf-vm/asdf.git ~/.asdf
 
 echo "########## asdf plugins ##########"
 asdf plugin-add nodejs https://github.com/asdf-vm/asdf-nodejs.git
-asdf plugin-add golang https://github.com/kennyp/asdf-golang.git
-asdf plugin-add python
+asdf plugin-add golang https://github.com/asdf-community/asdf-golang.git
+asdf plugin-add python https://github.com/asdf-community/asdf-python.git
 asdf plugin-add ruby https://github.com/asdf-vm/asdf-ruby.git
 asdf plugin-add lua https://github.com/Stratus3D/asdf-lua.git
 asdf plugin-add luajit https://github.com/smashedtoatoms/asdf-luajit.git
