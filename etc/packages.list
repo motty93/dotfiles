@@ -44,5 +44,6 @@ libtool
 libbz2-dev
 libsqlite3-dev
 unixodbc-dev
+liblzma-dev
 gpg
 dirmngr
