@@ -84,12 +84,20 @@ alias dvr='specific_docker_volume_rm'
 
 alias vi="vim ."
 alias mvim="vim -u NONE -N --noplugin -c 'set swapfile nobackup nowritebackup noswapfile noundofile' -c 'syntax off'"
+
+# tmux
 alias t="tmux"
 alias tn="tmux new -s"
 alias ta="tmux-attached"
 alias ts="tmux-session"
 alias tl="tmux list-sessions"
 alias tkill="tmux-kill-session-all"
+alias tmux-source="tmux source-file ~/.tmux.conf"
+alias tmux-dev="tmux new-session -s dev -n dev \; \
+  split-window -h \; \
+  send-keys -t 1 vim Enter \; \
+  send-keys -t 2 claude Enter"
+
 # alias remix='docker run -p 8080:80 remixproject/remix-ide:latest'
 alias rain='era'
 alias tree='tree -a -I "\.DS_Store|\.git|node_modules|vendor\/bundle" -N'
