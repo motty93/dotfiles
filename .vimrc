@@ -106,15 +106,6 @@ inoremap <silent><expr> <TAB>
 inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
 
 call dein#add('prabirshrestha/asyncomplete-lsp.vim')
-" lsp ruby
-if executable('solargraph')
-    " gem install solargraph
-    au User lsp_setup call lsp#register_server({
-        \ 'name': 'solargraph',
-        \ 'cmd': {server_info->[&shell, &shellcmdflag, 'solargraph stdio']},
-        \ 'whitelist': ['ruby'],
-        \ })
-endif
 " lsp typescript(vim-lsp-settingsだとtsxに対応してないっぽい)
 let g:lsp_settings_filetype_javascript = ['typescript-language-server']
 let g:lsp_settings_filetype_javascriptreact = ['typescript-language-server']
