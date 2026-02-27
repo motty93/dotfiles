@@ -1,0 +1,23 @@
+{
+  "version": 2,
+  "plugins": {
+    "gopls-lsp@claude-plugins-official": [
+      {
+        "scope": "user",
+        "installPath": "",
+        "version": "1.0.0",
+        "installedAt": "",
+        "lastUpdated": ""
+      }
+    ],
+    "typescript-lsp@claude-plugins-official": [
+      {
+        "scope": "user",
+        "installPath": "",
+        "version": "1.0.0",
+        "installedAt": "",
+        "lastUpdated": ""
+      }
+    ]
+  }
+}

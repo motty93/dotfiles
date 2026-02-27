@@ -1,0 +1,42 @@
+{
+  "selectedAuthType": "gemini-api-key",
+  "theme": "Ayu Light",
+  "mcpServers": {
+    "playwright": {
+      "type": "stdio",
+      "command": "npx",
+      "args": [
+        "@playwright/mcp@latest",
+        "--config",
+        "/home/motty93/playwright-config.json"
+      ],
+      "env": {}
+    },
+    "github": {
+      "type": "stdio",
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-github"],
+      "env": {
+        "GITHUB_PERSONAL_ACCESS_TOKEN": "YOUR_GITHUB_PAT_HERE"
+      }
+    },
+    "serena": {
+      "type": "sse",
+      "url": "http://localhost:9121/sse"
+    },
+    "context7": {
+      "type": "stdio",
+      "command": "npx",
+      "args": ["-y", "@upstash/context7-mcp@latest"]
+    },
+    "ollama": {
+      "command": "npx",
+      "args": ["-y", "@rawveg/ollama-mcp"],
+      "env": {
+        "OLLAMA_API": "http://192.168.112.1:11434",
+        "OLLAMA_DEFAULT_MODEL": "qwen3:4b-q4_K_M"
+      },
+      "timeout": 60000
+    }
+  }
+}
