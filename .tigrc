@@ -23,3 +23,7 @@ bind main !     ?git revert %(commit)
 
 # copy commit log
 bind main C     !@git pbcopy %(commit)
+
+# push
+bind generic P !git push origin %(branch)
+bind generic L !git pull origin %(branch)
