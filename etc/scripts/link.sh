@@ -1,33 +1,34 @@
 #!/bin/bash
 
-set -u
+set -eu
 DOT_DIRECTORY="${HOME}/dotfiles"
-BIN_DIRECTORY="${HOME}/dotfiles/bin"
-XKB_DIRECTORY="${HOME}/dotfiles/xkb"
 
-echo "xkb files"
-setxkbmap -print >> ${HOME}/keymap/mypc_default
-ln -snfv ${XKB_DIRECTORY} ${HOME}/.xkb
+cd "${DOT_DIRECTORY}" || exit 1
 
 echo "link home directory dotfiles"
-cd ${DOT_DIRECTORY}
 for f in .??*
 do
-    #ignore files and directories
+    # ignore files and directories
     [ "$f" = ".git" ] && continue
-    [ "$f" = ".gitgnore" ] && continue
+    [ "$f" = ".github" ] && continue
+    [ "$f" = ".gitignore" ] && continue
     [ "$f" = ".DS_Store" ] && continue
-    ln -snfv ${DOT_DIRECTORY}/${f} ${HOME}/${f}
+    [ "$f" = ".claude" ] && continue
+    ln -snfv "${DOT_DIRECTORY}/${f}" "${HOME}/${f}"
 done
 
-echo "lick bin files"
-cd ${BIN_DIRECTORY}
-for f in .??*
-do
-    #ignore files
-    [ "$f" = ".keep" ] && continue
-    [ "$f" = ".DS_Store" ] && continue
-    ln -snfv ${BIN_DIRECTORY}/${f} /usr/local/bin/${f}
-done
+# config/ 配下の設定ファイルを個別にシンボリックリンク
+echo ""
+echo "link config directory dotfiles"
+CONFIG_DIR="${DOT_DIRECTORY}/config"
+if [ -d "${CONFIG_DIR}" ]; then
+    find "${CONFIG_DIR}" -type f | while read -r src; do
+        # config/ からの相対パスを取得 (例: claude/settings.json)
+        rel="${src#"${CONFIG_DIR}"/}"
+        dest="${HOME}/.${rel}"
+        mkdir -p "$(dirname "${dest}")"
+        ln -snfv "${src}" "${dest}"
+    done
+fi
 
 echo "linked dotfiles complete!"
