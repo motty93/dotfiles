@@ -1,4 +1,4 @@
-.vim/dein/.cache/*
 .vim/dein/.cache/
-.vim/bundle/*
-/asdf-golang.sNHY/
+.vim/bundle/
+.vim/view/
+.vim/.netrwhist
