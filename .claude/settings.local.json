@@ -3,7 +3,10 @@
     "allow": [
       "Bash(ls:*)",
       "Bash(vim:*)",
-      "Bash(dpkg -l)"
+      "Bash(dpkg -l)",
+      "Bash(bash:*)",
+      "Bash(asdf plugin:*)",
+      "Bash(curl:*)"
     ]
   }
 }
