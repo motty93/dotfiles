@@ -4,6 +4,10 @@ if [ -f "$HOME/.bash_function" ]; then
   . $HOME/.bash_function
 fi
 
+# windows
+alias clip='/mnt/c/Windows/System32/clip.exe'
+alias powershell='/mnt/c/Windows/System32/WindowsPowerShell/v1.0/powershell.exe'
+
 # tools
 alias pcd='find_cd'
 alias pvi='find_vim'
@@ -58,12 +62,14 @@ alias mybranch="my_git_branch"
 alias ti="tig"
 
 # some tools
-alias pbcopy='clip.exe'
+alias pbcopy='iconv -f UTF-8 -t UTF-16LE | clip'
+alias pbpaste='powershell -NoProfile -Command "[Console]::OutputEncoding = [System.Text.Encoding]::UTF8; Get-Clipboard"'
 alias mozc='/usr/lib/mozc/mozc_tool --mode=config_dialog'
 alias slack='/usr/bin/slack'
 alias my-chown="sudo chown -R $USER:$USER *"
 alias chrome-kill="ps aux | grep [c]hrome | awk '{ print $2 }' | sudo xargs kill -9"
 alias open="xdg-open"
+alias bat="batcat"
 
 # rails bundle exec
 alias be='bundle exec'
