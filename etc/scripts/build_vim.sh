@@ -59,6 +59,11 @@ fi
 echo "=== clean previous build ==="
 make distclean 2>/dev/null || true
 
+# Vim configure が LuaJIT のヘッダ/ライブラリを発見できるようにフラグを補強
+# (通常 .bashrc で設定されるが、install.sh からの非対話呼び出しでは不在)
+export CPPFLAGS="-I${LUAJIT_DIR}/include/luajit-2.0 -I${LUA_DIR}/include ${CPPFLAGS:-}"
+export LDFLAGS="-L${LUAJIT_DIR}/lib -L${LUA_DIR}/lib ${LDFLAGS:-}"
+
 # configure
 echo "=== configure ==="
 ./configure \

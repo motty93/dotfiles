@@ -7,7 +7,8 @@ set -eu
 
 echo "=== install Claude Code ==="
 # https://docs.anthropic.com/en/docs/claude-code/overview
-curl -fsSL https://claude.ai/install.sh | sh
+# 公式スクリプトは bash 想定のため明示的に bash で実行 (Ubuntu の sh=dash 対策)
+curl -fsSL https://claude.ai/install.sh | bash
 
 echo ""
 echo "=== install Gemini CLI ==="
@@ -20,6 +21,11 @@ npm install -g @openai/codex
 echo ""
 echo "=== install MCP servers ==="
 npm install -g mcp-gemini-google-search
+
+echo ""
+echo "=== reshim (npm -g 後の shims 再生成) ==="
+# npm install -g で入れたバイナリは asdf reshim しないと shims に出ない
+asdf reshim nodejs
 
 echo ""
 echo "=== done ==="

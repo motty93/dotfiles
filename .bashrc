@@ -233,6 +233,8 @@ if [ -f "$HOME/google-cloud-sdk/path.bash.inc" ]; then source "$HOME/google-clou
 # The next line enables shell command completion for gcloud.
 if [ -f "$HOME/google-cloud-sdk/completion.bash.inc" ]; then source "$HOME/google-cloud-sdk/completion.bash.inc"; fi
 
-if [ -f "$HOME/.asdf/asdf.sh" ]; then source "$HOME/.asdf/asdf.sh"; fi
-if [ -f "$HOME/.asdf/completions/asdf.bash" ]; then source "$HOME/.asdf/completions/asdf.bash"; fi
+# asdf v0.16+ (Go 版) は asdf.sh 廃止。PATH に bin と shims を通すだけで動く
+if [ -d "$HOME/.asdf/bin" ]; then
+    export PATH="$HOME/.asdf/bin:$HOME/.asdf/shims:$PATH"
+fi
 
