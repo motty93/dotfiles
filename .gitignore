@@ -2,3 +2,7 @@
 .vim/bundle/
 .vim/view/
 .vim/.netrwhist
+
+# Claude Code がランタイムで書き換えるファイル (userID / firstStartTime / migrationVersion 等)
+# ユーザー設定は ~/.claude/settings.json (= config/claude/settings.json) で管理する
+.claude.json

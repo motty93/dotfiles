@@ -14,6 +14,7 @@ do
     [ "$f" = ".gitignore" ] && continue
     [ "$f" = ".DS_Store" ] && continue
     [ "$f" = ".claude" ] && continue
+    [ "$f" = ".claude.json" ] && continue
     ln -snfv "${DOT_DIRECTORY}/${f}" "${HOME}/${f}"
 done
 
