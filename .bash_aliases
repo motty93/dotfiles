@@ -99,7 +99,7 @@ alias ts="tmux-session"
 alias tl="tmux list-sessions"
 alias tkill="tmux-kill-session-all"
 alias tmux-source="tmux source-file ~/.tmux.conf"
-alias tmux-dev="tmux new-session -s dev -n dev \; \
+alias tdev="tmux new-session -s dev -n dev \; \
   split-window -h \; \
   send-keys -t 1 vim Enter \; \
   send-keys -t 2 claude Enter"
