@@ -67,6 +67,12 @@ chmod +x install_ai_tools.sh
 ./install_ai_tools.sh
 
 
+echo "########## era (rainy clock / alias rain) ##########"
+cd "${SCRIPT_DIRECTORY}"
+chmod +x install_era.sh
+./install_era.sh
+
+
 echo "########## build vim ##########"
 cd "${SCRIPT_DIRECTORY}"
 chmod +x build_vim.sh
