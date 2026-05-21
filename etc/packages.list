@@ -11,6 +11,8 @@ cmdtest
 cmake
 expect
 locate
+fd-find
+ripgrep
 build-essential
 libgcrypt20-dev
 libyajl-dev
