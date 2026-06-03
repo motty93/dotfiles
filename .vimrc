@@ -520,14 +520,16 @@ let g:ctrlp_cmd = 'CtrlP'
 call dein#add('mattn/ctrlp-matchfuzzy')
 let g:ctrlp_match_func = {'match': 'ctrlp_matchfuzzy#matcher'}
 
-" Ag - the silver search -
-call dein#add('rking/ag.vim')
-" use Ag for unite grep and ctrlpvim
-if executable('ag')
+" file search backend: rg (ripgrep)
+if executable('rg')
+  " CtrlP のファイル列挙
+  " (.agignore を読まないので docs/*.md 等も対象。.gitignore は尊重し、隠しファイルも拾うが .git は除外)
   let g:ctrlp_use_caching = 0
-  let g:ctrlp_user_command = 'ag %s -i --nocolor --nogroup -g ""'
-  let g:unite_source_grep_command = '/usr/bin/ag'
-  let g:unite_source_grep_default_opts = '--nogroup --nocolor --ignore .git --ignore .svn --ignore .hg --ignore .DS_Store --ignore node_modules --ignore vendor'
+  let g:ctrlp_user_command = 'rg %s --files --color=never --hidden -g "!.git"'
+  " unite grep (--vimgrep 形式で出力、再帰がデフォルトなので recursive_opt は空にする)
+  let g:unite_source_grep_command = 'rg'
+  let g:unite_source_grep_default_opts = '--vimgrep --no-heading --color=never'
+  let g:unite_source_grep_recursive_opt = ''
 endif
 
 " file devicons
