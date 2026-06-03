@@ -527,7 +527,7 @@ if executable('ag')
   let g:ctrlp_use_caching = 0
   let g:ctrlp_user_command = 'ag %s -i --nocolor --nogroup -g ""'
   let g:unite_source_grep_command = '/usr/bin/ag'
-  let g:unite_source_grep_default_opts = '--nogroup --nocolor --ignore .git --ignore .svn --ignore .hg --ignore .DS_Store --ignore node_modules'
+  let g:unite_source_grep_default_opts = '--nogroup --nocolor --ignore .git --ignore .svn --ignore .hg --ignore .DS_Store --ignore node_modules --ignore vendor'
 endif
 
 " file devicons

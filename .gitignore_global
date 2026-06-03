@@ -12,3 +12,4 @@ ubuntu-xenial-16.04-cloudimg-console.log
 .tool-versions
 .yarnrc
 .aider*
+**/.claude/settings.local.json
