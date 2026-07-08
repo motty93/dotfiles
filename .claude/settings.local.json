@@ -6,7 +6,18 @@
       "Bash(dpkg -l)",
       "Bash(bash:*)",
       "Bash(asdf plugin:*)",
-      "Bash(curl:*)"
+      "Bash(curl:*)",
+      "Bash(command -v ag)",
+      "Bash(command -v rg)",
+      "Read(//home/motty93/**)",
+      "Bash(fd -uu '\\\\.\\(agignore|ignore\\)$' /home/motty93/dotfiles)",
+      "Bash(exit 1)",
+      "Bash(rg --files --color=never --hidden)",
+      "Bash(rg '^\\\\.\\(vimrc|bashrc|agignore\\)$')",
+      "Bash(rg --files --color=never --hidden -g '!.git')",
+      "Bash(rg '^\\\\.\\(vimrc|bashrc\\)$')",
+      "Bash(fd -t d 'ag\\\\.vim$' ~/.cache/dein ~/.vim)",
+      "Bash(fd -uu -t d 'ag\\\\.vim' ~/.cache/dein)"
     ]
   }
 }
