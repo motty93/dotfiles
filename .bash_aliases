@@ -33,6 +33,7 @@ alias cdd="cd ../"
 alias cddd="cd ../../"
 alias ukiyo="cd ~/github.com/ukiyocreate"
 alias roots="cd ~/github.com/androots"
+alias retro="cd ~/github.com/retrolab-inc"
 alias sub="cd ~/github.com/subcontracting"
 alias ango="cd ~/github.com/subcontracting/ango-ya"
 alias blog="cd ~/github.com/home-blog"
@@ -110,6 +111,8 @@ alias tree='tree -a -I "\.DS_Store|\.git|node_modules|vendor\/bundle" -N'
 
 # claude
 alias serena='uv run --directory ~/serena serena-mcp-server --transport sse --port 9121'
+alias ccg='ccg'
+alias ccgr='ccgr'
 # alias claude='DISABLE_AUTOUPDATER=1 claude'
 alias gpt='codex'
 

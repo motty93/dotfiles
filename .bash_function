@@ -335,13 +335,18 @@ function tmux-attached () {
 }
 
 # peco select tmux session
-function tmux-session () {
-  for session in `tmux list-sessions | peco | awk '{ print $1 }' | tr -d ':'`
-  do
-    tmux a -t $session
-  done
-
-  return $1
+function tmux-session() {
+  local tmp session
+  tmp=$(mktemp "${TMPDIR:-/tmp}/tmux_sessions.XXXXXX") || return
+  tmux list-sessions -F '#{session_name}' > "$tmp" 2>/dev/null
+  session=$(peco "$tmp")
+  rm -f "$tmp"
+  [ -z "$session" ] && return
+  if [ -n "$TMUX" ]; then
+    tmux switch-client -t "$session"
+  else
+    tmux attach-session -t "$session"
+  fi
 }
 
 # tmux session kill all
@@ -352,6 +357,28 @@ function tmux-kill-session-all () {
   return $1
 }
 
+# zai claude code
+function ccg() {
+  ANTHROPIC_AUTH_TOKEN="${ZAI_API_KEY}" \
+  ANTHROPIC_BASE_URL="https://api.z.ai/api/anthropic" \
+  API_TIMEOUT_MS="3000000" \
+  CLAUDE_CODE_AUTO_COMPACT_WINDOW="1000000" \
+  ANTHROPIC_DEFAULT_HAIKU_MODEL="glm-4.5-air" \
+  ANTHROPIC_DEFAULT_SONNET_MODEL="glm-5.2[1m]" \
+  ANTHROPIC_DEFAULT_OPUS_MODEL="glm-5.2[1m]" \
+  claude "$@"
+}
+
+function ccgr() {
+  ANTHROPIC_AUTH_TOKEN="${ZAI_API_KEY}" \
+  ANTHROPIC_BASE_URL="https://api.z.ai/api/anthropic" \
+  API_TIMEOUT_MS="3000000" \
+  CLAUDE_CODE_AUTO_COMPACT_WINDOW="1000000" \
+  ANTHROPIC_DEFAULT_HAIKU_MODEL="glm-4.5-air" \
+  ANTHROPIC_DEFAULT_SONNET_MODEL="glm-5.2[1m]" \
+  ANTHROPIC_DEFAULT_OPUS_MODEL="glm-5.2[1m]" \
+  claude -r "$@"
+}
 
 function chrome() {
   if [ -z "$1" ]; then

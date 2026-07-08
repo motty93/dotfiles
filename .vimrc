@@ -990,7 +990,7 @@ nnoremap <silent> <leader>cm :silent! AICommitMessage<CR>
 " remove hightlight
 nnoremap <silent> <leader>n :nohlsearch<CR>
 " replace search word
-nnoremap <C-r> :%s//
+nnoremap <leader>s :%s//
 "  github copilot C-j
 imap <silent><script><expr> <C-j> copilot#Accept("\<CR>")
 " filetype detection
