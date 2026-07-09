@@ -1,0 +1,48 @@
+# herdr configuration
+# ~/dotfiles/.tmux.conf のキーバインドに合わせた設定
+# 反映: herdr server reload-config (または prefix+shift+r)
+# 全項目の一覧: herdr --default-config
+
+[terminal]
+# tmux の -c '#{pane_current_path}' 相当 (新規ペイン/タブで cwd を引き継ぐ)
+new_cwd = "follow"
+
+[keys]
+# tmux: set -g prefix C-q
+prefix = "ctrl+q"
+
+# tmux: bind v (split-window -h) / bind s (split-window -v)
+split_vertical = "prefix+v"
+split_horizontal = "prefix+s"
+# s を分割に使うため settings (デフォルト prefix+s) を shift+s へ移動
+settings = "prefix+shift+s"
+
+# tmux: bind q (kill-pane)
+close_pane = "prefix+q"
+# q を close_pane に使うため detach (デフォルト prefix+q) は tmux と同じ d へ
+detach = "prefix+d"
+
+# tmux: bind h/j/k/l (select-pane)
+focus_pane_left = "prefix+h"
+focus_pane_down = "prefix+j"
+focus_pane_up = "prefix+k"
+focus_pane_right = "prefix+l"
+
+# tmux: bind c (new-window)
+new_tab = "prefix+c"
+
+# tmux: bind p は vim ペインに使うため previous_tab (デフォルト prefix+p) を無効化
+# タブ移動は prefix+n / prefix+1..9
+previous_tab = ""
+
+# tmux: bind t (display-popup -E "tig")
+[[keys.command]]
+key = "prefix+t"
+type = "pane"
+command = "tig"
+
+# tmux: bind p (display-popup -E "vim")
+[[keys.command]]
+key = "prefix+p"
+type = "pane"
+command = "vim"
