@@ -357,6 +357,17 @@ function tmux-kill-session-all () {
   return $1
 }
 
+# peco select herdr workspace
+function herdr-ws() {
+  local ws
+  ws=$(herdr workspace list 2>/dev/null \
+    | jq -r '.result.workspaces[] | "\(.workspace_id)\t\(.label)"' \
+    | peco | cut -f1)
+  [ -z "$ws" ] && return
+  herdr workspace focus "$ws"
+  herdr
+}
+
 # zai claude code
 function ccg() {
   ANTHROPIC_AUTH_TOKEN="${ZAI_API_KEY}" \
