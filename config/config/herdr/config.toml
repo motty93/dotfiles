@@ -28,6 +28,15 @@ focus_pane_down = "prefix+j"
 focus_pane_up = "prefix+k"
 focus_pane_right = "prefix+l"
 
+# navigate mode (prefix+w) 中の spaces 選択を vim 風に (デフォルト: up / down 矢印)
+# j/k で選択を動かし enter で確定。agents ツリーは navigate mode 中の g (navigator) で j/k 移動可
+navigate_workspace_up = "k"
+navigate_workspace_down = "j"
+
+# agents の直接移動: prefix+shift+j/k で前後の agent pane へジャンプ (デフォルト未割当)
+next_agent = "prefix+shift+j"
+previous_agent = "prefix+shift+k"
+
 # tmux: bind c (new-window)
 new_tab = "prefix+c"
 
