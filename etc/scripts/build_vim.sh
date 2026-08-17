@@ -29,19 +29,26 @@ echo "LuaJIT:  ${LUAJIT_VERSION} (${LUAJIT_DIR})"
 echo "Perl:    ${PERL_VERSION} (${PERL_DIR})"
 echo ""
 
+# X11 ヘッダは +clipboard (X11 セレクション連携) / GUI 版のために必要。
+# ヘッドレス機など不要な場合は VIM_WITH_X11=0 ./build_vim.sh で X11 無しビルドにする
+VIM_WITH_X11="${VIM_WITH_X11:-1}"
+
+X11_DEV_PACKAGES=""
+X11_CONFIGURE_OPTS=""
+if [ "${VIM_WITH_X11}" = "1" ]; then
+    X11_DEV_PACKAGES="libxt-dev libxpm-dev libx11-dev libsm-dev libice-dev"
+else
+    X11_CONFIGURE_OPTS="--without-x --enable-gui=no"
+fi
+
 # ビルドに必要なAPTパッケージをインストール
 echo "=== install build dependencies ==="
 sudo apt install -y \
     build-essential \
-    libncurses5-dev \
     libncurses-dev \
     libacl1-dev \
     libgpm-dev \
-    libxt-dev \
-    libxpm-dev \
-    libx11-dev \
-    libsm-dev \
-    libice-dev
+    ${X11_DEV_PACKAGES}
 
 # Vimソースコードの取得
 VIM_SRC_DIR="${HOME}/vim-src"
@@ -83,6 +90,7 @@ echo "=== configure ==="
     --enable-cscope \
     --enable-terminal \
     --enable-fail-if-missing \
+    ${X11_CONFIGURE_OPTS} \
     --prefix=/usr/local
 
 # ビルド & インストール

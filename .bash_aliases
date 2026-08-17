@@ -4,9 +4,19 @@ if [ -f "$HOME/.bash_function" ]; then
   . $HOME/.bash_function
 fi
 
-# windows
-alias clip='/mnt/c/Windows/System32/clip.exe'
-alias powershell='/mnt/c/Windows/System32/WindowsPowerShell/v1.0/powershell.exe'
+# clipboard / Windows 連携
+# WSL2 と ネイティブ Linux (GNOME on Wayland) を共用するため WSL_DISTRO_NAME で分岐
+if [ -n "${WSL_DISTRO_NAME:-}" ]; then
+  alias clip='/mnt/c/Windows/System32/clip.exe'
+  alias powershell='/mnt/c/Windows/System32/WindowsPowerShell/v1.0/powershell.exe'
+  alias pbcopy='iconv -f UTF-8 -t UTF-16LE | clip'
+  alias pbpaste='powershell -NoProfile -Command "[Console]::OutputEncoding = [System.Text.Encoding]::UTF8; Get-Clipboard"'
+else
+  # wl-clipboard (etc/packages.list)
+  alias clip='wl-copy'
+  alias pbcopy='wl-copy'
+  alias pbpaste='wl-paste --no-newline'
+fi
 
 # tools
 alias pcd='find_cd'
@@ -18,10 +28,6 @@ alias his='peco-history'
 alias hiss='peco-sort-history'
 alias cdr='peco-cd'
 alias fd='fdfind'
-
-# keymapping
-alias anne='xkbcomp -I$HOME/.xkb $HOME/.xkb/keymap/anne_pro2_keymap $DISPLAY 2> /dev/null'
-alias xvx='xkbcomp -I$HOME/.xkb $HOME/.xkb/keymap/xvx_m61 $DISPLAY 2> /dev/null'
 
 # some more ls aliases
 alias ll='ls -alF'
@@ -63,8 +69,6 @@ alias mybranch="my_git_branch"
 alias ti="tig"
 
 # some tools
-alias pbcopy='iconv -f UTF-8 -t UTF-16LE | clip'
-alias pbpaste='powershell -NoProfile -Command "[Console]::OutputEncoding = [System.Text.Encoding]::UTF8; Get-Clipboard"'
 alias mozc='/usr/lib/mozc/mozc_tool --mode=config_dialog'
 alias slack='/usr/bin/slack'
 alias my-chown="sudo chown -R $USER:$USER *"

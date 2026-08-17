@@ -1,4 +1,4 @@
-# dotfiles 検証用 Dockerfile (Ubuntu 24.04 / WSL2 想定)
+# dotfiles 検証用 Dockerfile (Ubuntu 24.04。WSL_DISTRO_NAME 未設定なのでネイティブ Linux 側の分岐を通る)
 #
 # Build:
 #   docker build -t dotfiles-test ./etc/docker

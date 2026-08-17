@@ -318,8 +318,15 @@ call dein#add('jparise/vim-graphql')
 " preview
 call dein#add('previm/previm')
 let g:previm_plantuml_imageprefix = 'http://localhost:8888/png/'
-let g:previm_open_cmd = '/mnt/c/Program\ Files/Google/Chrome/Application/chrome.exe'
-let g:previm_wsl_mode = 1
+" WSL2 と ネイティブ Linux 共用: WSL_DISTRO_NAME で分岐
+if !empty($WSL_DISTRO_NAME)
+  " WSL2: Windows 側の Chrome で開く
+  let g:previm_open_cmd = '/mnt/c/Program\ Files/Google/Chrome/Application/chrome.exe'
+  let g:previm_wsl_mode = 1
+else
+  " ネイティブ Linux: 空にすると open-browser.vim 経由で標準ブラウザ (xdg-open) が開く
+  let g:previm_open_cmd = ''
+endif
 
 " editorconfig
 call dein#add('editorconfig/editorconfig-vim')
@@ -355,6 +362,11 @@ let g:netrw_nogx = 1
 nnoremap gx <Plug>(openbrowser-smart-search)
 vnoremap gx <Plug>(openbrowser-smart-search)
 command! OpenBrowserCurrent execute "!xdg-open" expand("%:p")
+
+" osc56 yank to clipboard
+call dein#add("ojroques/vim-oscyank")
+autocmd TextYankPost * if v:event.operator is 'y'
+  \ | execute 'OSCYankRegister "' | endif
 
 " color picker
 call dein#add('KabbAmine/vCoolor.vim')

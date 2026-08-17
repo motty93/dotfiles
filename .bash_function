@@ -397,7 +397,12 @@ function chrome() {
     return 1
   fi
 
-  /mnt/c/Program\ Files/Google/Chrome/Application/chrome.exe "$(wslpath -w "$(realpath "$1")")"
+  # WSL2 と ネイティブ Linux 共用: WSL_DISTRO_NAME で分岐
+  if [ -n "${WSL_DISTRO_NAME:-}" ]; then
+    /mnt/c/Program\ Files/Google/Chrome/Application/chrome.exe "$(wslpath -w "$(realpath "$1")")"
+  else
+    xdg-open "$(realpath "$1")"
+  fi
 }
 
 bouyomi() { local bytes=$(echo -n "$1"  < /dev/null |  wc -c); local win_ip=$(ip route | grep default | awk "{print \$3}"); printf "\x01\x00\xff\xff\xff\xff\xff\xff\x00\x00\x00\x$(printf %02x $((bytes&255)))\x$(printf %02x $((bytes>>8)))\x00\x00$1" | nc -w 2 ${win_ip:-0.0.0.0} 50001; }

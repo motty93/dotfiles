@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## 概要
 
-WSL2 (Ubuntu) 開発環境用の個人dotfilesリポジトリ。`~/dotfiles/` 配下のdotfilesをリンクスクリプトで `$HOME` にシンボリックリンクする構成。
+WSL2 (Ubuntu) と ネイティブ Linux (Ubuntu 24.04 / GNOME on Wayland) 兼用の個人dotfilesリポジトリ。`~/dotfiles/` 配下のdotfilesをリンクスクリプトで `$HOME` にシンボリックリンクする構成。
 
 ## 主要コマンド
 
@@ -37,11 +37,11 @@ sh ./dotfiles/etc/scripts/link.sh   # .??* にマッチする全ファイルを 
 ### Tmux
 - Prefix: **Ctrl-Q** (デフォルトのC-bではない)
 - Vimスタイルのペイン移動 (h/j/k/l)
-- コピーモードはviキーバインド + Windowsクリップボード連携 (`clip.exe`)
+- コピーモードはviキーバインド + システムクリップボード連携 (WSL2: `clip.exe` / ネイティブ: `wl-copy`、`if-shell` で分岐)
 
 ### その他の設定ディレクトリ
 - `config/claude/` — Claude デスクトップアプリの設定とMCPパーミッション
-- `xkb/` — メカニカルキーボード用カスタムキーマップ (Anne Pro 2, VXV M61)
+- `xkb/` — メカニカルキーボード用カスタムキーマップ (Anne Pro 2, VXV M61)。ネイティブ Linux (Wayland) 向けに `etc/scripts/install_xkb.sh` でシステムへ配置する (手順は `doc/xkb.md`)
 - `.github/` — PRテンプレート (日本語) と自動アサインワークフロー
 
 ### パッケージ管理
@@ -51,5 +51,5 @@ sh ./dotfiles/etc/scripts/link.sh   # .??* にマッチする全ファイルを 
 ## 規約
 
 - コメントやPRテンプレートは**日本語**で記述
-- WSL2 on Windows を前提とした構成 (`clip.exe` によるクリップボード連携、ターミナル色設定の調整等)
+- WSL2 と ネイティブ Linux を同じファイルで共用する。環境差分 (クリップボード、ブラウザ起動等) は実行時に `WSL_DISTRO_NAME` の有無で分岐し、片方だけの前提 (X11 前提など) を持ち込まない
 - Gitユーザー: motty93 / rdwbocungelt5@gmail.com

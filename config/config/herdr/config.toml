@@ -1,3 +1,4 @@
+onboarding = false
 # herdr configuration
 # ~/dotfiles/.tmux.conf のキーバインドに合わせた設定
 # 反映: herdr server reload-config (または prefix+shift+r)
@@ -55,3 +56,6 @@ command = "tig"
 key = "prefix+p"
 type = "pane"
 command = "vim"
+
+[ui]
+agent_panel_sort = "spaces"

@@ -53,9 +53,16 @@ asdf plugin add deno https://github.com/asdf-community/asdf-deno.git
 asdf plugin add bun https://github.com/cometkim/asdf-bun.git
 asdf plugin add terraform https://github.com/asdf-community/asdf-hashicorp.git
 asdf plugin add awscli https://github.com/MetricMike/asdf-awscli.git
+asdf plugin add rust https://github.com/code-lever/asdf-rust.git
 
 echo "########## asdf install (.tool-versions) ##########"
 cd "${HOME}"
+# link.sh で ~/dotfiles/.tool-versions が ~/.tool-versions にリンクされている前提。
+# 無いまま進むと言語が何も入らず、後段の install_ai_tools.sh (npm) や build_vim.sh (asdf current) が分かりにくく落ちる
+if [ ! -f "${HOME}/.tool-versions" ]; then
+    echo "error: ${HOME}/.tool-versions not found (link.sh should have linked ~/dotfiles/.tool-versions)" >&2
+    exit 1
+fi
 # 一部プラグイン (terraform の post-install callback 等) が失敗しても本体バイナリは入る。
 # 個別調査するより || true で全体を進める方針
 asdf install || true

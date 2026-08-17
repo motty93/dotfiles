@@ -1,0 +1,13 @@
+// dotfiles カスタム XKB オプション (libxkbcommon 用。/etc/xkb/rules/evdev に配置する)
+// GNOME on Wayland では mutter が libxkbcommon で keymap を組み立てるため、
+// /usr/share/X11/xkb/rules/evdev (パッケージ管理下、更新で上書きされる) を直接編集せず
+// /etc/xkb/rules/evdev にオプションを追記してからシステムの rules を取り込む。
+//
+// 有効化: gsettings set org.gnome.desktop.input-sources xkb-options "['xvx_m61:swap']"
+// 詳細:   doc/xkb.md
+
+! option = symbols
+  anne_pro2:swap = +anne_pro2(swap)
+  xvx_m61:swap   = +xvx_m61(swap)
+
+! include %S/evdev

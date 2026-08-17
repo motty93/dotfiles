@@ -6,3 +6,6 @@
 # Claude Code がランタイムで書き換えるファイル (userID / firstStartTime / migrationVersion 等)
 # ユーザー設定は ~/.claude/settings.json (= config/claude/settings.json) で管理する
 .claude.json
+
+# .tool-versions は ~/.gitignore_global で無視しているが、この repo では管理対象 (link.sh で ~ にリンクされる)
+!.tool-versions
