@@ -9,3 +9,6 @@
 
 # .tool-versions は ~/.gitignore_global で無視しているが、この repo では管理対象 (link.sh で ~ にリンクされる)
 !.tool-versions
+
+# 作業中の一時ファイル (検証ログ等)
+.claude/tmp/

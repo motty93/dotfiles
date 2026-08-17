@@ -95,6 +95,11 @@ if [ -f "$HOME/.bash_aliases" ]; then
     . "$HOME/.bash_aliases"
 fi
 
+# 秘密情報 (API キー等) はリポジトリにコミットしない ~/.bash_secrets から読む
+if [ -f "$HOME/.bash_secrets" ]; then
+    . "$HOME/.bash_secrets"
+fi
+
 # enable programmable completion features (you don't need to enable
 # this, if it's already enabled in /etc/bash.bashrc and /etc/profile
 # sources /etc/bash.bashrc).
@@ -193,6 +198,11 @@ export CLOUDSDK_PYTHON="$HOME/.asdf/shims/python"
 export LD_LIBRARY_PATH="/usr/local/lib"
 export snippets="$HOME/.cache/dein/repos/github.com/honza/vim-snippets/UltiSnips"
 export ASDF_DATA_DIR="$HOME/.asdf"
+# asdf v0.16+ (Go 版) は asdf.sh 廃止。PATH に bin と shims を通すだけで動く。
+# 後続の luajit ブロック (`asdf where`) より前に通しておく必要がある
+if [ -d "$HOME/.asdf/bin" ]; then
+    export PATH="$HOME/.asdf/bin:$HOME/.asdf/shims:$PATH"
+fi
 export ASDF_GOLANG_MOD_VERSION_ENABLED=true
 export DOCKER_BUILDKIT=0
 export COMPOSE_DOCKER_CLI_BUILD=0
@@ -232,9 +242,3 @@ if [ -f "$HOME/google-cloud-sdk/path.bash.inc" ]; then source "$HOME/google-clou
 
 # The next line enables shell command completion for gcloud.
 if [ -f "$HOME/google-cloud-sdk/completion.bash.inc" ]; then source "$HOME/google-cloud-sdk/completion.bash.inc"; fi
-
-# asdf v0.16+ (Go 版) は asdf.sh 廃止。PATH に bin と shims を通すだけで動く
-if [ -d "$HOME/.asdf/bin" ]; then
-    export PATH="$HOME/.asdf/bin:$HOME/.asdf/shims:$PATH"
-fi
-

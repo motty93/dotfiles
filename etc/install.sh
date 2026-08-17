@@ -63,6 +63,9 @@ if [ ! -f "${HOME}/.tool-versions" ]; then
     echo "error: ${HOME}/.tool-versions not found (link.sh should have linked ~/dotfiles/.tool-versions)" >&2
     exit 1
 fi
+# asdf-luaJIT は LuaJIT と一緒に LuaRocks も入れる (バージョンは LUAROCKS_VERSION、未指定なら最新)。
+# 最新の 3.13.0 は配布 tarball の rockspec が壊れていて bootstrap に失敗するので、動作確認済みの版に固定する
+export LUAROCKS_VERSION="${LUAROCKS_VERSION:-3.12.2}"
 # 一部プラグイン (terraform の post-install callback 等) が失敗しても本体バイナリは入る。
 # 個別調査するより || true で全体を進める方針
 asdf install || true
