@@ -11,6 +11,10 @@
 #   sh ~/dotfiles/etc/scripts/link.sh             # シンボリックリンクだけ
 #   sh ~/dotfiles/etc/scripts/install_ai_tools.sh # AI ツールだけ
 #
+# bootstrap.sh の検証 (git/curl を消してから流し込む。DOTFILES_REPO でローカル repo の HEAD を clone 元にできる):
+#   docker run --rm -t -v "$PWD":/src:ro dotfiles-test bash -c \
+#     'sudo apt-get remove -y git curl; DOTFILES_REPO=file:///src bash -c "cat /src/etc/bootstrap.sh | bash"'
+#
 # Tips:
 # - Docker daemon 関連 (install.sh の docker setting 部分) はコンテナ内では機能しない。
 #   検証時はその区画をスキップするか、`|| true` を一時的に挟むのが現実的。

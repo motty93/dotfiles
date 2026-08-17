@@ -17,6 +17,18 @@ WSL2 (Ubuntu) on Windows と ネイティブ Linux (Ubuntu 24.04 LTS Desktop / G
 
 ### Installing
 
+git も何も入っていない新しい Ubuntu では、bootstrap を wget か curl で流し込む
+(apt で git / curl を入れる → `~/dotfiles` に HTTPS で clone → `etc/install.sh` を実行):
+
+```bash
+# Ubuntu Desktop は curl が入っていないので wget
+wget -nv -O- https://raw.githubusercontent.com/motty93/dotfiles/master/etc/bootstrap.sh | bash
+# curl があるなら (Ubuntu Server / WSL2)
+curl -fsSL https://raw.githubusercontent.com/motty93/dotfiles/master/etc/bootstrap.sh | bash
+```
+
+git が使える環境なら clone して直接実行しても同じ:
+
 ```bash
 git clone https://github.com/motty93/dotfiles.git ~/dotfiles
 bash ~/dotfiles/etc/install.sh
@@ -29,6 +41,7 @@ bash ~/dotfiles/etc/install.sh
 ### Customizing
 
 - Change your `.gitconfig` user info
+- bootstrap 経由だと `origin` は HTTPS なので、SSH 鍵を GitHub に登録したら `git -C ~/dotfiles remote set-url origin git@github.com:motty93/dotfiles.git` で切り替える
 - Fill in `~/.bash_secrets` with actual values
 - Restart the shell (`exec bash`) to load PATH changes
 - Re-login or run `newgrp docker` to activate the docker group

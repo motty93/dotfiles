@@ -13,6 +13,8 @@ WSL2 (Ubuntu) と ネイティブ Linux (Ubuntu 24.04 / GNOME on Wayland) 兼用
 sh ./dotfiles/etc/install.sh    # aptパッケージ、Docker、asdfのインストール + シンボリックリンク作成
 ```
 
+git 未導入の新しい Ubuntu では `etc/bootstrap.sh` を wget/curl で流し込む (git/curl の apt install → HTTPS で clone → install.sh を実行。one-liner は README 参照)。
+
 ### dotfilesのリンク
 ```bash
 sh ./dotfiles/etc/scripts/link.sh   # .??* にマッチする全ファイルを $HOME にシンボリックリンク (.git, .github, .gitignore, .DS_Store は除外)

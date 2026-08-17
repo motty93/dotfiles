@@ -77,7 +77,13 @@
       "Bash(command -v mise herdr era)",
       "Bash(echo \"\\(exit: $?\\)\")",
       "Skill(artifact-design)",
-      "Artifact"
+      "Artifact",
+      "Bash(echo \"exit=$?\")",
+      "Bash(git ls-remote *)",
+      "Bash(lsb_release -ds)",
+      "Bash(apt --version)",
+      "Bash(docker run *)",
+      "Bash(wget -nv -O- https://raw.githubusercontent.com/motty93/dotfiles/master/etc/install.sh)"
     ]
   }
 }
