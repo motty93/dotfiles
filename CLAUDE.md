@@ -43,6 +43,7 @@ sh ./dotfiles/etc/scripts/link.sh   # .??* にマッチする全ファイルを 
 
 ### その他の設定ディレクトリ
 - `config/claude/` — Claude デスクトップアプリの設定とMCPパーミッション
+- `.claude/skills/` — 自作スキル (SKILL.md)。`link.sh` は `.claude` を除外するので、`~/.claude/skills/<name>` へ手動で symlink する。Codex でも使うスキルは同じ実体を `~/.codex/skills/<name>` にも symlink する (例: `daily-note`)
 - `xkb/` — メカニカルキーボード用カスタムキーマップ (Anne Pro 2, VXV M61)。ネイティブ Linux (Wayland) 向けに `etc/scripts/install_xkb.sh` でシステムへ配置する (手順は `doc/xkb.md`)
 - `.github/` — PRテンプレート (日本語) と自動アサインワークフロー
 

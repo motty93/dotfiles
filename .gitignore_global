@@ -13,3 +13,4 @@ ubuntu-xenial-16.04-cloudimg-console.log
 .yarnrc
 .aider*
 **/.claude/settings.local.json
+**/.codex/worktrees/

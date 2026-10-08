@@ -19,6 +19,12 @@ echo "=== install OpenAI Codex CLI ==="
 npm install -g @openai/codex
 
 echo ""
+echo "=== install ctx ==="
+# https://ctx.rs
+# 公式インストーラーで入れないと自動更新が効かない (cargo install などは unmanaged 扱い)。履歴取り込みのデーモン (systemd --user) もここで入る
+curl -fsSL https://ctx.rs/install | sh
+
+echo ""
 echo "=== install MCP servers ==="
 npm install -g mcp-gemini-google-search
 
@@ -32,3 +38,4 @@ echo "=== done ==="
 echo "Claude Code: $(claude --version 2>/dev/null || echo 'restart shell')"
 echo "Gemini CLI:  $(gemini --version 2>/dev/null || echo 'restart shell')"
 echo "Codex CLI:   $(codex --version 2>/dev/null || echo 'restart shell')"
+echo "ctx:         $(ctx --version 2>/dev/null || echo 'restart shell')"
