@@ -12,6 +12,19 @@ case $- in
       *) return;;
 esac
 
+# herdr のように端末のマウス捕捉(DECSET 1000/1002/1003/1006/1016 等)を有効にする
+# アプリが接続断やクラッシュで死ぬと、解除シーケンスが手元の端末に届かないまま
+# モードが残り、クリックやスクロールが文字列として入力されてしまう。
+# 切断後にサーバ側から端末へ届く経路はないので、後始末はシェルが受け持つ。
+# [ -t 1 ] は `ssh host cmd > file` の出力をエスケープで汚さないためのガード。
+# .bash_function の ssh / herdr ラッパからも呼ぶ。
+function mouse_reporting_off() {
+  [ -t 1 ] && printf '\e[?9l\e[?1000l\e[?1001l\e[?1002l\e[?1003l\e[?1004l\e[?1005l\e[?1006l\e[?1015l\e[?1016l'
+}
+
+# 前回の取りこぼしをログイン時に掃除する
+mouse_reporting_off
+
 # don't put duplicate lines or lines starting with space in the history.
 # See bash(1) for more options
 HISTCONTROL=ignoreboth
@@ -215,12 +228,6 @@ export NODE_OPTIONS=--openssl-legacy-provider
 export GOOGLE_APPLICATION_CREDENTIALS="$HOME/.config/gcloud/application_default_credentials.json"
 export PROMPT_COMMAND=my_prompt
 export KERL_CONFIGURE_OPTIONS="--disable-debug --without-javac"
-if which gcloud >/dev/null; then
-  PROJECT_NAME=$(gcloud config get-value project)
-  export GOOGLE_IMPERSONATE_SERVICE_ACCOUNT="terraform@$PROJECT_NAME.iam.gserviceaccount.com"
-else
-  echo "gcloud command not found. Please install gcloud."
-fi
 # luajit, lua
 # pathは適宜修正
 if which asdf >/dev/null; then
@@ -242,3 +249,15 @@ if [ -f "$HOME/google-cloud-sdk/path.bash.inc" ]; then source "$HOME/google-clou
 
 # The next line enables shell command completion for gcloud.
 if [ -f "$HOME/google-cloud-sdk/completion.bash.inc" ]; then source "$HOME/google-cloud-sdk/completion.bash.inc"; fi
+
+# gcloud 連携。PATH が通るのは上の path.bash.inc (tarball 版) / apt 版の /usr/bin なので、
+# この分岐はそれより後ろに置かないと入っていても not found 扱いになる
+if which gcloud >/dev/null 2>&1; then
+  PROJECT_NAME=$(gcloud config get-value project 2>/dev/null)
+  # 未設定だと "(unset)" が返るので、そのまま埋め込んで壊れた SA 名にならないようガードする
+  if [ -n "$PROJECT_NAME" ] && [ "$PROJECT_NAME" != "(unset)" ]; then
+    export GOOGLE_IMPERSONATE_SERVICE_ACCOUNT="terraform@$PROJECT_NAME.iam.gserviceaccount.com"
+  fi
+else
+  echo "gcloud command not found. Please install gcloud."
+fi

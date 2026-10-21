@@ -37,6 +37,7 @@ bash ~/dotfiles/etc/install.sh
 - 言語ランタイムは `.tool-versions` (リポジトリ管理、`~/.tool-versions` にリンクされる) を asdf でインストールする
 - Vim と各ランタイムはソースビルドするため、低スペック機では数時間かかる
 - GUI 不要のヘッドレス機で Vim の X11 連携が要らない場合は `VIM_WITH_X11=0 bash ~/dotfiles/etc/scripts/build_vim.sh`
+- Vim のプラグイン管理は dein.vim。install.sh が dein 本体を `~/.cache/dein/repos/github.com/Shougo/dein.vim` に clone し、続く vim 起動で `.vimrc` の `dein#check_install()` が全プラグインを入れる (dein は自分自身を自動インストールできないため、この clone が無いと起動時に `E117: Unknown function: dein#begin` で全滅する)
 
 ### Customizing
 

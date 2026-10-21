@@ -23,6 +23,19 @@ sudo apt install -y docker-ce docker-ce-cli containerd.io docker-buildx-plugin d
 sudo usermod -aG docker $USER
 
 
+echo "########## gcloud (Google Cloud CLI) ##########"
+# .bashrc が gcloud 前提の分岐 (GOOGLE_IMPERSONATE_SERVICE_ACCOUNT) を持っているので apt 版を入れる。
+# tarball 版 (~/google-cloud-sdk) と違い /usr/bin に入るため PATH 設定が不要
+sudo install -m 0755 -d /etc/apt/keyrings
+sudo curl -fsSL https://packages.cloud.google.com/apt/doc/apt-key.gpg -o /etc/apt/keyrings/cloud.google.asc
+sudo chmod a+r /etc/apt/keyrings/cloud.google.asc
+echo \
+  "deb [signed-by=/etc/apt/keyrings/cloud.google.asc] https://packages.cloud.google.com/apt cloud-sdk main" | \
+  sudo tee /etc/apt/sources.list.d/google-cloud-sdk.list > /dev/null
+sudo apt update
+sudo apt install -y google-cloud-cli
+
+
 echo "########## dotfiles link ##########"
 cd "${SCRIPT_DIRECTORY}"
 chmod +x link.sh
@@ -83,10 +96,36 @@ chmod +x install_era.sh
 ./install_era.sh
 
 
+echo "########## herdr (agent terminal runtime) ##########"
+cd "${SCRIPT_DIRECTORY}"
+chmod +x install_herdr.sh
+./install_herdr.sh
+
+
 echo "########## build vim ##########"
 cd "${SCRIPT_DIRECTORY}"
 chmod +x build_vim.sh
 ./build_vim.sh
+
+
+echo "########## vim LSP servers ##########"
+# .vimrc の executable('typescript-language-server') 分岐で使う。
+# typescript は 7 系 (ネイティブ版) が tsserver.js を同梱しなくなっており、
+# typescript-language-server が tsserver を見つけられず起動しない。5 系に固定する
+npm install -g typescript-language-server "typescript@5"
+asdf reshim nodejs
+
+
+echo "########## dein.vim (vim plugin manager) ##########"
+# dein は自分自身を自動インストールできないので、ここで clone しておく。
+# これが無いと .vimrc の dein#begin / dein#add が E117 (未知の関数) で全滅する
+DEIN_DIR="${HOME}/.cache/dein/repos/github.com/Shougo/dein.vim"
+if [ ! -d "${DEIN_DIR}" ]; then
+    git clone --depth 1 https://github.com/Shougo/dein.vim "${DEIN_DIR}"
+fi
+# プラグイン本体は .vimrc 末尾の dein#check_install() -> dein#install() が入れる。
+# 入れ終わった後に hit-enter プロンプトで止まることがあるので timeout で打ち切る
+timeout 1800 vim -X -c 'qa!' < /dev/null > /dev/null 2>&1 || true
 
 
 sudo apt update && sudo apt upgrade -y && sudo apt autoremove -y

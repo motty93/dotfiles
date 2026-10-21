@@ -2,7 +2,10 @@
   name = motty93
   email = rdwbocungelt5@gmail.com
 [core]
-  editor = vim
+  # SESSION_MANAGER が残っていると vim (+X11) がセッションマネージャ接続を試み、
+  # ホスト名変更後のセッションで _IceTransSocketUNIXConnect エラーがコミット画面に出る。
+  # -X と違いクリップボード連携は残したいので、この変数だけ落とす
+  editor = env -u SESSION_MANAGER vim
   autocrlf = input
   excludesfile = ~/.gitignore_global
 #[remote "origin"]

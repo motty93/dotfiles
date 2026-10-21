@@ -33,6 +33,8 @@ sh ./dotfiles/etc/scripts/link.sh   # .??* にマッチする全ファイルを 
 
 ### エディタ設定
 - `.vimrc` は **dein.vim** プラグインマネージャを使用、LSP対応 (gopls, typescript-language-server, solargraph/steep for Ruby)
+- dein 本体は `~/.cache/dein/repos/github.com/Shougo/dein.vim` に clone しておく必要がある (`etc/install.sh` の「dein.vim」ステップが担当)。プラグイン本体は初回 vim 起動時に `dein#check_install()` が入れる
+- プラグイン追加は `.vimrc` に `call dein#add(...)` を足して vim を再起動するだけ。手動で入れ直す場合は vim 内で `:call dein#install()`
 - `.vim/UltiSnips/` にカスタムスニペット: elixir, ruby, rails, go, javascript, typescript, typescriptreact, prisma, markdown, toml
 - Leaderキーは `,`
 

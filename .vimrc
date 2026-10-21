@@ -120,9 +120,7 @@ if executable('typescript-language-server')
                 \ 'whitelist': ['javascript', 'javascriptreact', 'typescript', 'typescriptreact'],
                 \ })
     autocmd FileType typescript setlocal omnifunc=lsp#complete
-  augroup END :echomsg 'vim-lsp with `typescript-language-server` enabled'
-else
-  :echomsg 'vim-lsp for typescript unavailable'
+  augroup END
 endif
 " lsp deno
 if executable("deno")

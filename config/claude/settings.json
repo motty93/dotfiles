@@ -1,6 +1,10 @@
 {
-  "env": {
-    "DISABLE_AUTOUPDATER": "1"
+  "permissions": {
+    "deny": [
+      "Bash(git add:*)",
+      "Bash(git commit:*)",
+      "Bash(git push:*)"
+    ]
   },
   "hooks": {
     "Stop": [
@@ -24,14 +28,108 @@
           }
         ]
       }
+    ],
+    "PostToolUse": [
+      {
+        "matcher": "EnterWorktree",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "\"$HOME/.claude/hooks/sync-worktree-files.sh\""
+          }
+        ]
+      }
     ]
   },
   "enabledPlugins": {
     "gopls-lsp@claude-plugins-official": true,
-    "typescript-lsp@claude-plugins-official": true
+    "typescript-lsp@claude-plugins-official": true,
+    "frontend-design@claude-plugins-official": true,
+    "slack@claude-plugins-official": true,
+    "discord@claude-plugins-official": true,
+    "eli5@claude-community": true
+  },
+  "extraKnownMarketplaces": {
+    "claude-community": {
+      "source": {
+        "source": "github",
+        "repo": "anthropics/claude-plugins-community"
+      }
+    }
   },
   "alwaysThinkingEnabled": true,
+  "effortLevel": "xhigh",
   "skipDangerousModePermissionPrompt": true,
   "theme": "dark-daltonized",
-  "editorMode": "vim"
+  "editorMode": "vim",
+  "agentPushNotifEnabled": true,
+  "autoMode": {
+    "allow": [
+      "$defaults",
+      "Bash(bq ls:*)",
+      "Bash(bq show:*)",
+      "Bash(bq head:*)",
+      "Bash(gh issue view:*)",
+      "Bash(gh issue list:*)",
+      "Bash(gh pr view:*)",
+      "Bash(bun run lint:*)",
+      "Bash(bun run typecheck:*)"
+    ],
+    "soft_deny": [
+      "$defaults",
+      "Bash(bq rm:*)",
+      "Bash(terraform apply:*)",
+      "Bash(gcloud run deploy:*)"
+    ],
+    "environment": [
+      "### Org-wide",
+      "**Organization**: androots (GitHub org; repo androots/polaris)",
+      "**Cloud provider(s)**: Google Cloud (project enterprise-dw-376005 — BigQuery, Cloud Run, Cloud Run Jobs, Secret Manager, Cloud Build); Supabase (mdm, mdm_new); Cloudflare (referenced via CI secrets)",
+      "**Repository visibility**: private (androots/polaris — confirmed via gh); rely on this for what's OK to commit/push here",
+      "**Internal sharing / snippet hosting**: None configured — treat public paste/gist services as outside the trust boundary",
+      "**Secrets management**: GCP Secret Manager (per CLAUDE.md); env files listed in .gitignore (`.env`, `.env*`); CI secrets referenced by name only (not value) — CLOUDFLARE_ACCOUNT_ID, CLOUDFLARE_API_TOKEN, DBT_PROFILES_YML, GCP_SA_KEY, GH_OWNER, GH_REPO, GH_TOKEN, GITHUB_TOKEN, HONSHITSU_APP_CLOUDFLARE_API_TOKEN, HONSHITSU_APP_SUPABASE_ANON_KEY, HONSHITSU_APP_SUPABASE_DB_URL, HONSHITSU_APP_SUPABASE_URL, SLACK_BOT_TOKEN, SLACK_CHANEL_ID, SLACK_CHANNEL, SLACK_ENABLED, SLACK_WEBHOOK_URL, SUPABASE_DB_HOST, SUPABASE_DB_NAME, SUPABASE_DB_PASSWORD",
+      "**Default / protected branches**: main (default; protected via ruleset `block-push-to-main`, active) — repo CLAUDE.md additionally forbids `git push -f`/`--force`/`--force-with-lease` and `git reset --hard` on any branch",
+      "**CI/CD deploy targets**: GitHub Actions (.github/workflows) deploying to Google Cloud Run / Cloud Run Jobs (enterprise-dw-376005); dbt Cloud (cloud.getdbt.com)",
+      "**Network posture**: None configured",
+      "**Source control**: androots/polaris (this repo) and its origin remote (github.com:androots/polaris.git) only — no additional orgs configured",
+      "**Trusted internal domains**: None configured",
+      "**Trusted cloud buckets**: None configured",
+      "**Key internal services**: BigQuery project enterprise-dw-376005; dbt Cloud (cloud.getdbt.com); Cloud Run service polaris-new-etl-lawtetl4ga-an.a.run.app; Supabase (mdm project, referenced via SUPABASE_DB_HOST etc.); external platform APIs used in ingestion (e.g. api.qoo10.jp, TikTok/Meta/Google Ads APIs)",
+      "**Internal package registry**: None configured",
+      "**Sensitive data locations & audiences**: env files (`.env`, `.env.example`, `.env.sample` under ingestion/, application/*, orchestration/*); credential helper scripts (application/streamlit/utils/credentials.py, application/notify-long-term-absence/services/secret_service.py); IAM docs and scripts (docs/guides/iam-guide.md, docs/iam/README.md, docs/iam/groups.md, scripts/iam/verify_iam_setup.sh); terraform production environment (terraform/environments/production/*.tf, including iam.tf, network.tf, backend.tf) — share only with audiences cleared at the [named+specifics] bar",
+      "**Data retention / declassification**: None configured",
+      "**Sensitive remote targets**: any namespace/host/container with `prod`/`production` as a whole segment — includes terraform/environments/production/* resources, and per agent-memory note, the honshitsu-app preview environment reportedly uses prod Supabase (application/honshitsu-app preview config) — treat preview deploys there as touching production data until confirmed otherwise",
+      "**Protected deployment namespaces / environments**: production (GCP project enterprise-dw-376005 production resources; Supabase production instance referenced by SUPABASE_DB_HOST/SUPABASE_DB_NAME/SUPABASE_DB_PASSWORD); BigQuery `staging` dataset (holds production Raw/Hrd tables per skill docs) and dev_* datasets are lower-risk but staging ALTERs are treated as prod-affecting per repo skill docs",
+      "**Protected IaC scopes**: terraform/environments/production/* (iam.tf, network.tf, backend.tf, and all per-source .tf files) — IAM, networking, and all production infrastructure definitions",
+      "**Organization**: retrolab-inc (GitHub org; repo retrolab-inc/voxlab)",
+      "**Cloud provider(s)**: Google Cloud (Cloud Run / Artifact Registry / Secret Manager / Cloud Build, per CLAUDE.md and infra/); Supabase (JWT auth backend; pfmuokevbigbbhlgkhfc.supabase.co, api.supabase.com seen in usage); Stripe (promo-code tooling)",
+      "**Repository visibility**: private (retrolab-inc/voxlab — confirmed via gh)",
+      "**Secrets management**: GCP Secret Manager (per CLAUDE.md); env files excluded via .gitignore (`.env*`, with `.env.example`/`.env.staging.example` tracked as templates)",
+      "**Default / protected branches**: main (default per repo CLAUDE.md; direct edits on main forbidden) — Rulesets not queryable here and Protected branches lists none, so treat main as protected by policy regardless; repo CLAUDE.md additionally forbids `git push -f`/`--force`/`--force-with-lease` and `git reset --hard` on any branch",
+      "**CI/CD deploy targets**: GitHub Actions (.github/workflows/ci.yml) running lint/typecheck/build/test on PRs to main; `bun run deploy:plugin` deploys the Premiere Pro CEP plugin locally; infra/ (Terraform) manages Cloud Run / Artifact Registry / SA, with infra/envs/prod and infra/envs/stg present",
+      "**Source control**: retrolab-inc/voxlab (this repo) and its origin remote (github.com:retrolab-inc/voxlab.git) only — no additional orgs configured",
+      "**Trusted internal domains**: vox-lab.net, www.vox-lab.net, vox-lab.com (product domains contacted repeatedly in this project's usage)",
+      "**Trusted cloud buckets**: voxlab-492613-plugin-dist-stg, voxlab-492613-plugin-dist-prod, voxlab-492613-autocut-stg, voxlab-492613-autocut-prod (all seen in this project's transcript-mined bucket usage)",
+      "**Key internal services**: Cloud Run services voxlab-api-prod-*.run.app, voxlab-api-stg-*.run.app, voxlab-mfa-prod-*.run.app, voxlab-mfa-stg-*.run.app (asia-northeast1); Supabase project pfmuokevbigbbhlgkhfc.supabase.co",
+      "**Sensitive data locations & audiences**: apps/api/.env, apps/api/.env.example, apps/web/.env.local, apps/web/.env.local.bak, apps/web/.env.staging.example; infra/envs/prod/* and infra/envs/stg/* (backend.tf, main.tf, outputs.tf, terraform.tfvars, variables.tf, versions.tf, .terraform.lock.hcl); infra/modules/api/* — share only with audiences cleared at the [named+specifics] bar",
+      "**Sensitive remote targets**: any namespace/host/container with `prod`/`production` as a whole segment — includes voxlab-api-prod-*.run.app, voxlab-mfa-prod-*.run.app, voxlab-492613-plugin-dist-prod, voxlab-492613-autocut-prod, and infra/envs/prod/*",
+      "**Protected deployment namespaces / environments**: None configured — fall back to the Sensitive remote targets heuristic",
+      "**Protected IaC scopes**: infra/envs/prod/* (backend.tf, main.tf, outputs.tf, terraform.tfvars, variables.tf, versions.tf) and infra/modules/api/* when targeting prod — IAM, networking, quota, and node-pool resources carrying a `prod`/`production` segment",
+      "### User-specific",
+      "**Primary use of Claude Code**: software development — data engineering (Go/Ruby/TypeScript, BigQuery/dbt, ingestion & reverse-ETL pipelines) for the androots/polaris monorepo",
+      "**Trusted repo**: androots/polaris (this repo, working directory), remote origin github.com:androots/polaris.git — private, so confidential material is fine to commit here but content ported from outside this session's repo is not automatically this repo's own work",
+      "**Org-specific CLIs**: bq (BigQuery CLI), gcloud, gh, ctx, fd/fdfind, rg, bat/batcat, dbt (via `make` targets in transformation/androots), terraform",
+      "**routine under polaris/ prefix**: BigQuery reads/schema inspection (`bq ls`, `bq show`, `bq head`, `bq query` with `--max_rows`) against enterprise-dw-376005 staging/dev_* datasets; `gh issue`/`gh pr` operations against androots/polaris; dbt `make` targets under transformation/androots/",
+      "**Primary use of Claude Code**: software development — full-stack work (Go API, Next.js web, Premiere Pro CEP plugin) for the retrolab-inc/voxlab monorepo",
+      "**Trusted repo**: retrolab-inc/voxlab (this repo, working directory), remote origin github.com:retrolab-inc/voxlab.git — private, so confidential material is fine to commit here but content ported from outside this session's repo is not automatically this repo's own work",
+      "**Org-specific CLIs**: gh, gcloud, fd/fdfind, rg, bat/batcat, rsync, peco, tig, lazydocker, asdf, terraform, bun, ctx",
+      "**routine under voxlab/ prefix**: `gh issue`/`gh pr` operations against retrolab-inc/voxlab; `bun run dev`/`lint`/`format`/`typecheck`/`build` at repo root; `cd apps/web && bun run dev` / `cd apps/api && go run ./cmd/server`; Go builds/tests/vet under apps/api"
+    ]
+  },
+  "voiceEnabled": true,
+  "model": "opus[1m]",
+  "env": {
+    "DISABLE_AUTOUPDATER": "1"
+  },
+  "tui": "fullscreen"
 }

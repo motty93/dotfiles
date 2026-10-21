@@ -1,7 +1,13 @@
-model = "gpt-5.2-codex"
+model = "gpt-5.6-sol"
 model_reasoning_effort = "medium"
 
 [projects."/home/motty93"]
+trust_level = "trusted"
+
+[projects."/home/motty"]
+trust_level = "trusted"
+
+[projects."/home/motty/github.com/motty93/memotty"]
 trust_level = "trusted"
 
 [mcp_servers.serena]
@@ -43,3 +49,10 @@ hide_gpt5_1_migration_prompt = true
 
 [notice.model_migrations]
 "gpt-5.1-codex-max" = "gpt-5.2-codex"
+
+[tui]
+screen_reader_detection_done = true
+
+[tui.model_availability_nux]
+gpt-6-astra = 1
+"gpt-6.1-sol" = 1
