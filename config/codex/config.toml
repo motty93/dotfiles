@@ -10,6 +10,9 @@ trust_level = "trusted"
 [projects."/home/motty/github.com/motty93/memotty"]
 trust_level = "trusted"
 
+[projects."/home/motty/github.com/androots/polaris"]
+trust_level = "trusted"
+
 [mcp_servers.serena]
 command = "uvx"
 args = ["--from", "git+https://github.com/oraios/serena", "serena", "start-mcp-server", "--context", "codex"]
@@ -55,4 +58,4 @@ screen_reader_detection_done = true
 
 [tui.model_availability_nux]
 gpt-6-astra = 1
-"gpt-6.1-sol" = 1
+"gpt-6.1-sol" = 4

@@ -256,7 +256,7 @@ if which gcloud >/dev/null 2>&1; then
   PROJECT_NAME=$(gcloud config get-value project 2>/dev/null)
   # 未設定だと "(unset)" が返るので、そのまま埋め込んで壊れた SA 名にならないようガードする
   if [ -n "$PROJECT_NAME" ] && [ "$PROJECT_NAME" != "(unset)" ]; then
-    export GOOGLE_IMPERSONATE_SERVICE_ACCOUNT="terraform@$PROJECT_NAME.iam.gserviceaccount.com"
+    export GOOGLE_IMPERSONATE_SERVICE_ACCOUNT="terraform-sa@$PROJECT_NAME.iam.gserviceaccount.com"
   fi
 else
   echo "gcloud command not found. Please install gcloud."

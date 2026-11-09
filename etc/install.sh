@@ -67,6 +67,7 @@ asdf plugin add bun https://github.com/cometkim/asdf-bun.git
 asdf plugin add terraform https://github.com/asdf-community/asdf-hashicorp.git
 asdf plugin add awscli https://github.com/MetricMike/asdf-awscli.git
 asdf plugin add rust https://github.com/code-lever/asdf-rust.git
+asdf plugin add golangci-lint https://github.com/hypnoglow/asdf-golangci-lint.git
 
 echo "########## asdf install (.tool-versions) ##########"
 cd "${HOME}"
