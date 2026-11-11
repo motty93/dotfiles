@@ -1,4 +1,7 @@
 {
+  "env": {
+    "DISABLE_AUTOUPDATER": "1"
+  },
   "permissions": {
     "deny": [
       "Bash(git add:*)",
@@ -6,6 +9,7 @@
       "Bash(git push:*)"
     ]
   },
+  "model": "opus[1m]",
   "hooks": {
     "Stop": [
       {
@@ -59,6 +63,7 @@
   },
   "alwaysThinkingEnabled": true,
   "effortLevel": "xhigh",
+  "tui": "fullscreen",
   "skipDangerousModePermissionPrompt": true,
   "theme": "dark-daltonized",
   "editorMode": "vim",
@@ -126,10 +131,5 @@
       "**routine under voxlab/ prefix**: `gh issue`/`gh pr` operations against retrolab-inc/voxlab; `bun run dev`/`lint`/`format`/`typecheck`/`build` at repo root; `cd apps/web && bun run dev` / `cd apps/api && go run ./cmd/server`; Go builds/tests/vet under apps/api"
     ]
   },
-  "voiceEnabled": true,
-  "model": "opus[1m]",
-  "env": {
-    "DISABLE_AUTOUPDATER": "1"
-  },
-  "tui": "fullscreen"
+  "voiceEnabled": true
 }
