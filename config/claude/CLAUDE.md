@@ -170,7 +170,7 @@
 
 ### ブランチ作業（worktree）
 
-- 別ブランチでの作業（実装・マージ・コンフリクト解消）は、メインの作業ディレクトリで `git checkout` せず `git worktree add` で分ける。ユーザーは tmux の複数ペインで並行作業しているため、メインのブランチが切り替わると衝突する
+- 別ブランチでの作業（実装・マージ・コンフリクト解消）は、メインの作業ディレクトリで `git checkout` せず `git worktree add` で分ける。ユーザーは herdr で複数の作業を並行させているため、メインのブランチが切り替わると衝突する
 - 置き場所は `<リポジトリ>/.claude/worktrees/<ブランチ名の / を - に置換>`。独自の短縮名を付けず、prefix の階層も掘らない
   - 例: `feature/603-notify-cancellation-reason` → `.claude/worktrees/feature-603-notify-cancellation-reason`
 - **worktree で作業したら、報告にパスとブランチを毎回書く。** 変更がメインの作業ディレクトリに無いことはユーザー側から見えないため、書かないと `git worktree list` を引き直す手間を押し付ける
@@ -194,7 +194,7 @@
 
 - OS: WSL2（Ubuntu）on Windows
 - エディタ: Vim（`~/dotfiles/.vimrc` / `.vim` 配下で管理）
-- ターミナルマルチプレクサ: tmux
+- ターミナル: herdr（herdr.dev）— コーディングエージェントを常駐させるランタイム。prefix は Ctrl-Q、workspace の切替は `herdr-ws`。tmux は使っていない
 - Git 操作: tig を併用
 - Docker 操作: lazydocker を併用
 - 設定ファイルは `~/dotfiles` リポジトリで一元管理している（`bash ~/dotfiles/etc/install.sh` でセットアップ）
